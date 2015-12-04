@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.4.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.4.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.4.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"
+	>
+	
+	<!-- 定时任务开关 -->
+    <task:scheduler id="scheduler" />   <!--指定scheduler， 不指定要报错，不指定为什么？ -->
+    <task:annotation-driven />
+	
+	<!-- 数据库配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.service" />
+	
+	<!-- 扫描定时任务-->
+	<context:component-scan base-package="com.task" /> 
+	
+	<!-- ehcache配置 -->
+	<import resource="classpath:cache.xml" /> 
+	
+	<!-- 数据源配置文件 -->
+	<import resource="classpath:spring-mybatis.xml" />
+</beans>
