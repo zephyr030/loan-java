@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
@@ -31,8 +32,8 @@ public class UserMethodArgumentResolver implements HandlerMethodArgumentResolver
 	public Object resolveArgument(MethodParameter parameter,
 			ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
 			WebDataBinderFactory binderFactory) throws Exception {
-
-		String id = webRequest.getParameter("id");
+		String token = (String)webRequest.getAttribute("token", RequestAttributes.SCOPE_SESSION);
+		String id = token.split("\\|")[1];
 		SysUser user = userService.getSysUser(id);
 		return user;
 	}

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.model.AuthUser;
 import com.annotation.model.UserRole;
 import com.model.SysUser;
 import com.service.UserService;
@@ -42,7 +43,7 @@ public class LoginController extends BaseController  {
         System.out.println(username + ":"  + password);
         SysUser user = userService.getSysUserByName(username);
         if(null != user && user.getPassword().equals(password)) {
-            String token = username + "|" + password;
+            String token = username + "|" + user.getId();
             request.getSession().setAttribute("token", token);
             System.out.println("token" + ":"  + token);
             return "true";
@@ -53,7 +54,8 @@ public class LoginController extends BaseController  {
 
     @RequestMapping(value = "admin/select")
     @UserRole(validate = true)
-    public String select() {
+    public String select(@AuthUser SysUser sysUser) {
+        System.out.println("user" + ":"  + sysUser.getUsername());
         return "/login/login";
     }
 
