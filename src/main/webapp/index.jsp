@@ -13,7 +13,7 @@
   
   <body>
  	 <div style="border: dotted 1px; top: 300px;left: 200px;width: 300px;height: 200px">
-		 <a href="${path}/user/recharge">我要充值</a> <br/><br/><br/>
+		 <a href="${path}/user/recharge?account=">我要充值</a> <br/><br/><br/>
 		 <a href="javascript:void(0)">我要提现</a> <br/>
 	 </div>
   </body>

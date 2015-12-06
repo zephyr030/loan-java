@@ -10,7 +10,7 @@ public class Constants {
 	/*错误key*/
 	public static final String ERROR = "error";
 	/*上一个地址*/
-	public static final String BACK_URL = "BackURL";
+	public static final String BACK_URL = "backURL";
 	/*当前地址*/
 	public static final String CURRENT_URL = "currentURL";
 	/*当前不带参数地址*/

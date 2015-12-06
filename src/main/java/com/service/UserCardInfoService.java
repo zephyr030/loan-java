@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dao.UserCardInfoMapper;
+import com.dao.UserRechargeDetailMapper;
 import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
@@ -59,4 +60,5 @@ public class UserCardInfoService extends BaseService{
         }
         return ajaxResponse;
     }
+
 }

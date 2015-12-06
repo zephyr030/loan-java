@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserRechargeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.model.UserRechargeDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="recType" property="rectype" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="flowNo" property="flowno" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="recTime" property="rectime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="actTime" property="acttime" jdbcType="TIMESTAMP" />
+    <result column="update_uid" property="updateUid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, recType, user_id, flowNo, amount, recTime, status, actTime, update_uid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_recharge_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_recharge_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.model.UserRechargeDetail" >
+    insert into user_recharge_detail (id, recType, user_id, 
+      flowNo, amount, recTime, 
+      status, actTime, update_uid
+      )
+    values (#{id,jdbcType=BIGINT}, #{rectype,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{flowno,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{rectime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{acttime,jdbcType=TIMESTAMP}, #{updateUid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.UserRechargeDetail" >
+    insert into user_recharge_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rectype != null" >
+        recType,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="flowno != null" >
+        flowNo,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="rectime != null" >
+        recTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="acttime != null" >
+        actTime,
+      </if>
+      <if test="updateUid != null" >
+        update_uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="rectype != null" >
+        #{rectype,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="flowno != null" >
+        #{flowno,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rectime != null" >
+        #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acttime != null" >
+        #{acttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUid != null" >
+        #{updateUid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.UserRechargeDetail" >
+    update user_recharge_detail
+    <set >
+      <if test="rectype != null" >
+        recType = #{rectype,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="flowno != null" >
+        flowNo = #{flowno,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rectime != null" >
+        recTime = #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acttime != null" >
+        actTime = #{acttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUid != null" >
+        update_uid = #{updateUid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.UserRechargeDetail" >
+    update user_recharge_detail
+    set recType = #{rectype,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      flowNo = #{flowno,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      recTime = #{rectime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      actTime = #{acttime,jdbcType=TIMESTAMP},
+      update_uid = #{updateUid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
