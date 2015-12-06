@@ -19,15 +19,14 @@ public class UserAuthHandlerInterceptorAdapter extends HandlerInterceptorAdapter
             //没有声明需要权限,或者声明不验证权限
             if(userRole == null || userRole.validate() == false) {
                 return true;
-            } else {                
-                //在这里实现自己的权限验证逻辑
-                if(userRole.validate()) {//如果验证成功返回true（这里直接写false来模拟验证失败的处理）
-                	
+            } else {
+                Object obj = request.getAttribute("token");
+                if(null == obj) {
+                    response.sendRedirect("/admin/login");
+                    return false;
+                } else {
                     return true;
-                } else {//如果验证失败
-                	//返回到登录界面
-                	return true;
-                }       
+                }
             }
         }
         else
