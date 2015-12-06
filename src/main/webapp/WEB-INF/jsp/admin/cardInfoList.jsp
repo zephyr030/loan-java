@@ -16,38 +16,45 @@
   <body>
 		<div style="left: 200px;top: 200px;border: 1px">
 
-			超盘账号<input type="text" id="account" value="${cardInfo.account}"/><br/>
-			姓名<input type="text" id="customerName"  value="${cardInfo.customername}"/><br/>
-			银行卡号<input type="text" id="cardNumber"  value="${cardInfo.cardnumber}"/><br/>
-			开户行<input type="text" id="bankName"  value="${cardInfo.bankname}"/><br/>
-			手机号<input type="text" id="mobile"  value="${cardInfo.mobile}"/><br/>
-			<input type="button" id="rechargeBn" value="充值"/><br/>
 		</div>
+  		<table>
+			<thead>
+				<td width="70px">用户编号</td>
+				<td width="200px">操盘账号</td>
+				<td width="100px">姓名</td>
+				<td width="200px">开户行</td>
+				<td width="200px">银行卡号</td>
+				<td width="120px">手机号</td>
+				<td width="120px">账户余额</td>
+				<td width="150px">创建时间</td>
+			</thead>
+
+			<tbody class="tableInfo">
+
+			</tbody>
+
+		</table>
   </body>
   <script type="text/javascript">
 	  $(document).ready(function(){
-		 $("#rechargeBn").click(recharge);
+
 	  });
 
-	  function recharge() {
+	  function insertAmount() {
 		  var account = $.trim($("#account").val());
-		  var customerName = $.trim($("#customerName").val());
-		  var cardNumber = $.trim($("#cardNumber").val());
-		  var bankName = $.trim($("#bankName").val());
-		  var mobile = $.trim($("#mobile").val());
+		  var amount = $.trim($("#amount").val());
+		  var recType = 'A02';
 
 		  $.ajax({
 			  cache: true,
 			  type: "POST",
 			  dataType: "json",
-			  url:path + "/user/recharge",
+			  url:path + "/user/recharge/amount",
 			  data:{
 				  account: account,
-				  customerName: customerName,
-				  cardNumber: cardNumber,
-				  bankName: bankName,
-				  mobile: mobile
-			  },// 你的formid
+				  amount: amount,
+				  recType: recType
+			  },
 			  async: false,
 			  error: function(request) {
 				  alert("Connection error");
@@ -56,11 +63,18 @@
 				  if(!data.success) {
 					  alert(data.message);
 				  }else {
-					  document.location.href = path + "/user/recharge/amount?account=" + account;
+					  alert(data.message);
 
 				  }
 			  }
 		  });
+	  }
+
+
+	  function goBack() {
+		  var account = $.trim($("#account").val());
+		  var backURL = '${backURL}';
+		  document.location.href = path + '/user/recharge?account=' + account;
 	  }
   </script>
 </html>

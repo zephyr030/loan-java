@@ -77,14 +77,4 @@ public class UserController extends BaseController {
 		return "index";
 	}
 
-	/**
-	 * 进入充值页面
-	 * @return
-     */
-	@RequestMapping(value = "/user/recharge", method = RequestMethod.GET)
-	public String recharge() {
-
-		return "/recharge/recharge";
-	}
-
 }

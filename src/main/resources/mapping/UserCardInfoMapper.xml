@@ -131,4 +131,11 @@
     from user_card_info
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
+
+  <select id="selectList" parameterType="Searchable" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" />
+    from user_card_info
+    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+
+  </select>
 </mapper>
