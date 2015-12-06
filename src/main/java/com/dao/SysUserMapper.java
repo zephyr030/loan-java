@@ -1,17 +1,10 @@
 package com.dao;
 
+import com.dao.common.BaseMapper;
+import com.dao.common.MyBatisMapper;
 import com.model.SysUser;
 
-public interface SysUserMapper {
-    int deleteByPrimaryKey(Long id);
+@MyBatisMapper
+public interface SysUserMapper extends BaseMapper<SysUser,Integer> {
 
-    int insert(SysUser record);
-
-    int insertSelective(SysUser record);
-
-    SysUser selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(SysUser record);
-
-    int updateByPrimaryKey(SysUser record);
 }

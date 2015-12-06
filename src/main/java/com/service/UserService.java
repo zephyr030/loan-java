@@ -22,7 +22,7 @@ public class UserService extends BaseService implements UserServiceI  {
 	@Autowired
 	private CacheManager cacheManager;
 
-	@Override
+
 	@Cacheable(key="'user_' + #id", value="ehcache_3600s")
 	public Map<String, Object> getUser(String id) {
 		Map<String, Object> map = jdbcTemplate.queryForMap("select * from sys_user where id = ?", id);
@@ -30,16 +30,16 @@ public class UserService extends BaseService implements UserServiceI  {
 		return map;
 	}
 	
-	@Override
+
 	@Cacheable(key="'user1_' + #id", value="ehcache_3600s")
 	public SysUser getSysUser(String id) {
 		System.out.println(id);
-		SysUser user = sysUserMapper.selectByPrimaryKey(Long.valueOf(id));
+		SysUser user = sysUserMapper.selectByPrimaryKey(Integer.valueOf(id));
 		System.out.println("userService no chache2!");
 		return user;
 	}
 	
-	@Override
+
 	public void getSys(String id) {
 		
 		Cache cache = cacheManager.getCache("ehcache_3600s");

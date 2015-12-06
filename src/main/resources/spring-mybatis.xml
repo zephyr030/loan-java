@@ -56,13 +56,15 @@
     <!-- 配置mybatis数据库连接 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSource"/>
-    	<property name="mapperLocations" value="classpath:com/mapping/*.xml"></property>
+        <property name="configLocation" value="classpath:/mybatis-config.xml" />
+    	<property name="mapperLocations" value="classpath:/mapping/*.xml"></property>
     </bean>
     
     <!-- 配置mybatis扫描包 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     	<property name="basePackage" value="com.dao" />
     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="annotationClass" value="com.dao.common.MyBatisMapper"/>
     </bean>
     
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

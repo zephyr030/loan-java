@@ -92,10 +92,10 @@ public class JunitTest {
 	
 	@Test
 	public void listTest() {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<String>();
 		list.add("1");
 		list.add("2");
-		List<String> list1 = new ArrayList<>();
+		List<String> list1 = new ArrayList<String>();
 		list1.add("3");
 		list.addAll(list1);
 		System.out.println("************************" + list);
