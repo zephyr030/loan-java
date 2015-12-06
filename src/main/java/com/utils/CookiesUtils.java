@@ -67,13 +67,13 @@ public class CookiesUtils {
      */
     public static void setCookie(HttpServletRequest request,
             HttpServletResponse response, String name, String value) {
-        setCookie(request, response, name, value, false, 0x278d00);
+        setCookie(request, response, name, value, false);
     }
     
     
     public static void setHttpCookie(HttpServletRequest request,
             HttpServletResponse response, String name, String value) {
-    	setCookie(request, response, name, value, true, 0x278d00);
+    	setCookie(request, response, name, value, true);
     }
  
     /**
@@ -90,6 +90,23 @@ public class CookiesUtils {
         Cookie cookie = new Cookie(name, value == null ? "" : cookieValue.replaceAll("\r\n", ""));
         cookie.setHttpOnly(isHttpOnly);
         cookie.setMaxAge(maxAge);
+        cookie.setPath(getPath(request));
+        response.addCookie(cookie);
+    }
+
+    /**
+     * 设置cookie为session
+     * @param request
+     * @param response
+     * @param name
+     * @param value
+     * @param isHttpOnly
+     */
+    public static void setCookie(HttpServletRequest request,
+                                 HttpServletResponse response, String name, String value, boolean isHttpOnly) {
+        String cookieValue = Security.encrypt(value);
+        Cookie cookie = new Cookie(name, value == null ? "" : cookieValue.replaceAll("\r\n", ""));
+        cookie.setHttpOnly(isHttpOnly);
         cookie.setPath(getPath(request));
         response.addCookie(cookie);
     }

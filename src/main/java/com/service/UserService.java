@@ -26,7 +26,6 @@ public class UserService extends BaseService implements UserServiceI  {
 	@Cacheable(key="'user_' + #id", value="ehcache_3600s")
 	public Map<String, Object> getUser(String id) {
 		Map<String, Object> map = jdbcTemplate.queryForMap("select * from sys_user where id = ?", id);
-		System.out.println("userService no chache!");
 		return map;
 	}
 	
@@ -48,6 +47,12 @@ public class UserService extends BaseService implements UserServiceI  {
 			String v = (String)el.getObjectValue();
 			System.out.println(v);
 		}
+	}
+
+	@Cacheable(key="'username_' + #username", value="ehcache_60s")
+	public SysUser getSysUserByName(String username) {
+		SysUser user = sysUserMapper.getSysUserByName(username);
+		return user;
 	}
 	
 }

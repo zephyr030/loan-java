@@ -11,4 +11,6 @@ public interface UserServiceI {
 	public SysUser getSysUser(String id);
 
 	public void getSys(String id);
+
+	public SysUser getSysUserByName(String username);
 }

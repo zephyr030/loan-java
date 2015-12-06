@@ -31,10 +31,7 @@ public class UserMethodArgumentResolver implements HandlerMethodArgumentResolver
 	public Object resolveArgument(MethodParameter parameter,
 			ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
 			WebDataBinderFactory binderFactory) throws Exception {
-		String spar = parameter.getParameterName();
-		System.out.println("*************" + spar);
-		Map<String, String> sCookis = CookiesUtils.parseCookiesString(webRequest.getHeader("cookie"));
-		String str = sCookis.get("user");
+
 		String id = webRequest.getParameter("id");
 		SysUser user = userService.getSysUser(id);
 		return user;

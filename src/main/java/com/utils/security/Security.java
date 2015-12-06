@@ -8,7 +8,7 @@ public class Security {
 	
 	static{
 		//key需要写一个
-		String key = "jintouhui";
+		String key = "tdpay";
 		key = MD5.md5(key);
 		password = key.toCharArray();
 	}

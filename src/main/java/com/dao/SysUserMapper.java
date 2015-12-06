@@ -7,4 +7,5 @@ import com.model.SysUser;
 @MyBatisMapper
 public interface SysUserMapper extends BaseMapper<SysUser,Integer> {
 
+    SysUser getSysUserByName(String username);
 }
