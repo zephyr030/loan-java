@@ -34,21 +34,20 @@ public class LoginController extends BaseController  {
 
     @RequestMapping(value = "admin/login", method = RequestMethod.POST)
     @ResponseBody
-    public Object doLogin(@RequestParam(value = "username") String username,
+    public String doLogin(@RequestParam(value = "username") String username,
                                 @RequestParam(value = "password") String password,
                                 HttpServletRequest request,
                                 HttpServletResponse response) {
         System.out.println(username + ":"  + password);
         SysUser user = userService.getSysUserByName(username);
-        if(null != user) {
+        if(null != user && user.getPassword().equals(password)) {
             String token = username + "|" + password;
             request.getSession().setAttribute("token", token);
             System.out.println("token" + ":"  + token);
-            return AjaxResponse.success();
+            return "true";
         } else {
-            return AjaxResponse.fail();
+            return "false";
         }
     }
-
 
 }

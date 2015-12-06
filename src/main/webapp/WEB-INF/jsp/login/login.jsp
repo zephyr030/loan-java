@@ -20,7 +20,7 @@
             $.ajax({
                 cache: true,
                 type: "POST",
-                dataType: "json",
+                dataType: "text",
                 url:path + "/admin/login",
                 data:{
                     username: username,
@@ -31,8 +31,10 @@
                     alert("Connection error");
                 },
                 success: function(data) {
-                    if(!data.success) {
+                    if("true" == data) {
                         alert("登录成功");
+                    } else {
+                        alert("请检查用户名和密码是否正确");
                     }
                 }
             });
