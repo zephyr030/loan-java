@@ -36,6 +36,26 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+	<!-- filter 与 request 配置 -->
+	<filter>
+		<filter-name>SetCommonDataFilter</filter-name>
+		<filter-class>com.common.filter.SetCommonDataFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>blackListURL</param-name>
+			<param-value>/static/**,*.js,*.css,*.jpg,*.gif,*.png,*.ico,/admin/monitor/druid/**</param-value>
+		</init-param>
+		<init-param>
+			<param-name>whiteListURL</param-name>
+			<param-value>/**</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCommonDataFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 	
 	<servlet>
 		<description>spring mvc servlet</description>

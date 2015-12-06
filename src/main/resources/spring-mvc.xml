@@ -16,8 +16,16 @@
 	
 	<!-- 自动扫描controller -->
 	<context:component-scan base-package="com.controller" />
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp" />
+
+
+	<!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+	<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="contentType" value="text/html"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
 	
 	<!-- 参数注解拦截器 -->
 	<mvc:annotation-driven>
@@ -33,7 +41,9 @@
 	<mvc:interceptors>
 		<bean class="com.annotation.resolver.UserAuthHandlerInterceptorAdapter" />
 	</mvc:interceptors>
-	
+
+	<mvc:default-servlet-handler/>
 	<!-- 静态文件 -->
-	<mvc:resources mapping="/script/**" location="/script/" />
+	<!-- 静态资源映射 -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
 </beans>

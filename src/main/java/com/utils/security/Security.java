@@ -75,7 +75,11 @@ public class Security {
 //		System.out.println(s);
 //		s = decrypt(s);
 //		System.out.println(s);
-        System.out.print(decrypt("U1YLVlQD"));
+        System.out.println(decrypt("U1YLVlQD"));
+
+
+		String a = "敌法";
+		System.out.println(a.length());
 	}
 
 }
