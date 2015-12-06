@@ -20,7 +20,8 @@ public class UserAuthHandlerInterceptorAdapter extends HandlerInterceptorAdapter
             if(userRole == null || userRole.validate() == false) {
                 return true;
             } else {
-                Object obj = request.getAttribute("token");
+                Object obj = request.getSession().getAttribute("token");
+                System.out.println("++++++++++++++++++++++++" + obj);
                 if(null == obj) {
                     response.sendRedirect("/admin/login");
                     return false;

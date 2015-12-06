@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.annotation.model.UserRole;
 import com.model.SysUser;
 import com.service.UserService;
 import com.utils.AjaxResponse;
@@ -28,7 +29,7 @@ public class LoginController extends BaseController  {
     public String login(HttpServletRequest request, HttpServletResponse response) {
         String token = (String)request.getSession().getAttribute("token");
         System.out.println("token" + ":"  + token);
-        CookiesUtils.deleteCookie(request, response, CookiesUtils.getCookie(request, "token"));
+        request.getSession().setAttribute("token", null);
         return "/login/login";
     }
 
@@ -48,6 +49,12 @@ public class LoginController extends BaseController  {
         } else {
             return "false";
         }
+    }
+
+    @RequestMapping(value = "admin/select")
+    @UserRole(validate = true)
+    public String select() {
+        return "/login/login";
     }
 
 }
