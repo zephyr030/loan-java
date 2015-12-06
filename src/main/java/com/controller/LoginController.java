@@ -29,7 +29,6 @@ public class LoginController extends BaseController  {
     @RequestMapping(value = "admin/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, HttpServletResponse response) {
         String token = (String)request.getSession().getAttribute("token");
-        System.out.println("token" + ":"  + token);
         request.getSession().setAttribute("token", null);
         return "/login/login";
     }
@@ -45,7 +44,6 @@ public class LoginController extends BaseController  {
         if(null != user && user.getPassword().equals(password)) {
             String token = username + "|" + user.getId();
             request.getSession().setAttribute("token", token);
-            System.out.println("token" + ":"  + token);
             return "true";
         } else {
             return "false";
@@ -55,7 +53,6 @@ public class LoginController extends BaseController  {
     @RequestMapping(value = "admin/select")
     @UserRole(validate = true)
     public String select(@AuthUser SysUser sysUser) {
-        System.out.println("user" + ":"  + sysUser.getUsername());
         return "/login/login";
     }
 

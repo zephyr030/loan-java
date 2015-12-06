@@ -32,7 +32,7 @@
                 },
                 success: function(data) {
                     if("true" == data) {
-                        alert("登录成功");
+                        location.href = "/admin/select"
                     } else {
                         alert("请检查用户名和密码是否正确");
                     }
