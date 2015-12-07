@@ -32,6 +32,17 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.10" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
+          <element id="library" level="project" name="Maven: commons-httpclient:commons-httpclient:3.0-rc4" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.2" />
+          <element id="library" level="project" name="Maven: org.dom4j:dom4j:2.0.0-RC1" />
+          <element id="library" level="project" name="Maven: net.java.dev.msv:xsdlib:2013.6.1" />
+          <element id="library" level="project" name="Maven: relaxngDatatype:relaxngDatatype:20020414" />
+          <element id="library" level="project" name="Maven: pull-parser:pull-parser:2" />
+          <element id="library" level="project" name="Maven: jaxen:jaxen:1.1.6" />
+          <element id="library" level="project" name="Maven: xpp3:xpp3:1.1.4c" />
+          <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.12" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.0.3" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.1" />
         </element>
