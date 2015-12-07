@@ -5,6 +5,8 @@ import java.util.Date;
 public class SysPayLog {
     private Long id;
 
+    private String service;
+
     private Long orderno;
 
     private String type;
@@ -23,6 +25,14 @@ public class SysPayLog {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 
     public Long getOrderno() {

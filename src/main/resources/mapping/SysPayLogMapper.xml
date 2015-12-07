@@ -3,6 +3,7 @@
 <mapper namespace="com.dao.SysPayLogMapper" >
   <resultMap id="BaseResultMap" type="com.model.SysPayLog" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="service" property="service" jdbcType="VARCHAR" />
     <result column="orderNo" property="orderno" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="CHAR" />
     <result column="data" property="data" jdbcType="VARCHAR" />
@@ -11,7 +12,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, orderNo, type, data, sign, status, create_time
+    id, service, orderNo, type, data, sign, status, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -24,18 +25,21 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.model.SysPayLog" >
-    insert into sys_pay_log (id, orderNo, type, 
-      data, sign, status, create_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{orderno,jdbcType=BIGINT}, #{type,jdbcType=CHAR}, 
-      #{data,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into sys_pay_log (id, service, orderNo, 
+      type, data, sign, status, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{service,jdbcType=VARCHAR}, #{orderno,jdbcType=BIGINT}, 
+      #{type,jdbcType=CHAR}, #{data,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.model.SysPayLog" >
     insert into sys_pay_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="service != null" >
+        service,
       </if>
       <if test="orderno != null" >
         orderNo,
@@ -60,6 +64,9 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="service != null" >
+        #{service,jdbcType=VARCHAR},
+      </if>
       <if test="orderno != null" >
         #{orderno,jdbcType=BIGINT},
       </if>
@@ -83,6 +90,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.model.SysPayLog" >
     update sys_pay_log
     <set >
+      <if test="service != null" >
+        service = #{service,jdbcType=VARCHAR},
+      </if>
       <if test="orderno != null" >
         orderNo = #{orderno,jdbcType=BIGINT},
       </if>
@@ -106,7 +116,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.model.SysPayLog" >
     update sys_pay_log
-    set orderNo = #{orderno,jdbcType=BIGINT},
+    set service = #{service,jdbcType=VARCHAR},
+      orderNo = #{orderno,jdbcType=BIGINT},
       type = #{type,jdbcType=CHAR},
       data = #{data,jdbcType=VARCHAR},
       sign = #{sign,jdbcType=VARCHAR},

@@ -1,7 +1,11 @@
 package com.service;
 
 import com.alibaba.fastjson.JSON;
+import com.dao.SysPayLogMapper;
+import com.model.SysPayLog;
+import com.pay.EncryUtil;
 import com.utils.RandomUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 /**
  * Created by Administrator on 2015/12/7.
@@ -35,7 +40,8 @@ public class BBPayApiService extends BaseService {
     /* 生成订单orderId */
     protected static final String getOrderSql = "EXEC [Wit_BaseInfo].[dbo].[dc_getOrderID] ?,?,?";
 
-
+    @Autowired
+    private SysPayLogMapper sysPayLogMapper;
 
     /**
      * 给MAP中加订单ID
@@ -43,9 +49,13 @@ public class BBPayApiService extends BaseService {
      * @param remark 订单备注
      */
     @Transactional(propagation= Propagation.REQUIRES_NEW)
-    public void putOrderID(Map<String, String> paramMap, String remark) {
-        String orderID = getOrderID(paramMap.get("service")==null?" ":paramMap.get("service"), JSON.toJSONString(paramMap), remark);
+    public void putOrderID(Map<String, Object> paramMap, String remark) {
+        String interfaceName = paramMap.get("service") == null ? " " : paramMap.get("service").toString();
+        paramMap.remove("service");
+        long orderID = getOrderID(interfaceName, paramMap, remark);
         paramMap.put("orderNo", String.valueOf(orderID));
+        String sign = EncryUtil.handleRSA(new TreeMap<String, Object>(paramMap), merchantPrivateKey);
+        paramMap.put("sign", sign);
     }
 
     /**
@@ -56,9 +66,13 @@ public class BBPayApiService extends BaseService {
      * @return 订单号
      */
     @Transactional(propagation=Propagation.REQUIRES_NEW)
-    public String getOrderID(String interfaceName,String params,String remark) {
-        String orderNo = RandomUtil.getRandom(18);
-
+    public long getOrderID(String interfaceName, Map params,String remark) {
+        long orderNo = System.currentTimeMillis();
+        SysPayLog sysPayLog = new SysPayLog();
+        sysPayLog.setOrderno(orderNo);
+        sysPayLog.setService(interfaceName);
+        sysPayLog.setData(JSON.toJSONString(params));
+        sysPayLogMapper.insert(sysPayLog);
         return orderNo;
     }
 
@@ -67,10 +81,10 @@ public class BBPayApiService extends BaseService {
      * @param orderid 订单ID
      * @param returninfo 返回信息
      */
-    private void updateOrderRetrunState(long orderid,String returninfo){
+    private void updateOrderRetrunState(long orderid, String returninfo){
         StringBuffer sql = new StringBuffer();
-        sql.append("update [Wit_BaseInfo].[dbo].[wit_yjf_detail] ");
-        sql.append("set state = 1 , returninfo = ? ");
+        sql.append("update sys_pay_log ");
+        sql.append("set status = 'A1' , returninfo = ? ");
         sql.append("where orderID = ? ");
         jdbcTemplate.update(sql.toString(), returninfo , orderid);
     }
@@ -80,7 +94,7 @@ public class BBPayApiService extends BaseService {
      * @param service 接口名称
      * @param orderNo 订单号
      */
-    public static Map<String, String> getBaseParam(String service,String orderNo){
+    public static Map<String, String> getBaseParam(String service, String orderNo){
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("service", service);
 //        paramMap.put("partnerId", YjfConfig.partnerId);
