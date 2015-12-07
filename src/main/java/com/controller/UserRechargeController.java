@@ -150,6 +150,7 @@ public class UserRechargeController extends BaseController {
 	 * @param recType
      * @return
      */
+	@RequestMapping(value = "/user/recharge/confirm", method = RequestMethod.POST)
 	public String confirmRechargeInfo(@RequestParam(value="account", required=true) String account,
 									   @RequestParam(value="amount", required=true) int amount,
 									   @RequestParam(value="recType", required=true) String recType,
@@ -158,7 +159,7 @@ public class UserRechargeController extends BaseController {
 		model.addAttribute("cardInfo", cardInfo);
 		model.addAttribute("amount", amount);
 		model.addAttribute("recType", recType);
-		return "/recharge/amount/confirm";
+		return "/recharge/confirm";
 	}
 
 	/**

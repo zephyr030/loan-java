@@ -15,13 +15,16 @@
   
   <body>
 		<div style="left: 200px;top: 200px;border: 1px">
-			<input type="hidden" id="account" value="${account}"/><br/>
-			请填写充值金额：<input type="text" id="amount" /><br/>
-			请选择充值通道： <input type="radio" name="recType" value="A01" />网银充值
-			<input type="radio" name="recType" value="A02" />银行转账<br/><br/>
+			<form action="${path}/user/recharge/confirm" id="amountform" method="post">
+				<input type="hidden" id="account" name="account" value="${account}"/><br/>
+				请填写充值金额：<input type="text" id="amount" name="amount"/><br/>
+				请选择充值通道： <input type="radio" name="recType" value="A01" />网银充值
+				<input type="radio" name="recType" value="A02" checked="checked"/>银行转账<br/><br/>
 
-			&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
-			<input type="button" id="backBn" value="上一步"/>&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
+				<input type="button" id="backBn" value="上一步"/>&nbsp;&nbsp;&nbsp;
+			</form>
+
 		</div>
   </body>
   <script type="text/javascript">
@@ -53,8 +56,7 @@
 				  if(!data.success) {
 					  alert(data.message);
 				  }else {
-					  alert(data.message);
-
+					  $("#amountform").submit();
 				  }
 			  }
 		  });
@@ -63,7 +65,6 @@
 
 	  function goBack() {
 		  var account = $.trim($("#account").val());
-		  var backURL = '${backURL}';
 		  document.location.href = path + '/user/recharge?account=' + account;
 	  }
   </script>

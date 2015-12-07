@@ -23,13 +23,12 @@
 			手机号<input type="text" id="mobile"  value="${cardInfo.mobile}" disabled="disabled"/><br/>
 			充值金额<input type="text" id="amount" value="${amount}" disabled="disabled" /><br/>
 			充值方式<input type="text" id="recType" value="${recType}" disabled="disabled"/><br/>
-			<input type="button" id="rechargeBn" value="充值"/><br/>
+			&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
+			<input type="button" id="backBn" value="重填"/>&nbsp;&nbsp;&nbsp;
+
 		</div>
   </body>
   <script type="text/javascript">
-	  $(document).ready(function(){
-		 $("#rechargeBn").click(recharge);
-	  });
 
 	  function recharge() {
 		  var account = $.trim($("#account").val());
@@ -64,5 +63,7 @@
 			  }
 		  });
 	  }
+
+
   </script>
 </html>

@@ -15,7 +15,6 @@
   
   <body>
 		<div style="left: 200px;top: 200px;border: 1px">
-
 			超盘账号<input type="text" id="account" value="${cardInfo.account}"/><br/>
 			姓名<input type="text" id="customerName"  value="${cardInfo.customername}"/><br/>
 			银行卡号<input type="text" id="cardNumber"  value="${cardInfo.cardnumber}"/><br/>
@@ -57,7 +56,6 @@
 					  alert(data.message);
 				  }else {
 					  document.location.href = path + "/user/recharge/amount?account=" + account;
-
 				  }
 			  }
 		  });
