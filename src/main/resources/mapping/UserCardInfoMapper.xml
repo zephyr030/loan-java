@@ -8,11 +8,12 @@
     <result column="bankName" property="bankname" jdbcType="VARCHAR" />
     <result column="cardNumber" property="cardnumber" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="balance" property="balance" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, account, customerName, bankName, cardNumber, mobile, createTime, balance
+    id, account, customerName, bankName, cardNumber, mobile, status, createTime, balance
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -26,11 +27,11 @@
   </delete>
   <insert id="insert" parameterType="com.model.UserCardInfo" useGeneratedKeys="true" keyProperty="id">
     insert into user_card_info (id, account, customerName, 
-      bankName, cardNumber, mobile, 
+      bankName, cardNumber, mobile, status,
       createTime, balance)
     values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
       #{bankname,jdbcType=VARCHAR}, #{cardnumber,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL})
+      #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.model.UserCardInfo" >
     insert into user_card_info
@@ -52,6 +53,9 @@
       </if>
       <if test="mobile != null" >
         mobile,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="createtime != null" >
         createTime,
@@ -79,6 +83,9 @@
       <if test="mobile != null" >
         #{mobile,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -105,6 +112,9 @@
       <if test="mobile != null" >
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="createtime != null" >
         createTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -121,6 +131,7 @@
       bankName = #{bankname,jdbcType=VARCHAR},
       cardNumber = #{cardnumber,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       balance = #{balance,jdbcType=DECIMAL}
     where id = #{id,jdbcType=BIGINT}
@@ -136,6 +147,12 @@
     select  <include refid="Base_Column_List" />
     from user_card_info
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
-
   </select>
+
+
+  <delete id="deleteBySearchable" parameterType="Searchable">
+    delete from user_card_info
+    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+  </delete>
+
 </mapper>

@@ -32,6 +32,8 @@ public interface BaseMapper<M, ID extends Serializable> {
     List<M> selectList(Searchable searchable);
     
     M selectBySearchable(Searchable searchable);
+
+    int deleteBySearchable(Searchable searchable);
     
     long exists(ID id);
     

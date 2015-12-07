@@ -16,6 +16,8 @@ public class UserCardInfo {
 
     private String mobile;
 
+    private int status;
+
     private Date createtime;
 
     private BigDecimal balance;
@@ -82,5 +84,13 @@ public class UserCardInfo {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="iTextAsian">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/iTextAsian.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

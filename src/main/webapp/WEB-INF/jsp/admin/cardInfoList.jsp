@@ -18,7 +18,7 @@
 
 		</div>
   		<table>
-			<thead>
+				<tr>
 				<td width="70px">用户编号</td>
 				<td width="200px">操盘账号</td>
 				<td width="100px">姓名</td>
@@ -27,7 +27,7 @@
 				<td width="120px">手机号</td>
 				<td width="120px">账户余额</td>
 				<td width="150px">创建时间</td>
-			</thead>
+				</tr>
 
 			<tbody class="tableInfo">
 
@@ -37,35 +37,45 @@
   </body>
   <script type="text/javascript">
 	  $(document).ready(function(){
-
+		  insertAmount();
 	  });
 
 	  function insertAmount() {
-		  var account = $.trim($("#account").val());
-		  var amount = $.trim($("#amount").val());
-		  var recType = 'A02';
+//		  var account = $.trim($("#account").val());
+		  var account = "";
+		  var pageNumber = 2;
+		  var pageSize = 3;
 
 		  $.ajax({
-			  cache: true,
-			  type: "POST",
+			  cache: false,
+			  type: "GET",
 			  dataType: "json",
-			  url:path + "/user/recharge/amount",
-			  data:{
-				  account: account,
-				  amount: amount,
-				  recType: recType
-			  },
+			  url:path + "/admin/cardInfo/ajax/list",
 			  async: false,
+			  data:{
+				  pageNumber: pageNumber,
+				  pageSize: pageSize,
+				  account: account
+			  },
+
 			  error: function(request) {
 				  alert("Connection error");
 			  },
 			  success: function(data) {
-				  if(!data.success) {
-					  alert(data.message);
-				  }else {
-					  alert(data.message);
+				  $.each(data.list, function(i,obj){
+					  var html = '<tr>';
+					  html += '<td>' + obj.id + '<td>';
+					  html += '<td>' + obj.account + '<td>';
+					  html += '<td>' + obj.customername + '<td>';
+					  html += '<td>' + obj.bankname + '<td>';
+					  html += '<td>' + obj.cardnumber + '<td>';
+					  html += '<td>' + obj.mobile + '<td>';
+					  html += '<td>' + obj.balance + '<td>';
+					  html += '<td>' + obj.createtime + '<td>';
+					  html += '</tr>';
 
-				  }
+					  $(".tableInfo").append(html);
+				  });
 			  }
 		  });
 	  }
