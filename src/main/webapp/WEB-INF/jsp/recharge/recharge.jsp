@@ -15,7 +15,6 @@
   
   <body>
 		<div style="left: 200px;top: 200px;border: 1px">
-
 			超盘账号<input type="text" id="account" value="${cardInfo.account}"/><br/>
 			姓名<input type="text" id="customerName"  value="${cardInfo.customername}"/><br/>
 			银行卡号<input type="text" id="cardNumber"  value="${cardInfo.cardnumber}"/><br/>
@@ -37,7 +36,8 @@
 		  var mobile = $.trim($("#mobile").val());
 
 		  $.ajax({
-			  cache: true,
+			  cache: false,
+			  async: false,
 			  type: "POST",
 			  dataType: "json",
 			  url:path + "/user/recharge",
@@ -47,8 +47,7 @@
 				  cardNumber: cardNumber,
 				  bankName: bankName,
 				  mobile: mobile
-			  },// 你的formid
-			  async: false,
+			  },
 			  error: function(request) {
 				  alert("Connection error");
 			  },
@@ -57,7 +56,6 @@
 					  alert(data.message);
 				  }else {
 					  document.location.href = path + "/user/recharge/amount?account=" + account;
-
 				  }
 			  }
 		  });

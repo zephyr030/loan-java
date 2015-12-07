@@ -1,5 +1,7 @@
 package com.model;
 
+import com.utils.security.Security;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -21,6 +23,9 @@ public class UserCardInfo {
     private Date createtime;
 
     private BigDecimal balance;
+
+    /*加密后的超盘账号*/
+    private String encodeAccount;
 
     public Long getId() {
         return id;
@@ -92,5 +97,13 @@ public class UserCardInfo {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getEncodeAccount() {
+        return Security.encrypt(account);
+    }
+
+    public void setEncodeAccount(String encodeAccount) {
+        this.encodeAccount = encodeAccount;
     }
 }

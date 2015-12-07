@@ -9,6 +9,7 @@ import com.utils.AjaxResponse;
 
 import com.utils.NumberUtils;
 import com.utils.StringUtils;
+import com.utils.security.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class UserRechargeController extends BaseController {
 	@RequestMapping(value = "/user/recharge", method = RequestMethod.GET)
 	public String recharge(@RequestParam(value="account") String account,
 						    Model model) {
+	//	account = Security.decrypt(account);
 		if(!StringUtils.isEmpty(account)) {
 			UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
 			model.addAttribute("cardInfo", cardInfo);
@@ -150,6 +152,7 @@ public class UserRechargeController extends BaseController {
 	 * @param recType
      * @return
      */
+	@RequestMapping(value = "/user/recharge/confirm", method = RequestMethod.POST)
 	public String confirmRechargeInfo(@RequestParam(value="account", required=true) String account,
 									   @RequestParam(value="amount", required=true) int amount,
 									   @RequestParam(value="recType", required=true) String recType,
@@ -158,7 +161,42 @@ public class UserRechargeController extends BaseController {
 		model.addAttribute("cardInfo", cardInfo);
 		model.addAttribute("amount", amount);
 		model.addAttribute("recType", recType);
-		return "/recharge/amount/confirm";
+		return "/recharge/confirm";
+	}
+
+	/**
+	 * 用户确认充值信息
+	 * @param account
+	 * @return
+     */
+	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.POST)
+	public Object confirmInfo(@RequestParam(value="account", required=true) String account) {
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		if(cardInfo == null) {
+			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
+		}
+		//激活账户信息，激活后，用户不可以再修改
+		if(cardInfo.getStatus() == 0) {
+			cardInfo.setStatus(1);
+			cardInfoService.updateUserCardInfo(cardInfo);
+		}
+		return AjaxResponse.success().toJsonString();
+	}
+
+	/**
+	 * 选择充值入账银行
+	 * @param account
+	 * @param amount
+	 * @param recType
+	 * @param model
+     * @return
+     */
+	@RequestMapping(value = "/user/recharge/bank", method = RequestMethod.POST)
+	public String selectBank(@RequestParam(value="account", required=true) String account,
+							  @RequestParam(value="amount", required=true) int amount,
+							  @RequestParam(value="recType", required=true) String recType,
+							  Model model){
+		return "/recharge/bank";
 	}
 
 	/**
