@@ -89,6 +89,8 @@ public class BBPayApiService extends BaseService {
         jdbcTemplate.update(sql.toString(), returninfo , orderid);
     }
 
+
+
     /**
      * 获得请求易极付的基础参数
      * @param service 接口名称
