@@ -35,6 +35,8 @@ public class BBPayApiService extends BaseService {
     /* 生成订单orderId */
     protected static final String getOrderSql = "EXEC [Wit_BaseInfo].[dbo].[dc_getOrderID] ?,?,?";
 
+
+
     /**
      * 给MAP中加订单ID
      * @param paramMap 需要加订单ID的MAP
