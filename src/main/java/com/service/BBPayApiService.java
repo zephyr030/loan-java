@@ -57,7 +57,7 @@ public class BBPayApiService extends BaseService {
     public String getOrderID(String interfaceName,String params,String remark) {
         String orderNo = RandomUtil.getRandom(18);
 
-        return jdbcTemplate.queryForLong(getOrderSql, interfaceName,params,remark);
+        return orderNo;
     }
 
     /**
