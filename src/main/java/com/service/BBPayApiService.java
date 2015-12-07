@@ -1,6 +1,7 @@
 package com.service;
 
 import com.alibaba.fastjson.JSON;
+import com.utils.RandomUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +42,7 @@ public class BBPayApiService extends BaseService {
      */
     @Transactional(propagation= Propagation.REQUIRES_NEW)
     public void putOrderID(Map<String, String> paramMap, String remark) {
-        long orderID = getOrderID(paramMap.get("service")==null?" ":paramMap.get("service"), JSON.toJSONString(paramMap), remark);
+        String orderID = getOrderID(paramMap.get("service")==null?" ":paramMap.get("service"), JSON.toJSONString(paramMap), remark);
         paramMap.put("orderNo", String.valueOf(orderID));
     }
 
@@ -53,7 +54,9 @@ public class BBPayApiService extends BaseService {
      * @return 订单号
      */
     @Transactional(propagation=Propagation.REQUIRES_NEW)
-    public long getOrderID(String interfaceName,String params,String remark) {
+    public String getOrderID(String interfaceName,String params,String remark) {
+        String orderNo = RandomUtil.getRandom(18);
+
         return jdbcTemplate.queryForLong(getOrderSql, interfaceName,params,remark);
     }
 
