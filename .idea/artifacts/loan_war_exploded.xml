@@ -45,6 +45,11 @@
           <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.12" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.0.3" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.1" />
+          <element id="library" level="project" name="core-renderer (2)" />
+          <element id="library" level="project" name="core-renderer-minimal" />
+          <element id="library" level="project" name="iText-2.0.8" />
+          <element id="library" level="project" name="jsqlparser-0.9.1" />
+          <element id="library" level="project" name="Tidy" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -8,10 +8,10 @@
     <title>Login Page - Ace Admin</title>
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <link rel="stylesheet" href="<c:url value="/static/Ace/css/bootstrap.min.css"/>" />
-    <link rel="stylesheet" href="<c:url value="/static/Ace/css/font-awesome.min.css"/>" />
-    <link rel="stylesheet" href="<c:url value="/static/Ace/css/ace-fonts.min.css"/>" />
-    <link rel="stylesheet" href="<c:url value="/static/Ace/css/ace.min.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/static/Ace/css/bootstrap.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/static/Ace/css/font-awesome.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/static/Ace/css/ace-fonts.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/static/Ace/css/ace.css"/>" />
 </head>
 
 <body class="login-layout blur-login">

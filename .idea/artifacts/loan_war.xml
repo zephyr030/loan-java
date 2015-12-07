@@ -3,6 +3,15 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="loan.war">
       <element id="artifact" artifact-name="loan:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="core-renderer (2)" />
+          <element id="library" level="project" name="core-renderer-minimal" />
+          <element id="library" level="project" name="iText-2.0.8" />
+          <element id="library" level="project" name="jsqlparser-0.9.1" />
+          <element id="library" level="project" name="Tidy" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>
