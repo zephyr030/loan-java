@@ -5,10 +5,14 @@ import com.dao.UserRechargeDetailMapper;
 import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.model.UserCardInfo;
 import com.utils.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/5 0005.
@@ -27,6 +31,7 @@ public class UserCardInfoService extends BaseService{
     public UserCardInfo getUserCardInfoByAccount(String account) {
         Searchable searchable = new Searchable();
         searchable.addCondition(new Condition("account", SearchOperator.eq, account));
+        searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
         return cardInfoMapper.selectBySearchable(searchable);
     }
 
@@ -36,6 +41,12 @@ public class UserCardInfoService extends BaseService{
      * @return
      */
     public int save(UserCardInfo cardInfo) {
+        //先删除未激活的记录
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("account", SearchOperator.eq, cardInfo.getAccount()));
+        searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
+        cardInfoMapper.deleteBySearchable(searchable);
+        //再添加新的记录
         return cardInfoMapper.insertSelective(cardInfo);
     }
 
@@ -59,6 +70,19 @@ public class UserCardInfoService extends BaseService{
             ajaxResponse = AjaxResponse.fail("你输入的手机号信息有误");
         }
         return ajaxResponse;
+    }
+
+    /**
+     * 查询账户信息
+     * @param searchable
+     * @param pageNumber
+     * @param pageSize
+     */
+    public PageInfo selectCardInfoList(Searchable searchable, int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber, pageSize);
+        List<UserCardInfo> list = cardInfoMapper.selectList(searchable);
+        PageInfo page = new PageInfo(list);
+        return page;
     }
 
 }
