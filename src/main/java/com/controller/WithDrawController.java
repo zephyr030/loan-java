@@ -80,6 +80,9 @@ public class WithDrawController {
         return AjaxResponse.success().toJsonString();
     }
 
+
+
+
     /**
      * 检查提现信息有效性
      * @param account

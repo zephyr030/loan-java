@@ -29,10 +29,10 @@
   </body>
   <script type="text/javascript">
 	  $(document).ready(function(){
-		 $("#rechargeBn").click(recharge);
+		 $("#withdrawBn").click(withdraw);
 	  });
 
-	  function recharge() {
+	  function withdraw() {
 		  var account = $.trim($("#account").val());
 		  var customerName = $.trim($("#customerName").val());
 		  var cardNumber = $.trim($("#cardNumber").val());

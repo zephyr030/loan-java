@@ -41,7 +41,7 @@ public class UserCardInfoService extends BaseService{
         Searchable searchable = new Searchable();
         searchable.addCondition(new Condition("account", SearchOperator.eq, account));
         if(status >= 0) {
-            searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
+            searchable.addCondition(new Condition("status", SearchOperator.eq, status));
         }
         return cardInfoMapper.selectBySearchable(searchable);
     }
