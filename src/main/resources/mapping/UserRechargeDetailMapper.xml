@@ -151,4 +151,11 @@
       bank_id = #{bankId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="rechargeList" parameterType="Searchable" resultType="java.util.Map">
+     SELECT a.*,b.text,c.* FROM user_recharge_detail a
+        LEFT JOIN sys_code_table b ON a.recType=b.id
+        LEFT JOIN user_card_info c ON a.user_id = c.id
+    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+  </select>
 </mapper>
