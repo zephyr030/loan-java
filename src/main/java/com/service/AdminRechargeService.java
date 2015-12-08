@@ -1,6 +1,6 @@
 package com.service;
 
-import com.dao.AminRechargeMapper;
+import com.dao.UserRechargeDetailMapper;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,12 +20,12 @@ import java.util.Map;
 @Service
 public class AdminRechargeService extends BaseService{
     @Autowired
-    private AminRechargeMapper adminRechargeMapper;
+    private UserRechargeDetailMapper userRechargeDetailMapper;
 
     //充值列表
     public PageInfo rechargeList(Searchable searchable, int pageNumber, int pageSize){
         PageHelper.startPage(pageNumber, pageSize);
-        List<Map<String,Object>> list = adminRechargeMapper.rechargeList(searchable);
+        List<Map<String,Object>> list = userRechargeDetailMapper.rechargeList(searchable);
         PageInfo page = new PageInfo(list);
         return page;
     }
