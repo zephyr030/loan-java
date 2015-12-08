@@ -74,7 +74,7 @@ public class LoginController extends BaseController  {
     public String main(HttpServletRequest request){
         SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
         if(user == null){
-            return "/login/login";
+            return "redirect:/admin/login";
         }else{
             request.setAttribute("user",user);
             return "/admin/main";
@@ -86,6 +86,6 @@ public class LoginController extends BaseController  {
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("sysUser");
         request.getSession().removeAttribute("token");
-        return "/login/login";
+        return "redirect:/admin/login";
     }
 }

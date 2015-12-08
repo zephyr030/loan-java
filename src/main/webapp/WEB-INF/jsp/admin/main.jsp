@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace-fonts.css" />
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
+    <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.js" ></script>
     <script type="text/javascript" src="${path}/static/script/Main/main.js" ></script>
 </head>
 
@@ -33,7 +34,7 @@
                     <img class="nav-user-photo" src="${path}/static/Ace/avatars/avatar4.png" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>Welcome,</small>
-                            Jason
+                            ${user.username}
                         </span>
                     <i class="ace-icon fa fa-caret-down"></i>
                 </a>
@@ -55,10 +56,10 @@
     <div class="sidebar responsive" id="sidebar">
         <ul class="nav nav-list" style="top: 0px;">
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="javascript:;" class="dropdown-toggle" onclick="url('rechargeList')">
                     <i class="menu-icon fa fa-desktop"></i>
                     <span class="menu-text">
-                        菜单1
+                        充值列表
                     </span>
                 </a>
             </li>
@@ -82,37 +83,29 @@
     </div>
 
     <div class="main-content">
-        <div class="breadcrumbs">
-
-        </div>
-
+        <div class="breadcrumbs"></div>
         <div class="page-content">
-
-
             <div class="row">
-                <div class="col-xs-12">
-
+                <div class="col-xs-12" id="iframeWindow">
+                    <iframe id="iframe_id" width="100%" scrolling="no"  frameborder="0" name="iframe_id" src=""></iframe>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="footer-inner">
                 <div class="footer-content">
-                    <span class="bigger-120">
-                        <span class="blue bolder">Ace</span>
-                        Application &copy; 2013-2014
-                    </span>
+                    <span class="bigger-120"><span class="blue bolder">Ace</span>Application &copy; 2013-2014</span>
                     &nbsp; &nbsp;
                     <span class="action-buttons">
-                        <a href="#">
+                        <a href="javascript:;">
                             <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
                         </a>
 
-                        <a href="#">
+                        <a href="javascript:;">
                             <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
                         </a>
 
-                        <a href="#">
+                        <a href="javascript:;">
                             <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
                         </a>
                     </span>
