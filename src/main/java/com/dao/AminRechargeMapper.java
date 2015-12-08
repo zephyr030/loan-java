@@ -2,6 +2,7 @@ package com.dao;
 
 import com.dao.common.BaseMapper;
 import com.dao.common.MyBatisMapper;
+import com.dao.util.Searchable;
 import com.model.SysUser;
 
 import java.util.List;
@@ -17,5 +18,5 @@ import java.util.Map;
 @MyBatisMapper
 public interface AminRechargeMapper extends BaseMapper<SysUser,Long>{
     //充值列表
-    List<Map<String,Object>> rechargeList();
+    List<Map<String,Object>> rechargeList(Searchable searchable);
 }

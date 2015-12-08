@@ -4,7 +4,6 @@ import com.dao.AminRechargeMapper;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.model.UserCardInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class AdminRechargeService extends BaseService{
     //充值列表
     public PageInfo rechargeList(Searchable searchable, int pageNumber, int pageSize){
         PageHelper.startPage(pageNumber, pageSize);
-        List<Map<String,Object>> list = adminRechargeMapper.rechargeList();
+        List<Map<String,Object>> list = adminRechargeMapper.rechargeList(searchable);
         PageInfo page = new PageInfo(list);
         return page;
     }

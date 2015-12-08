@@ -84,7 +84,7 @@
                             <c:forEach items="${page.list}" var="obj">
                                 <tr>
                                     <th>${obj.id}</th>
-                                    <td>${obj.text}</td>
+                                    <td>网银充值</td>
                                     <td>${obj.flowNo}</td>
                                     <td>${obj.account}</td>
                                     <td>${obj.customername}</td>
