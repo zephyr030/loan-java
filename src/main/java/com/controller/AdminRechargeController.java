@@ -35,13 +35,39 @@ public class AdminRechargeController {
                                 @RequestParam(required = false,defaultValue = "") String account,
                                 @RequestParam(required = false,defaultValue = "") String name,
                                 @RequestParam(required = false,defaultValue = "") String mobile,
-                                @RequestParam(required = false,defaultValue = "") String smoney,
-                                @RequestParam(required = false,defaultValue = "") String emoney,
+                                @RequestParam(required = false,defaultValue = "0") Double smoney,
+                                @RequestParam(required = false,defaultValue = "0") Double emoney,
                                 @RequestParam(required = false,defaultValue = "") String startTime,
                                 @RequestParam(required = false,defaultValue = "") String endTime,
                                HttpServletRequest request){
         Searchable searchable = new Searchable();
-        searchable.addCondition(new Condition("type", SearchOperator.eq, type));
+        if(type > 0){
+            searchable.addCondition(new Condition("recType", SearchOperator.eq, type==1?"A01":"A02"));
+        }
+        if(!flow.equals("")){
+            searchable.addCondition(new Condition("flowNo", SearchOperator.eq, flow));
+        }
+        if(!account.equals("")){
+            searchable.addCondition(new Condition("cardnumber", SearchOperator.eq, account));
+        }
+        if(!name.equals("")){
+            searchable.addCondition(new Condition("customername", SearchOperator.eq, name));
+        }
+        if(!mobile.equals("")){
+            searchable.addCondition(new Condition("mobile", SearchOperator.eq, mobile));
+        }
+        if(smoney > 0){
+            searchable.addCondition(new Condition("amount", SearchOperator.gte, smoney));
+        }
+        if(emoney > 0){
+            searchable.addCondition(new Condition("amount", SearchOperator.lte, emoney));
+        }
+        if(!startTime.equals("")){
+            searchable.addCondition(new Condition("recTime", SearchOperator.gte, startTime));
+        }
+        if(!endTime.equals("")){
+            searchable.addCondition(new Condition("recTime", SearchOperator.lte, endTime));
+        }
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);

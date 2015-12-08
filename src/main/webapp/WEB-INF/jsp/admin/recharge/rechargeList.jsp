@@ -19,38 +19,40 @@
 <body class="no-skin" style="background-color: white;">
 <div class="row">
     <div class="col-xs-12">
-        <select id="type" name="type" style="height: 34px;">
-            <option value="0" ${type==0?'selected':''}>全部</option>
-            <option value="1" ${type==1?'selected':''}>充值</option>
-            <option value="2" ${type==2?'selected':''}>转账</option>
-        </select>
-        <input type="text" name="flow" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
-        <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
-        <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
-        <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
-        <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
-            onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
-        />
-        --
-        <input type="text" name="emoney" value="${emoney}" placeholder="结束金额"
-            onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
-        />
-        <input type="text" id="startTime" name="startTime" size="16" readonly class="form_datetime" value="${startTime}"
-               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d' || '#F{$dp.$D(\'endTime\')}'})"
-        />
-        <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
-               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
-        />
-        <button type="button" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
-            <i class="ace-icon fa fa-search bigger-120 green"></i>
-            查询
-        </button>
-        <a href="">
-            <button type="button" id="addUser" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
-                <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-                导出
+        <form action="rechargeList" id="form" name="form" method="post">
+            <select id="type" name="type" style="height: 34px;">
+                <option value="0" ${type==0?'selected':''}>全部</option>
+                <option value="1" ${type==1?'selected':''}>充值</option>
+                <option value="2" ${type==2?'selected':''}>转账</option>
+            </select>
+            <input type="text" name="flow" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
+            <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
+            <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
+            <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
+            <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
+                   onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+            />
+            --
+            <input type="text" name="emoney" value="${emoney}" placeholder="结束金额"
+                   onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+            />
+            <input type="text" id="startTime" name="startTime" size="16" readonly class="form_datetime" value="${startTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d' || '#F{$dp.$D(\'endTime\')}'})"
+            />
+            <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
+            />
+            <button type="submit" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
+                <i class="ace-icon fa fa-search bigger-120 green"></i>
+                查询
             </button>
-        </a>
+            <a href="">
+                <button type="button" id="export" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    导出
+                </button>
+            </a>
+        </form>
         <div class="widget-box widget-color-blue2 ui-sortable-handle">
             <!-- 设置table颜色 -->
             <div class="widget-header">
