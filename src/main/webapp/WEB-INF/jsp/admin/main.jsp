@@ -64,10 +64,10 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="javascript:;" class="dropdown-toggle" onclick="url('rechargeOverList')">
                     <i class="menu-icon fa fa-desktop"></i>
                     <span class="menu-text">
-                        菜单2
+                        充值上账信息
                     </span>
                 </a>
             </li>

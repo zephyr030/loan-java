@@ -156,11 +156,14 @@
   <select id="rechargeList" parameterType="Searchable" resultType="java.util.Map">
       SELECT a.id,a.recType,a.flowNo,a.amount,a.status,a.recTime,a.actTime,a.update_uid,a.bborderid,
       b.text,c.account,c.customername,d.text AS bankname,c.cardnumber,c.mobile,c.status AS cardStatus,
-      CASE WHEN 'A01' THEN '充值' ELSE '转账' END AS recTypes
+      e.customername AS exeUser,
+      CASE WHEN 'A01' THEN '充值' ELSE '转账' END AS recTypes,
+      CASE WHEN 1 THEN '已到账' ELSE '未到账' END as statusName
       FROM user_recharge_detail a
       LEFT JOIN sys_code_table b ON a.recType=b.typeCode
       LEFT JOIN user_card_info c ON a.user_id = c.id
       LEFT JOIN sys_code_table d ON c.bankname = d.typeCode
+      LEFT JOIN user_card_info e ON a.update_uid = e.id
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
 </mapper>
