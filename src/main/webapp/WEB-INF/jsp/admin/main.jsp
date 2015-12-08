@@ -57,7 +57,7 @@
         <ul class="nav nav-list" style="top: 0px;">
             <li>
                 <a href="javascript:;" class="dropdown-toggle" onclick="url('rechargeList')">
-                    <i class="menu-icon fa fa-desktop"></i>
+                    <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">
                         充值列表
                     </span>
@@ -65,7 +65,7 @@
             </li>
             <li>
                 <a href="javascript:;" class="dropdown-toggle" onclick="url('rechargeOverList')">
-                    <i class="menu-icon fa fa-desktop"></i>
+                    <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text">
                         充值上账信息
                     </span>
@@ -73,9 +73,17 @@
             </li>
             <li>
                 <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-desktop"></i>
+                    <i class="menu-icon fa fa-credit-card"></i>
                     <span class="menu-text">
-                        菜单3
+                        提现列表
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-money"></i>
+                    <span class="menu-text">
+                        提现放款信息
                     </span>
                 </a>
             </li>

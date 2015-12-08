@@ -35,4 +35,19 @@ public class AdminRechargeService extends BaseService{
         List<Map<String,Object>> list = userRechargeDetailMapper.rechargeList(searchable);
         return list;
     }
+
+    //提现列表
+    public PageInfo drawList(Searchable searchable, int pageNumber, int pageSize){
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Map<String,Object>> list = userRechargeDetailMapper.drawList(searchable);
+        PageInfo page = new PageInfo(list);
+        return page;
+    }
+
+    //导出提现列表Excel
+    public List<Map<String,Object>> drawList(Searchable searchable){
+        List<Map<String,Object>> list = userRechargeDetailMapper.drawList(searchable);
+        return list;
+    }
+
 }
