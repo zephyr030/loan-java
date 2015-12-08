@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
     <title>登录</title>
@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
 
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
+    <script type="text/javascript" src="${path}/static/script/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/bootbox.min.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/Login/login.js" ></script>
 </head>
 
 
@@ -44,34 +47,31 @@
                                     </h4>
 
                                     <div class="space-6"></div>
-
-                                    <form>
                                         <fieldset>
                                             <label class="block clearfix">
-                                                            <span class="block input-icon input-icon-right">
-                                                                <input type="text" class="form-control" placeholder="Username" />
-                                                                <i class="ace-icon fa fa-user"></i>
-                                                            </span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" class="form-control" placeholder="Username" id="username" name="username"/>
+                                                    <i class="ace-icon fa fa-user"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block clearfix">
-                                                            <span class="block input-icon input-icon-right">
-                                                                <input type="password" class="form-control" placeholder="Password" />
-                                                                <i class="ace-icon fa fa-lock"></i>
-                                                            </span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password"/>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
                                             </label>
 
                                             <div class="space"></div>
 
                                             <div class="clearfix">
-                                                <button type="button" class="width-100 pull-right btn btn-sm btn-primary">
+                                                <button type="button" class="width-100 pull-right btn btn-sm btn-primary" id="login">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">Login</span>
                                                 </button>
                                             </div>
                                             <div class="space-4"></div>
                                         </fieldset>
-                                    </form>
                                 </div>
                             </div>
                         </div>
