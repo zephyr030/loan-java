@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace-fonts.css" />
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
+    <script type="text/javascript" src="${path}/static/script/Main/main.js" ></script>
 </head>
 
 <body class="no-skin">
@@ -29,34 +30,17 @@
         <ul class="nav ace-nav">
             <li class="light-blue">
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                    <img class="nav-user-photo" src="${path}/static/Ace/avatars/user.jpg" alt="Jason's Photo" />
-								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
-								</span>
-
+                    <img class="nav-user-photo" src="${path}/static/Ace/avatars/avatar4.png" alt="Jason's Photo" />
+                        <span class="user-info">
+                            <small>Welcome,</small>
+                            Jason
+                        </span>
                     <i class="ace-icon fa fa-caret-down"></i>
                 </a>
 
                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                     <li>
-                        <a href="#">
-                            <i class="ace-icon fa fa-cog"></i>
-                            Settings
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="profile.html">
-                            <i class="ace-icon fa fa-user"></i>
-                            Profile
-                        </a>
-                    </li>
-
-                    <li class="divider"></li>
-
-                    <li>
-                        <a href="#">
+                        <a href="logout">
                             <i class="ace-icon fa fa-power-off"></i>
                             Logout
                         </a>
@@ -69,7 +53,32 @@
 
 <div class="main-container" id="main-container">
     <div class="sidebar responsive" id="sidebar">
-
+        <ul class="nav nav-list" style="top: 0px;">
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text">
+                        菜单1
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text">
+                        菜单2
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text">
+                        菜单3
+                    </span>
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="main-content">
@@ -83,6 +92,30 @@
             <div class="row">
                 <div class="col-xs-12">
 
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span class="bigger-120">
+                        <span class="blue bolder">Ace</span>
+                        Application &copy; 2013-2014
+                    </span>
+                    &nbsp; &nbsp;
+                    <span class="action-buttons">
+                        <a href="#">
+                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>

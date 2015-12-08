@@ -76,8 +76,16 @@ public class LoginController extends BaseController  {
         if(user == null){
             return "/login/login";
         }else{
-
+            request.setAttribute("user",user);
             return "/admin/main";
         }
+    }
+
+    //退出登录
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("sysUser");
+        request.getSession().removeAttribute("token");
+        return "/login/login";
     }
 }
