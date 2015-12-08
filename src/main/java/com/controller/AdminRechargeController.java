@@ -155,11 +155,10 @@ public class AdminRechargeController {
         Excel.ExportExcel(request, response, map, mapKey,list);
     }
 
-    //充值查询列表
-    @RequestMapping("/rechargeOverList")
-    public String rechargeOverList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
+    //提现查询列表
+    @RequestMapping("/drawList")
+    public String drawList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
                                @RequestParam(required = false,defaultValue = "0") int type,
-                               @RequestParam(required = false,defaultValue = "") String flow,
                                @RequestParam(required = false,defaultValue = "") String account,
                                @RequestParam(required = false,defaultValue = "") String name,
                                @RequestParam(required = false,defaultValue = "") String mobile,
@@ -167,15 +166,8 @@ public class AdminRechargeController {
                                @RequestParam(required = false,defaultValue = "0") Double emoney,
                                @RequestParam(required = false,defaultValue = "") String startTime,
                                @RequestParam(required = false,defaultValue = "") String endTime,
-                               @RequestParam(required = false,defaultValue = "0") int status,
                                HttpServletRequest request){
         Searchable searchable = new Searchable();
-        if(type > 0){
-            searchable.addCondition(new Condition("a.recType", SearchOperator.eq, type==1?"A01":"A02"));
-        }
-        if(!flow.equals("")){
-            searchable.addCondition(new Condition("a.flowNo", SearchOperator.eq, flow));
-        }
         if(!account.equals("")){
             searchable.addCondition(new Condition("c.cardnumber", SearchOperator.eq, account));
         }
@@ -197,13 +189,9 @@ public class AdminRechargeController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("a.recTime", SearchOperator.lte, endTime));
         }
-        if(status > 0){
-            searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
-        }
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);
-        request.setAttribute("flow",flow);
         request.setAttribute("account",account);
         request.setAttribute("name",name);
         request.setAttribute("mobile",mobile);
@@ -211,13 +199,12 @@ public class AdminRechargeController {
         request.setAttribute("emoney",emoney);
         request.setAttribute("startTime",startTime);
         request.setAttribute("endTime",endTime);
-        request.setAttribute("status",status);
         return "/admin/recharge/rechargeOverList";
     }
 
     //充值查询列表
-    @RequestMapping("/exportRechargeOverList")
-    public void exportRechargeOverList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
+    @RequestMapping("/exportDrawList")
+    public void exportDrawList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
                                    @RequestParam(required = false,defaultValue = "0") int type,
                                    @RequestParam(required = false,defaultValue = "") String flow,
                                    @RequestParam(required = false,defaultValue = "") String account,
