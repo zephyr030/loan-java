@@ -14,17 +14,24 @@
   </head>
   
   <body>
+
 		<div style="left: 200px;top: 200px;border: 1px">
-			超盘账号<input type="text" id="account" value="${cardInfo.account}" disabled="disabled"/><br/>
-			姓名<input type="text" id="customerName" value="${cardInfo.customername}" disabled="disabled"/><br/>
-			银行卡号<input type="text" id="cardNumber" value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
-			开户行<input type="text" id="bankName" value="${cardInfo.bankname}" disabled="disabled"/><br/>
-			手机号<input type="text" id="mobile" value="${cardInfo.mobile}" disabled="disabled"/><br/>
-			充值金额<input type="text" id="amount" value="${amount}" disabled="disabled"/><br/>
-			充值方式<input type="text" id="recType" value="${recType}" disabled="disabled"/><br/>
+			超盘账号<input type="text" value="${cardInfo.account}" disabled="disabled"/><br/>
+			姓名<input type="text" value="${cardInfo.customername}" disabled="disabled"/><br/>
+			银行卡号<input type="text" value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
+			开户行<input type="text" value="${cardInfo.bankname}" disabled="disabled"/><br/>
+			手机号<input type="text" value="${cardInfo.mobile}" disabled="disabled"/><br/>
+			充值金额<input type="text" value="${amount}" disabled="disabled"/><br/>
+			充值方式<input type="text" name="recType" value="${recType}" disabled="disabled"/><br/>
 			<input type="button" id="nextBn" value="下一步"/> &nbsp;&nbsp;
 			<input type="button" id="backBn" value="重填"/><br/>
 		</div>
+
+		<form action="${path}/user/recharge/bank" id="confirmForm" method="post">
+			<input type="hidden" id="account" name="account" value="${cardInfo.account}"/>
+			<input type="hidden" id="amount" name="amount" value="${amount}"/>
+			<input type="hidden" id="recType" name="recType" value="${recType}"/>
+		</form>
   </body>
   <script type="text/javascript">
 	$(document).ready(function(){
@@ -32,14 +39,13 @@
 		$("#backBn").click(goBack);
 	});
 
-
 	function confirmInfo() {
 		var account = $("#account").val();
 
 		$.ajax({
 			cache: false,
 			async: false,
-			type: "POST",
+			type: "GET",
 			dataType: "json",
 			url:path + "/user/recharge/confirm/info",
 			data:{
@@ -52,8 +58,7 @@
 				if(!data.success) {
 					alert(data.message);
 				}else {
-					alert(OK);
-					//document.location.href = path + "/user/recharge/amount?account=" + account;
+					$("#confirmForm").submit();
 				}
 			}
 		});

@@ -22,6 +22,8 @@ public class UserRechargeDetail {
 
     private Integer updateUid;
 
+    private String bankId;
+
     public Long getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class UserRechargeDetail {
 
     public void setUpdateUid(Integer updateUid) {
         this.updateUid = updateUid;
+    }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
     }
 }

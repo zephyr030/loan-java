@@ -30,15 +30,15 @@ public class AdminRechargeController {
     //充值查询列表
     @RequestMapping("/rechargeList")
     public String rechargeList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
-                               @RequestParam(required = false,defaultValue = "0") int type,
-                               @RequestParam(required = false,defaultValue = "") String flow,
-                               @RequestParam(required = false,defaultValue = "") String account,
-                               @RequestParam(required = false,defaultValue = "") String name,
-                               @RequestParam(required = false,defaultValue = "") String mobile,
-                               @RequestParam(required = false,defaultValue = "") String smoney,
-                               @RequestParam(required = false,defaultValue = "") String emoney,
-                               @RequestParam(required = false,defaultValue = "") String startTime,
-                               @RequestParam(required = false,defaultValue = "") String endTime,
+                                @RequestParam(required = false,defaultValue = "0") int type,
+                                @RequestParam(required = false,defaultValue = "") String flow,
+                                @RequestParam(required = false,defaultValue = "") String account,
+                                @RequestParam(required = false,defaultValue = "") String name,
+                                @RequestParam(required = false,defaultValue = "") String mobile,
+                                @RequestParam(required = false,defaultValue = "") String smoney,
+                                @RequestParam(required = false,defaultValue = "") String emoney,
+                                @RequestParam(required = false,defaultValue = "") String startTime,
+                                @RequestParam(required = false,defaultValue = "") String endTime,
                                HttpServletRequest request){
         Searchable searchable = new Searchable();
         searchable.addCondition(new Condition("type", SearchOperator.eq, type));

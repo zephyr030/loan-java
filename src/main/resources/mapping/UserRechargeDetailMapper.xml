@@ -11,9 +11,10 @@
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="actTime" property="acttime" jdbcType="TIMESTAMP" />
     <result column="update_uid" property="updateUid" jdbcType="INTEGER" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, recType, user_id, flowNo, amount, recTime, status, actTime, update_uid
+    id, recType, user_id, flowNo, amount, recTime, status, actTime, update_uid, bank_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -27,14 +28,14 @@
   </delete>
   <insert id="insert" parameterType="com.model.UserRechargeDetail" >
     insert into user_recharge_detail (id, recType, user_id, 
-      flowNo, amount, recTime, 
-      status, actTime, update_uid
+      flowNo, amount, recTime, status, actTime, update_uid, bank_id
       )
     values (#{id,jdbcType=BIGINT}, #{rectype,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
       #{flowno,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{rectime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{acttime,jdbcType=TIMESTAMP}, #{updateUid,jdbcType=INTEGER}
+      #{status,jdbcType=INTEGER}, #{acttime,jdbcType=TIMESTAMP}, #{updateUid,jdbcType=INTEGER},#{bankId,jdbcType=VARCHAR}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.model.UserRechargeDetail" >
     insert into user_recharge_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -65,6 +66,9 @@
       <if test="updateUid != null" >
         update_uid,
       </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -94,8 +98,12 @@
       <if test="updateUid != null" >
         #{updateUid,jdbcType=INTEGER},
       </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.model.UserRechargeDetail" >
     update user_recharge_detail
     <set >
@@ -123,9 +131,13 @@
       <if test="updateUid != null" >
         update_uid = #{updateUid,jdbcType=INTEGER},
       </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.model.UserRechargeDetail" >
     update user_recharge_detail
     set recType = #{rectype,jdbcType=VARCHAR},
@@ -135,7 +147,8 @@
       recTime = #{rectime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       actTime = #{acttime,jdbcType=TIMESTAMP},
-      update_uid = #{updateUid,jdbcType=INTEGER}
+      update_uid = #{updateUid,jdbcType=INTEGER},
+      bank_id = #{bankId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -169,7 +169,8 @@ public class UserRechargeController extends BaseController {
 	 * @param account
 	 * @return
      */
-	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.GET)
+	@ResponseBody
 	public Object confirmInfo(@RequestParam(value="account", required=true) String account) {
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
 		if(cardInfo == null) {
@@ -180,7 +181,7 @@ public class UserRechargeController extends BaseController {
 			cardInfo.setStatus(1);
 			cardInfoService.updateUserCardInfo(cardInfo);
 		}
-		return AjaxResponse.success().toJsonString();
+		return AjaxResponse.success("操作成功").toJsonString();
 	}
 
 	/**
@@ -196,7 +197,38 @@ public class UserRechargeController extends BaseController {
 							  @RequestParam(value="amount", required=true) int amount,
 							  @RequestParam(value="recType", required=true) String recType,
 							  Model model){
+		model.addAttribute("account",account);
+		model.addAttribute("amount",amount);
+		model.addAttribute("recType",recType);
+
 		return "/recharge/bank";
+	}
+
+	/**
+	 * 充值最后一步：选择充值银行，填写流水号
+	 * @return
+     */
+	@RequestMapping(value = "/user/recharge/end", method = RequestMethod.POST)
+	@ResponseBody
+	public Object selectBanka(@RequestParam(value="account", required=true) String account,
+							   @RequestParam(value="amount", required=true) int amount,
+							   @RequestParam(value="recType", required=true) String recType,
+							   @RequestParam(value="bankName", required=true) String bankName,
+							   @RequestParam(value="flowNo", required=false) String flowNo) {
+
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		if(cardInfo == null) {
+			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
+		}
+		//记录本次充值信息
+		UserRechargeDetail detail = new UserRechargeDetail();
+		detail.setUserId(cardInfo.getId());
+		detail.setAmount(new BigDecimal(amount));
+		detail.setRectype(recType);
+		detail.setFlowno(flowNo);
+
+		rechargeService.save(detail);
+		return AjaxResponse.success().toJsonString();
 	}
 
 	/**

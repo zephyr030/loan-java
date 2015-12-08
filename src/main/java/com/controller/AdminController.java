@@ -52,7 +52,6 @@ public class AdminController extends BaseController {
 			searchable.addCondition(new Condition("account", SearchOperator.eq, account));
 		}
 		PageInfo pageInfo = cardInfoService.selectCardInfoList(searchable,pageNumber,pageSize);
-
 		return JSON.toJSONStringWithDateFormat(pageInfo, "yyyy-MM-dd HH:mm:ss");
 	}
 }
