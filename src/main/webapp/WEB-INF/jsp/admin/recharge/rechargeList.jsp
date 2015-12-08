@@ -46,7 +46,7 @@
                 <i class="ace-icon fa fa-search bigger-120 green"></i>
                 查询
             </button>
-            <a href="">
+            <a href="exportRechargeList">
                 <button type="button" id="export" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                     导出
@@ -86,7 +86,7 @@
                             <c:forEach items="${page.list}" var="obj">
                                 <tr>
                                     <th>${obj.id}</th>
-                                    <td>网银充值</td>
+                                    <td>${obj.recTypes}</td>
                                     <td>${obj.flowNo}</td>
                                     <td>${obj.account}</td>
                                     <td>${obj.customername}</td>
@@ -114,7 +114,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNumber-1}" aria-label="Previous">
+                            <a href="rechargeList?pageNumber=${page.pageNumber-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
@@ -134,7 +134,7 @@
                             <li class="active"><a href="javascript:void(0)">${obj}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="rechargeList?pageNumber=${obj}">${obj}</a></li>
+                            <li><a href="rechargeList?pageNumber=${obj}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}">${obj}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -142,7 +142,7 @@
                 <c:choose>
                     <c:when test="${page.hasNextPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNum+1}" aria-label="Next">
+                            <a href="rechargeList?pageNumber=${page.pageNum+1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Next">
                                 <span aria-hidden="true">下一页</span>
                             </a>
                         </li>

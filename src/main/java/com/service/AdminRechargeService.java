@@ -29,4 +29,10 @@ public class AdminRechargeService extends BaseService{
         PageInfo page = new PageInfo(list);
         return page;
     }
+
+    //导出充值列表Excel
+    public List<Map<String,Object>> rechargeList(Searchable searchable){
+        List<Map<String,Object>> list = userRechargeDetailMapper.rechargeList(searchable);
+        return list;
+    }
 }
