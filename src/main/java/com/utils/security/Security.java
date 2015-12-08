@@ -8,7 +8,7 @@ public class Security {
 	
 	static{
 		//key需要写一个
-		String key = "tdpay";
+		String key = "tbpay";
 		key = MD5.md5(key);
 		password = key.toCharArray();
 	}
@@ -19,7 +19,7 @@ public class Security {
 //	}
 	
     public static String encrypt(String str) {
-    	if(str==null || str.equals("")){
+    	if(str==null || str.trim().equals("")){
     		return "";
     	}
     	str = encode(str);
@@ -46,12 +46,15 @@ public class Security {
             return str;
         }
         catch(UnsupportedEncodingException e)  {
-        }
+
+        }catch (ArrayIndexOutOfBoundsException e) {
+
+		}
         return null;
     }
     
     public static String encode(String str){
-    	if(str==null || str.equals("")){
+    	if(str==null || str.trim().equals("")){
     		return "";
     	}
     	int len = str.length();
@@ -75,11 +78,8 @@ public class Security {
 //		System.out.println(s);
 //		s = decrypt(s);
 //		System.out.println(s);
-        System.out.println(decrypt("U1YLVlQD"));
+        System.out.println(decrypt("123456"));
 
-
-		String a = "敌法";
-		System.out.println(a.length());
 	}
 
 }

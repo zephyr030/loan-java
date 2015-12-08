@@ -24,6 +24,15 @@ public class UserCardInfoService extends BaseService{
     private UserCardInfoMapper cardInfoMapper;
 
     /**
+     * 修改一条用户账号信息
+     * @param userCardInfo
+     * @return
+     */
+    public int updateUserCardInfo(UserCardInfo userCardInfo) {
+        return cardInfoMapper.updateByPrimaryKeySelective(userCardInfo);
+    }
+
+    /**
      * 根据超盘账号查询用户账户信息
      * @param account
      * @return

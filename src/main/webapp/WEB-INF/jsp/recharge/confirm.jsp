@@ -15,55 +15,53 @@
   
   <body>
 		<div style="left: 200px;top: 200px;border: 1px">
-
 			超盘账号<input type="text" id="account" value="${cardInfo.account}" disabled="disabled"/><br/>
-			姓名<input type="text" id="customerName"  value="${cardInfo.customername}" disabled="disabled"/><br/>
-			银行卡号<input type="text" id="cardNumber"  value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
-			开户行<input type="text" id="bankName"  value="${cardInfo.bankname}" disabled="disabled"/><br/>
-			手机号<input type="text" id="mobile"  value="${cardInfo.mobile}" disabled="disabled"/><br/>
-			充值金额<input type="text" id="amount" value="${amount}" disabled="disabled" /><br/>
+			姓名<input type="text" id="customerName" value="${cardInfo.customername}" disabled="disabled"/><br/>
+			银行卡号<input type="text" id="cardNumber" value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
+			开户行<input type="text" id="bankName" value="${cardInfo.bankname}" disabled="disabled"/><br/>
+			手机号<input type="text" id="mobile" value="${cardInfo.mobile}" disabled="disabled"/><br/>
+			充值金额<input type="text" id="amount" value="${amount}" disabled="disabled"/><br/>
 			充值方式<input type="text" id="recType" value="${recType}" disabled="disabled"/><br/>
-			&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
-			<input type="button" id="backBn" value="重填"/>&nbsp;&nbsp;&nbsp;
-
+			<input type="button" id="nextBn" value="下一步"/> &nbsp;&nbsp;
+			<input type="button" id="backBn" value="重填"/><br/>
 		</div>
   </body>
   <script type="text/javascript">
-
-	  function recharge() {
-		  var account = $.trim($("#account").val());
-		  var customerName = $.trim($("#customerName").val());
-		  var cardNumber = $.trim($("#cardNumber").val());
-		  var bankName = $.trim($("#bankName").val());
-		  var mobile = $.trim($("#mobile").val());
-
-		  $.ajax({
-			  cache: true,
-			  type: "POST",
-			  dataType: "json",
-			  url:path + "/user/recharge",
-			  data:{
-				  account: account,
-				  customerName: customerName,
-				  cardNumber: cardNumber,
-				  bankName: bankName,
-				  mobile: mobile
-			  },// 你的formid
-			  async: false,
-			  error: function(request) {
-				  alert("Connection error");
-			  },
-			  success: function(data) {
-				  if(!data.success) {
-					  alert(data.message);
-				  }else {
-					  document.location.href = path + "/user/recharge/amount?account=" + account;
-
-				  }
-			  }
-		  });
-	  }
+	$(document).ready(function(){
+		$("#nextBn").click(confirmInfo);
+		$("#backBn").click(goBack);
+	});
 
 
+	function confirmInfo() {
+		var account = $("#account").val();
+
+		$.ajax({
+			cache: false,
+			async: false,
+			type: "POST",
+			dataType: "json",
+			url:path + "/user/recharge/confirm/info",
+			data:{
+				account: account
+			},
+			error: function(request) {
+				alert("Connection error");
+			},
+			success: function(data) {
+				if(!data.success) {
+					alert(data.message);
+				}else {
+					alert(OK);
+					//document.location.href = path + "/user/recharge/amount?account=" + account;
+				}
+			}
+		});
+	}
+
+	function goBack() {
+		var account = $.trim($("#account").val());
+		document.location.href = path + '/user/recharge?account=' + account;
+	}
   </script>
 </html>

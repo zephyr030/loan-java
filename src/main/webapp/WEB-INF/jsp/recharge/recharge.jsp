@@ -36,7 +36,8 @@
 		  var mobile = $.trim($("#mobile").val());
 
 		  $.ajax({
-			  cache: true,
+			  cache: false,
+			  async: false,
 			  type: "POST",
 			  dataType: "json",
 			  url:path + "/user/recharge",
@@ -46,8 +47,7 @@
 				  cardNumber: cardNumber,
 				  bankName: bankName,
 				  mobile: mobile
-			  },// 你的formid
-			  async: false,
+			  },
 			  error: function(request) {
 				  alert("Connection error");
 			  },

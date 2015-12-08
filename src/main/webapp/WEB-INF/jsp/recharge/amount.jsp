@@ -14,18 +14,17 @@
   </head>
   
   <body>
+  	<form action="${path}/user/recharge/confirm" id="amountForm" method="post">
 		<div style="left: 200px;top: 200px;border: 1px">
-			<form action="${path}/user/recharge/confirm" id="amountform" method="post">
-				<input type="hidden" id="account" name="account" value="${account}"/><br/>
-				请填写充值金额：<input type="text" id="amount" name="amount"/><br/>
-				请选择充值通道： <input type="radio" name="recType" value="A01" />网银充值
-				<input type="radio" name="recType" value="A02" checked="checked"/>银行转账<br/><br/>
+			<input type="hidden" id="account" name="account" value="${account}"/><br/>
+			请填写充值金额：<input type="text" id="amount" name="amount"/><br/>
+			请选择充值通道： <input type="radio" name="recType" value="A01" />网银充值
+			<input type="radio" name="recType" value="A02" checked="checked"/>银行转账<br/><br/>
 
-				&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
-				<input type="button" id="backBn" value="上一步"/>&nbsp;&nbsp;&nbsp;
-			</form>
-
+			&nbsp;&nbsp;<input type="button" id="nextBn" value="下一步"/>&nbsp;
+			<input type="button" id="backBn" value="上一步"/>&nbsp;&nbsp;&nbsp;
 		</div>
+	</form>
   </body>
   <script type="text/javascript">
 	  $(document).ready(function(){
@@ -39,7 +38,8 @@
 		  var recType = 'A02';
 
 		  $.ajax({
-			  cache: true,
+			  cache: false,
+			  async: false,
 			  type: "POST",
 			  dataType: "json",
 			  url:path + "/user/recharge/amount",
@@ -48,7 +48,6 @@
 				  amount: amount,
 				  recType: recType
 			  },
-			  async: false,
 			  error: function(request) {
 				  alert("Connection error");
 			  },
@@ -56,12 +55,11 @@
 				  if(!data.success) {
 					  alert(data.message);
 				  }else {
-					  $("#amountform").submit();
+					  $("#amountForm").submit();
 				  }
 			  }
 		  });
 	  }
-
 
 	  function goBack() {
 		  var account = $.trim($("#account").val());
