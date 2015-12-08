@@ -12,6 +12,8 @@ public class UserCardInfo {
 
     private String customername;
 
+    private int bankid;
+
     private String bankname;
 
     private String cardnumber;
@@ -49,6 +51,14 @@ public class UserCardInfo {
 
     public void setCustomername(String customername) {
         this.customername = customername == null ? null : customername.trim();
+    }
+
+    public int getBankid() {
+        return bankid;
+    }
+
+    public void setBankid(int bankid) {
+        this.bankid = bankid;
     }
 
     public String getBankname() {

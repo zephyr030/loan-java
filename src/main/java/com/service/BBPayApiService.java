@@ -38,7 +38,7 @@ public class BBPayApiService extends BaseService {
     private String merchantPrivateKey = resb.getString("payapi.merchant_privatekey");
 
     /* 生成订单orderId */
-    protected static final String getOrderSql = "EXEC [Wit_BaseInfo].[dbo].[dc_getOrderID] ?,?,?";
+    //protected static final String getOrderSql = "EXEC [Wit_BaseInfo].[dbo].[dc_getOrderID] ?,?,?";
 
     @Autowired
     private SysPayLogMapper sysPayLogMapper;
@@ -70,6 +70,8 @@ public class BBPayApiService extends BaseService {
         long orderNo = System.currentTimeMillis();
         SysPayLog sysPayLog = new SysPayLog();
         sysPayLog.setOrderno(orderNo);
+        sysPayLog.setType("AO");
+        sysPayLog.setStatus("A0");
         sysPayLog.setService(interfaceName);
         sysPayLog.setData(JSON.toJSONString(params));
         sysPayLogMapper.insert(sysPayLog);
@@ -81,7 +83,7 @@ public class BBPayApiService extends BaseService {
      * @param orderid 订单ID
      * @param returninfo 返回信息
      */
-    private void updateOrderRetrunState(long orderid, String returninfo){
+    public void updateOrderRetrunState(long orderid, String returninfo){
         StringBuffer sql = new StringBuffer();
         sql.append("update sys_pay_log ");
         sql.append("set status = 'A1' , returninfo = ? ");
@@ -117,5 +119,10 @@ public class BBPayApiService extends BaseService {
 //        paramMap.put("signType", YjfConfig.signType.getName());
 //        paramMap.put("inputCharset", YjfConfig.inputCharset);
         return paramMap;
+    }
+
+    public static void main(String args []) {
+        String a = "CEsTqGVciFtwGQGPWHWJ+TxMagMrz+naA5zsP8iZBuXsFfF0RV8tz9IEq4CJzqdhifMLVYjZK7P1unKBI1xjckzX7uAFGoz9DXiE+ZKnJMycTNE4M0xm5286m4DDYQNe0sp7aryxJ70evAU5HVf4p5DcYYb8SNMyPbRZBO6ayyKilU9LOIYTqxVU62ezNKAj8td9LHIBKwnGEK90/ePyEfWkhCRFSXwgh5nZAGabXP1o94nJ5WhFYGvZn3I624IHTYDV3zRbAi48z8yUjirwdInKUn7kuzQBSbKy0vsk3LE5ysu3HLHl/96/hT6P022CbegNpwRKhQ3wyGzl5ClsOXEFzkh9j5oHFhs2I8frlvDv5JzCkSIUWrnHJC1jvzRJiV3S9/KsC2d3d+d78p+I1gRh4HKvSFpz65qipPgYKIVqxFeRh5iTdGPmAxC0akSoh5zN3obToO7Ku+FeTlcR8jSNfiz8bsfshTs8J7UgXmnzjptjuG7ZDtKM60ejj4PyHaMZp4FbRET+yLlGQVa9h29yNv/9aDRS17L6us20sTa77ndiEIlAgkWyp/hi31wUXIzNnV0FR96ZsUIN6exASVGRKGzNDFBaPdFVRBOfljUcMKQGgrA6PioY3G1hWoSJEqKD+NPf1b4juMd2ki4W6XF8eKhVCeuUwl+0HdM6C0ROmWdpTvIrxkRmO+klC/ZREI8tGZAwQYXWz6KZeCfD1VhO9lDaL5/GbRygGvlri96WL/NVBY25rYNu2WgoK0qvmr+ZpgL7IaaCXJHxcSEk8aobkrfEh8J32MDgPoiwj5nKBjg6gorflVuFzvyVSSPCf0+zI8yxOsFBnuJjiiiNdyEfBGZPdbhQUoN/e2F5KHDbroQNFbp8+GH2FvsNdoiOq2znd4LJEYPXdtQl5qPtAXbkjPlwZ6v+W7T84pXnWMTFJWFNHyoKNCOesu8/IRGJC1VpOl1IZOporQXmX40mwQ==";
+        System.out.println(a.length());
     }
 }
