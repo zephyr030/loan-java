@@ -40,7 +40,7 @@ public class UserRechargeController extends BaseController {
 						    Model model) {
 	//	account = Security.decrypt(account);
 		if(!StringUtils.isEmpty(account)) {
-			UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+			UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 			model.addAttribute("cardInfo", cardInfo);
 		}
 		return "/recharge/recharge";
@@ -71,7 +71,7 @@ public class UserRechargeController extends BaseController {
 			2.如果有用户则验证其他信息是否一致
 			3.如果没有则新增客户
 		 */
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
 		if(cardInfo != null) {
 			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo);
 			if(ajaxResponse != null) {
@@ -122,7 +122,7 @@ public class UserRechargeController extends BaseController {
 	public Object insertAmount(@RequestParam(value="account", required=true) String account,
 							    @RequestParam(value="amount", required=true) int amount,
 							    @RequestParam(value="recType", required=true) String recType) {
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		if(cardInfo == null) {
 			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
 		}
@@ -157,7 +157,7 @@ public class UserRechargeController extends BaseController {
 									   @RequestParam(value="amount", required=true) int amount,
 									   @RequestParam(value="recType", required=true) String recType,
 									   Model model) {
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		model.addAttribute("cardInfo", cardInfo);
 		model.addAttribute("amount", amount);
 		model.addAttribute("recType", recType);
@@ -172,7 +172,7 @@ public class UserRechargeController extends BaseController {
 	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.GET)
 	@ResponseBody
 	public Object confirmInfo(@RequestParam(value="account", required=true) String account) {
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		if(cardInfo == null) {
 			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
 		}
@@ -205,18 +205,18 @@ public class UserRechargeController extends BaseController {
 	}
 
 	/**
-	 * 充值最后一步：选择充值银行，填写流水号
+	 * 充值最后一步：选择充值银行，填写流水号, 确认充值
 	 * @return
      */
 	@RequestMapping(value = "/user/recharge/end", method = RequestMethod.POST)
 	@ResponseBody
-	public Object selectBanka(@RequestParam(value="account", required=true) String account,
-							   @RequestParam(value="amount", required=true) int amount,
-							   @RequestParam(value="recType", required=true) String recType,
-							   @RequestParam(value="bankId", required=true) String bankId,
-							   @RequestParam(value="flowNo", required=false) String flowNo) {
+	public Object rechargeSure(@RequestParam(value="account", required=true) String account,
+							    @RequestParam(value="amount", required=true) int amount,
+							    @RequestParam(value="recType", required=true) String recType,
+							    @RequestParam(value="bankId", required=true) String bankId,
+							    @RequestParam(value="flowNo", required=false) String flowNo) {
 
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
+		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
 		if(cardInfo == null) {
 			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
 		}

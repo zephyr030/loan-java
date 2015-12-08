@@ -41,7 +41,7 @@ public class PayController extends BaseController {
     public String payView(@RequestParam(value = "account") String account,
                           @RequestParam(value = "amount") String amount,
                           HttpServletRequest request) throws Exception {
-        UserCardInfo userCardInfo = userCardInfoService.getUserCardInfoByAccount(account);
+        UserCardInfo userCardInfo = userCardInfoService.getUserCardInfoByAccount(account, -1);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("service", resb.getString("payapi.payUrl"));
         map.put("pt", "02");  //02是网上银行

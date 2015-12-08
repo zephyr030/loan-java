@@ -10,7 +10,7 @@
     <div style="border: solid; width: 300px;height: 200px;text-align: center;">
         <br/><br/>
         <a href="${path}/user/recharge?account=">我要充值</a><br/><br/><br/>
-        <a>我要提现</a>
+        <a href="${path}/user/withdraw/index">我要提现</a>
     </div>
 
 </body>

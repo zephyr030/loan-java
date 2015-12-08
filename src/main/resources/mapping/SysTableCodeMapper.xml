@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.SysTableCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.model.SysTableCode" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="typeId" property="typeid" jdbcType="VARCHAR" />
+    <result column="typeCode" property="typecode" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="disc" property="disc" jdbcType="VARCHAR" />
+    <result column="available" property="available" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="strVal" property="strval" jdbcType="VARCHAR" />
+    <result column="longVal" property="longval" jdbcType="BIGINT" />
+    <result column="numberVal" property="numberval" jdbcType="DECIMAL" />
+    <result column="textVal" property="textval" jdbcType="VARCHAR" />
+    <result column="s_index" property="sIndex" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, typeId, typeCode, text, disc, available, createTime, strVal, longVal, numberVal, 
+    textVal, s_index, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_code_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_code_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.SysTableCode" >
+    insert into sys_code_table (id, typeId, typeCode, 
+      text, disc, available, 
+      createTime, strVal, longVal, 
+      numberVal, textVal, s_index, 
+      url)
+    values (#{id,jdbcType=INTEGER}, #{typeid,jdbcType=VARCHAR}, #{typecode,jdbcType=VARCHAR}, 
+      #{text,jdbcType=VARCHAR}, #{disc,jdbcType=VARCHAR}, #{available,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{strval,jdbcType=VARCHAR}, #{longval,jdbcType=BIGINT}, 
+      #{numberval,jdbcType=DECIMAL}, #{textval,jdbcType=VARCHAR}, #{sIndex,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.SysTableCode" >
+    insert into sys_code_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typeid != null" >
+        typeId,
+      </if>
+      <if test="typecode != null" >
+        typeCode,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="disc != null" >
+        disc,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="strval != null" >
+        strVal,
+      </if>
+      <if test="longval != null" >
+        longVal,
+      </if>
+      <if test="numberval != null" >
+        numberVal,
+      </if>
+      <if test="textval != null" >
+        textVal,
+      </if>
+      <if test="sIndex != null" >
+        s_index,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="disc != null" >
+        #{disc,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strval != null" >
+        #{strval,jdbcType=VARCHAR},
+      </if>
+      <if test="longval != null" >
+        #{longval,jdbcType=BIGINT},
+      </if>
+      <if test="numberval != null" >
+        #{numberval,jdbcType=DECIMAL},
+      </if>
+      <if test="textval != null" >
+        #{textval,jdbcType=VARCHAR},
+      </if>
+      <if test="sIndex != null" >
+        #{sIndex,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.SysTableCode" >
+    update sys_code_table
+    <set >
+      <if test="typeid != null" >
+        typeId = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="typecode != null" >
+        typeCode = #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="disc != null" >
+        disc = #{disc,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="strval != null" >
+        strVal = #{strval,jdbcType=VARCHAR},
+      </if>
+      <if test="longval != null" >
+        longVal = #{longval,jdbcType=BIGINT},
+      </if>
+      <if test="numberval != null" >
+        numberVal = #{numberval,jdbcType=DECIMAL},
+      </if>
+      <if test="textval != null" >
+        textVal = #{textval,jdbcType=VARCHAR},
+      </if>
+      <if test="sIndex != null" >
+        s_index = #{sIndex,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.SysTableCode" >
+    update sys_code_table
+    set typeId = #{typeid,jdbcType=VARCHAR},
+      typeCode = #{typecode,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      disc = #{disc,jdbcType=VARCHAR},
+      available = #{available,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      strVal = #{strval,jdbcType=VARCHAR},
+      longVal = #{longval,jdbcType=BIGINT},
+      numberVal = #{numberval,jdbcType=DECIMAL},
+      textVal = #{textval,jdbcType=VARCHAR},
+      s_index = #{sIndex,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectList" parameterType="Searchable" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" />
+    from sys_code_table
+    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+  </select>
+</mapper>

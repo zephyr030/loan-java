@@ -37,10 +37,12 @@ public class UserCardInfoService extends BaseService{
      * @param account
      * @return
      */
-    public UserCardInfo getUserCardInfoByAccount(String account) {
+    public UserCardInfo getUserCardInfoByAccount(String account, int status) {
         Searchable searchable = new Searchable();
         searchable.addCondition(new Condition("account", SearchOperator.eq, account));
-//        searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
+        if(status >= 0) {
+            searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
+        }
         return cardInfoMapper.selectBySearchable(searchable);
     }
 
