@@ -213,7 +213,7 @@ public class UserRechargeController extends BaseController {
 	public Object selectBanka(@RequestParam(value="account", required=true) String account,
 							   @RequestParam(value="amount", required=true) int amount,
 							   @RequestParam(value="recType", required=true) String recType,
-							   @RequestParam(value="bankName", required=true) String bankName,
+							   @RequestParam(value="bankId", required=true) String bankId,
 							   @RequestParam(value="flowNo", required=false) String flowNo) {
 
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account);
@@ -226,7 +226,7 @@ public class UserRechargeController extends BaseController {
 		detail.setAmount(new BigDecimal(amount));
 		detail.setRectype(recType);
 		detail.setFlowno(flowNo);
-
+		detail.setBankId(bankId);
 		rechargeService.save(detail);
 		return AjaxResponse.success().toJsonString();
 	}

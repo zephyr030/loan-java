@@ -16,7 +16,7 @@
   <body>
   	<form action="${path}/user/recharge/end" id="amountForm" method="post">
 		<div style="left: 200px;top: 200px;border:solid;width: 400px">
-			 充值银行：<select name="bankName">
+			 充值银行：<select id="bankId">
 				<option value="A001" selected="selected">中国建设银行</option>
 				<option value="A002">中国工商银行</option>
 				<option value="A003">中国农业银行</option>
@@ -26,35 +26,41 @@
 			<br/>
 			银行流水号：<input type="text" id="flowNo" />
 
-			<input type="hidden" name="account" value="${account}" />
-			<input type="hidden" name="amount" value="${amount}" />
-			<input type="hidden" name="recType" value="${recType}" />
+			<input type="hidden" id="account" value="${account}" />
+			<input type="hidden" id="amount" value="${amount}" />
+			<input type="hidden" id="recType" value="${recType}" />
 			<br/>
+
+			<input type="button" value="确认" id="sureBn"/>
 		</div>
 
 	</form>
   </body>
   <script type="text/javascript">
 	  $(document).ready(function(){
-		  $("#nextBn").click(insertAmount);
-		  $("#backBn").click(goBack);
+		  $("#sureBn").click(recharge);
+
 	  });
 
-	  function insertAmount() {
+	  function recharge() {
 		  var account = $.trim($("#account").val());
 		  var amount = $.trim($("#amount").val());
-		  var recType = 'A02';
+		  var recType = $.trim($("#recType").val());
+		  var flowNo = $.trim($("#flowNo").val());
+		  var bankId = $.trim($("#bankId").val());
 
 		  $.ajax({
 			  cache: false,
 			  async: false,
 			  type: "POST",
 			  dataType: "json",
-			  url:path + "/user/recharge/amount",
+			  url:path + "/user/recharge/end",
 			  data:{
 				  account: account,
 				  amount: amount,
-				  recType: recType
+				  recType: recType,
+				  bankId: bankId,
+				  flowNo: flowNo
 			  },
 			  error: function(request) {
 				  alert("Connection error");
@@ -63,15 +69,11 @@
 				  if(!data.success) {
 					  alert(data.message);
 				  }else {
-					  $("#amountForm").submit();
+					 alert("ok");
 				  }
 			  }
 		  });
 	  }
 
-	  function goBack() {
-		  var account = $.trim($("#account").val());
-		  document.location.href = path + '/user/recharge?account=' + account;
-	  }
   </script>
 </html>
