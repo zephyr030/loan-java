@@ -19,12 +19,13 @@
 <body class="no-skin" style="background-color: white;">
 <div class="row">
     <div class="col-xs-12">
-        <form action="drawList" id="form" name="form" method="post">
+        <form action="drawOverList" id="form" name="form" method="post">
             <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
             <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="银行单号"/>
             <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="交易手数"/>
+
             <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
             />
