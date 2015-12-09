@@ -17,10 +17,14 @@ $(function(){
                 dataType: "json",
                 success: function(result){
                     if(parseInt(result.code) != 0){
-                        var box = bootbox.alert("用户不存在", function() {});
-                        //box.on('shown',function(){
-                        //    $("#username").focus();
-                        //});
+                        art.dialog({
+                            content: '您输入的账户不存在',
+                            lock:true,
+                            drag:true,
+                            ok: function () {
+                                $("#username").focus();
+                            }
+                        });
                     }
                 }
             });
@@ -46,12 +50,23 @@ $(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         if(username.length == 0){
-            bootbox.alert("请填写用户名", function() {});
+            art.dialog({
+                content: '请填写用户名',
+                lock:true,
+                drag:true,
+                ok: function () {
+                    $("#username").focus();
+                }
+            });
         }else if(password.length == 0){
-            bootbox.alert("请输入密码", function() {$("#password").focus();});
-            //bootbox.bind('shown',function(){
-            //    $("#password").focus();
-            //});
+            art.dialog({
+                content: '请输入密码',
+                lock:true,
+                drag:true,
+                ok: function () {
+                    $("#password").focus();
+                }
+            });
         }else{
             $.ajax({
                 type:"post",
@@ -60,10 +75,14 @@ $(function(){
                 dataType: "json",
                 success: function(result){
                     if(parseInt(result.code) != 0){
-                        var box = bootbox.alert("用户名或密码错误", function() {});
-                        //box.on('shown',function(){
-                        //    $("#username").focus();
-                        //});
+                        art.dialog({
+                            content: '用户名或密码错误',
+                            lock:true,
+                            drag:true,
+                            ok: function () {
+                                $("#username").focus();
+                            }
+                        });
                     }else{
                         window.location.href = "main";
                     }

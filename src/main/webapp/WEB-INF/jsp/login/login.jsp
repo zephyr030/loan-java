@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
 
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
-    <script type="text/javascript" src="${path}/static/script/bootstrap.min.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/bootbox.min.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/artDialog4.1.7/jquery.artDialog.js?skin=default" ></script>
     <script type="text/javascript" src="${path}/static/script/Login/login.js" ></script>
 </head>
 
