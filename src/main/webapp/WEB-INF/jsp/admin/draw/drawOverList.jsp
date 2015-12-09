@@ -23,6 +23,8 @@
             <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
+            <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="银行单号"/>
+            <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="交易手数"/>
             <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
             />
@@ -35,6 +37,12 @@
             />
             <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
+            />
+            <input type="text" id="stTime" name="stTime" size="16" readonly class="form_datetime" value="${stTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d H%:m%' || '#F{$dp.$D(\'enTime\')}'})"
+            />
+            <input type="text" id="enTime" name="enTime" size="16" readonly class="form_datetime" value="${enTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'stTime\')}'})"
             />
             <button type="submit" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                 <i class="ace-icon fa fa-search bigger-120 green"></i>
@@ -68,30 +76,32 @@
                             <th><i></i>开户行</th>
                             <th><i></i>银行账号</th>
                             <th><i></i>手机号</th>
+                            <th><i></i>提现金额</th>
                             <th><i></i>提现时间</th>
-                            <th><i></i>操作</th>
+                            <th><i></i>操作时间</th>
+                            <th><i></i>交易手数</th>
+                            <th><i></i>银行单号</th>
+                            <th><i></i>操作人</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                            <c:forEach items="${page.list}" var="obj">
-                                <tr>
-                                    <th>${obj.id}</th>
-                                    <td>${obj.account}</td>
-                                    <td>${obj.customername}</td>
-                                    <td>${obj.bankname}</td>
-                                    <td>${obj.cardnumber}</td>
-                                    <td>${obj.mobile}</td>
-                                    <td>${obj.drawTime}</td>
-                                    <td>
-                                        <div class="hidden-sm hidden-xs action-buttons">
-                                            <a class="blue" href="">冻结</a>
-                                            <a class="green" href="">修改</a>
-                                            <a class="red">删除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                        <c:forEach items="${page.list}" var="obj">
+                            <tr>
+                                <th>${obj.id}</th>
+                                <td>${obj.account}</td>
+                                <td>${obj.customername}</td>
+                                <td>${obj.bankname}</td>
+                                <td>${obj.cardnumber}</td>
+                                <td>${obj.mobile}</td>
+                                <td>${obj.amount}</td>
+                                <td>${obj.drawTime}</td>
+                                <td>${obj.lastUpdateTime}</td>
+                                <td>${obj.counts}</td>
+                                <td>${obj.flowNo}</td>
+                                <td>${obj.exeUser}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
