@@ -49,7 +49,7 @@
                 <i class="ace-icon fa fa-search bigger-120 green"></i>
                 查询
             </button>
-            <a href="exportRechargeList">
+            <a href="ExcelDrawOverList">
                 <button type="button" id="export" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                     导出

@@ -197,4 +197,86 @@ public class AdminDrawController {
         request.setAttribute("enTime",enTime);
         return "/admin/draw/drawOverList";
     }
+
+    //导出提现放款列表
+    @RequestMapping("/ExcelDrawOverList")
+    public void ExcelDrawOverList(
+            @RequestParam(required = false,defaultValue = "1") int pageNumber,
+            @RequestParam(required = false,defaultValue = "") String account,
+            @RequestParam(required = false,defaultValue = "") String name,
+            @RequestParam(required = false,defaultValue = "") String mobile,
+            @RequestParam(required = false,defaultValue = "") String flowNo,
+            @RequestParam(required = false,defaultValue = "0") int counts,
+            @RequestParam(required = false,defaultValue = "0") Double smoney,
+            @RequestParam(required = false,defaultValue = "0") Double emoney,
+            @RequestParam(required = false,defaultValue = "") String startTime,
+            @RequestParam(required = false,defaultValue = "") String endTime,
+            @RequestParam(required = false,defaultValue = "") String stTime,
+            @RequestParam(required = false,defaultValue = "") String enTime,
+            HttpServletRequest request,HttpServletResponse response)throws Exception{
+        Searchable searchable = new Searchable();
+        if(!account.equals("")){
+            searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
+        }
+        if(!name.equals("")){
+            searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
+        }
+        if(!mobile.equals("")){
+            searchable.addCondition(new Condition("b.mobile", SearchOperator.eq, mobile));
+        }
+        if(!flowNo.equals("")){
+            searchable.addCondition(new Condition("a.flowNo", SearchOperator.eq, flowNo));
+        }
+        if(counts > 0){
+            searchable.addCondition(new Condition("a.counts", SearchOperator.eq, counts));
+        }
+        if(smoney > 0){
+            searchable.addCondition(new Condition("a.amount", SearchOperator.gte, smoney));
+        }
+        if(emoney > 0){
+            searchable.addCondition(new Condition("a.amount", SearchOperator.lte, emoney));
+        }
+        if(!startTime.equals("")){
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.gte, startTime));
+        }
+        if(!endTime.equals("")){
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
+        }
+        if(!stTime.equals("")){
+            searchable.addCondition(new Condition("a.lastUpdateTime", SearchOperator.gte, stTime));
+        }
+        if(!enTime.equals("")){
+            searchable.addCondition(new Condition("a.lastUpdateTime", SearchOperator.lte, enTime));
+        }
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        map.put("编号", "编号");
+        map.put("账号", "账号");
+        map.put("姓名", "姓名");
+        map.put("开户行", "开户行");
+        map.put("银行账号", "银行账号");
+        map.put("手机号", "手机号");
+        map.put("提现金额", "提现金额");
+        map.put("提现时间", "提现时间");
+        map.put("操作时间", "操作时间");
+        map.put("交易手数", "交易手数");
+        map.put("银行单号", "银行单号");
+        map.put("操作人", "操作人");
+
+
+        Map<String,String> mapKey = new LinkedHashMap<String, String>();
+        mapKey.put("id", "id");
+        mapKey.put("account","account");
+        mapKey.put("customername", "customername");
+        mapKey.put("bankname", "bankname");
+        mapKey.put("cardnumber", "cardnumber");
+        mapKey.put("mobile", "mobile");
+        mapKey.put("amount", "amount");
+        mapKey.put("drawTime", "drawTime");
+        mapKey.put("lastUpdateTime", "lastUpdateTime");
+        mapKey.put("counts", "counts");
+        mapKey.put("flowNo", "flowNo");
+        mapKey.put("exeUser", "exeUser");
+        List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
+        Excel.ExportExcel(request, response, map, mapKey,list);
+    }
 }
