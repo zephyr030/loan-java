@@ -73,7 +73,7 @@ public class UserRechargeController extends BaseController {
 		 */
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
 		if(cardInfo != null) {
-			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo);
+			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo,0);
 			if(ajaxResponse != null) {
 				return ajaxResponse.toJsonString();
 			}

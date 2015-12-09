@@ -21,8 +21,45 @@ public class StringUtils extends org.springframework.util.StringUtils{
         return m.find();//boolean
     }
 
+    /**
+     * 设置掩码
+     * @param mask     掩码字段
+     * @param start    掩码起始位置
+     * @param end      掩码结束位置
+     * @return
+     */
+    public static String maskString(String value, int start, int end, String mask) {
+        if(isEmpty(value)) {
+            return "";
+        }
+        if(start < 0 ) {
+            start = 0;
+        }
+        if(value.length() < start) {
+            return "";
+        }
+        if(value.length() < end) {
+            end = value.length();
+        }
+        if(end <= start) {
+            return "";
+        }
+        if(isEmpty(mask)) {
+            mask = "*";
+        }
+
+        StringBuffer before = new StringBuffer(value.substring(0,start));
+        String last = value.substring(end,value.length());
+        for(int i=start;i<end;i++) {
+            before.append(mask);
+        }
+        return before.append(last).toString();
+    }
+
     public static void main(String args[]) {
         String mobile = "12999999999";
-        System.out.print(isMobile(mobile));
+        //System.out.print(isMobile(mobile));
+        String mask = maskString(mobile,-1,12,"*");
+        System.out.println(mask);
     }
 }
