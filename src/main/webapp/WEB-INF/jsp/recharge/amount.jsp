@@ -40,11 +40,15 @@
 					<input type="radio" class="radio" name="recType" value="A02" checked="checked"/><i>银行转账</i>
 				</li>
 			</ul>
-			<div class="cd_m_btn cdg_m_btn"><a href="javascript:void;" class="cm_m_up" id="backBn">上一步</a><a href="javascript:void;" class="cm_m_down" id="nextBn">下一步</a></div>
+			<div class="cd_m_btn cdg_m_btn">
+				<a href="javascript:void(0)" class="cm_m_up" id="backBn">上一步</a>
+				<a href="javascript:void(0)" class="cm_m_down" id="nextBn">下一步</a>
+			</div>
 		</div>
 	</div>
 </div>
 </body>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#nextBn").click(insertAmount);
