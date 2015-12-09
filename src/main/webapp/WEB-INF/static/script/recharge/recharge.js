@@ -1,75 +1,54 @@
-$(document).ready(function(){
-    $("#rechargeBn").click(recharge);
-});
-
-function recharge() {
-    var account = $.trim($("#account").val());
-    var customerName = $.trim($("#customerName").val());
-    var cardNumber = $.trim($("#cardNumber").val());
-    var bankName = $.trim($("#bankName").val());
-    var mobile = $.trim($("#mobile").val());
-
-    if(!validateInfo(account,customerName,cardNumber,bankName,mobile)) {
-        return;
-    }
-
-    $.ajax({
-        cache: false,
-        async: false,
-        type: "GET",
-        dataType: "json",
-        url:path + "/user/recharge/input",
-        data:{
-            account: account,
-            customerName: customerName,
-            cardNumber: cardNumber,
-            bankName: bankName,
-            mobile: mobile
-        },
-        error: function(request) {
-            alert("Connection error");
-        },
-        success: function(data) {
-            if(!data.success) {
-                alert(data.message);
-            }else {
-                document.location.href = path + "/user/recharge/amount?account=" + account;
+/**
+ * 方法描述:充值回填方法
+ *
+ * author 小刘
+ * version v1.0
+ * date 2015/12/9
+ */
+function isSend(id){
+    top.art.dialog({
+        content: $("#subForm").html(),
+        lock:true,
+        drag:true,
+        opacity:0.1,
+        ok: function () {
+            //流水号
+            var fowNo = top.$("#rechargeNo").val();
+            //操作时间
+            var time = top.$("#rechargeTime").val();
+            if(fowNo.length == 0){
+                top.$("#fowError").show();
+                return false;
+            }else if(time.length == 0){
+                top.$("#timeError").show();
+                return false;
+            }else{
+                top.$("#fowError").hide();
+                top.$("#timeError").hide();
+                var status = 0;
+                $.ajax({
+                    type:"post",
+                    url: "reLoadCharge",
+                    async: false,
+                    data: {id:id,fowNo:fowNo,time:time},
+                    dataType: "json",
+                    success: function(result){
+                        if(parseInt(result.code) != 0){
+                            status = 1;
+                            top.$("#rechargeError").html("错误提示:"+result.msg);
+                        }else{
+                            status = 0;
+                        }
+                    }
+                });
+                if(status == 0){
+                    window.location.href = window.location.href;
+                }else {
+                    return false;
+                }
             }
-        }
+        },
+        cancelVal: '关闭',
+        cancel: true
     });
-}
-
-function validateInfo(account, customerName, cardNumber, bankName, mobile) {
-    if(!account) {
-        alert("请输入操盘账号信息");
-        $("#account").focus();
-        return false;
-    }
-    if(!checkAccount(account)) {
-        alert("操盘账号格式有误");
-        $("#account").focus();
-        return false;
-    }
-
-    if(!customerName) {
-        alert("请输入开户姓名");
-        $("#customerName").focus();
-        return false;
-    }
-    if(!cardNumber) {
-        alert("请输入银行卡号");
-        $("#cardNumber").focus();
-        return false;
-    }
-    if(!mobile) {
-        alert("请输入手机号");
-        $("#mobile").focus();
-        return false;
-    }
-    if(!checkMoblie(mobile)) {
-        alert("手机号格式有误");
-        $("#mobile").focus();
-        return false;
-    }
-    return true;
 }

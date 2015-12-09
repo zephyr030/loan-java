@@ -50,4 +50,10 @@ public class AdminRechargeService extends BaseService{
         return list;
     }
 
+    //回填充值信息
+    public int reLoadCharge(long id,String fowNo,String time){
+        String sql = "update user_recharge_detail set flowNo = ?,actTime = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{fowNo,time,id});
+    }
+
 }

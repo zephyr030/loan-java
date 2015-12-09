@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/My97DatePicker/WdatePicker.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/artDialog4.1.7/jquery.artDialog.js?skin=default" ></script>
     <script type="text/javascript" src="${path}/static/script/Main/main.js" ></script>
 </head>
 
