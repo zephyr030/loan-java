@@ -117,7 +117,6 @@ public class AdminDrawController {
         map.put("开户行", "开户行");
         map.put("银行账号", "银行账号");
         map.put("手机号", "手机号");
-        map.put("提现金额", "提现金额");
         map.put("提现时间", "提现时间");
 
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
@@ -127,7 +126,6 @@ public class AdminDrawController {
         mapKey.put("bankname", "bankname");
         mapKey.put("cardnumber", "cardnumber");
         mapKey.put("mobile", "mobile");
-        mapKey.put("amount", "amount");
         mapKey.put("drawTime", "drawTime");
         List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
