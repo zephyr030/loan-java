@@ -1,6 +1,7 @@
 package com.utils.security;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 public class Security {
 	
@@ -70,19 +71,10 @@ public class Security {
     	
     	return re.toString();
     }
+
+
     
     public static void main(String[] args) {
-//    	String s = "{\"ConnectionLimit\":100,\"ClientName\":\"张飞测试机\",\"CurrentBandwidth\":0,\"ClientSpType\":\"0\",\"ClientIp\":\"192.168.1.86\",\"RejectUserIds\":\"10002278，10002256\",\"CurrentConnection\":0,\"City\":\"beijing\",\"BandwidthLimit\":5000,\"VipUserIds\":\"10002279,10002275\",\"MsgType\":\"init\"}";
-//		System.out.println(s);
-//		s = encrypt(s);
-//		System.out.println(s);
-//		s = decrypt(s);
-//		System.out.println(s);
-		String card = "666";
-		String b = card.substring(card.length() - 4 ,card.length());
-
-        System.out.println(b);
-
 
 	}
 

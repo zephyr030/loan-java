@@ -5,11 +5,14 @@ import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.model.SysTableCode;
 import com.model.UserCardInfo;
+import com.model.UserMobileMessage;
 import com.service.SysTableCodeService;
 import com.service.UserCardInfoService;
+import com.service.UserMobileMessageService;
 import com.service.UserWithdrawService;
 import com.utils.AjaxResponse;
 import com.utils.StringUtils;
+import com.utils.security.Security;
 import com.utils.sms.SMSUtiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +43,9 @@ public class WithDrawController {
 
     @Autowired
     private UserCardInfoService cardInfoService;
+
+    @Autowired
+    private UserMobileMessageService messageService;
 
     /**
      * 提现页面
@@ -108,12 +116,84 @@ public class WithDrawController {
         return "/withdraw/message";
     }
 
-
+    /**
+     * 发送验证码
+     * @param account
+     * @return
+     */
     @RequestMapping(value = "/message/send",method = RequestMethod.GET)
     @ResponseBody
     public Object sendMessage(@RequestParam(value="account", required=true) String account) {
-        SMSUtiles.sendSMS("13752870005","您的验证码是：344234。请不要把验证码泄露给其他人。");
+        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+        if(cardInfo == null) {
+            return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
+        }
+
+        //查询当天验证码发送次数，如果超过5次不在发送
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("mobile",SearchOperator.eq, cardInfo.getMobile()));
+        searchable.addCondition(new Condition("date",SearchOperator.eq, simpleDateFormat.format(date)));
+        searchable.addCondition(new Condition("sendType",SearchOperator.eq, 1));
+        UserMobileMessage message = messageService.selectMessage(searchable);
+        if(message != null && message.getTimes() == 5) {
+            AjaxResponse.fail("当天发送次数超过5次，系统拒绝再次发送").toJsonString();
+        }
+
+        //发送6位数验证码
+        String code = StringUtils.getSalt(6,2);
+        if(message != null) {
+            message.setCode(code);
+            message.setTimes(message.getTimes() + 1);
+            messageService.update(message);
+        }else {
+            message = new UserMobileMessage();
+            message.setMobile(cardInfo.getMobile());
+            message.setCode(code);
+            message.setDate(date);
+            messageService.save(message);
+        }
+
+        String template = SMSUtiles.getReplaceTemplate("sms.withdraw", "{code}", code);
+        SMSUtiles.sendSMS(message.getMobile(), template);
         return AjaxResponse.success().toJsonString();
+    }
+
+    /**
+     * 验证用户输入信息
+     * @param account
+     * @param code
+     * @return
+     */
+    @RequestMapping(value = "/message/validate",method = RequestMethod.GET)
+    @ResponseBody
+    public Object validateMessage(@RequestParam(value="account", required=true) String account,
+                                   @RequestParam(value="code", required=true) String code) {
+        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+        if(cardInfo == null) {
+            return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("mobile",SearchOperator.eq, cardInfo.getMobile()));
+        searchable.addCondition(new Condition("date",SearchOperator.eq, simpleDateFormat.format(date)));
+        searchable.addCondition(new Condition("sendType",SearchOperator.eq, 1));
+        UserMobileMessage message = messageService.selectMessage(searchable);
+        if(!message.getCode().equals(code)) {
+            if(message.getTimes() < 5) {
+                return AjaxResponse.fail("你输入的验证码有误").toJsonString();
+            }else {
+                //冻结账号
+                cardInfo.setStatus(2);
+
+            }
+        }
+        return null;
     }
 
     /**

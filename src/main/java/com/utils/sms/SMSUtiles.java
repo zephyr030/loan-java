@@ -1,5 +1,6 @@
 package com.utils.sms;
 
+import com.utils.StringUtils;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
@@ -73,5 +74,32 @@ public class SMSUtiles {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取模板信息
+     * @param template
+     * @return
+     */
+    public static String getTemplate(String template) {
+        return resb.getString(template);
+    }
+
+    public static String getReplaceTemplate(String template, String replace, String value) {
+        String temp = resb.getString(template);
+        if(StringUtils.isEmpty(temp)) {
+            return "";
+        }
+
+        if(temp.indexOf(replace) == -1) {
+            return temp;
+        }
+
+        return temp.replace(replace,value);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getTemplate("sms.withdraw"));
+        System.out.println(getReplaceTemplate("sms.withdraw", "{code}", "123456"));
     }
 }

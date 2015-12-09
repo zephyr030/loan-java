@@ -3,6 +3,10 @@ $(document).ready(function(){
 });
 
 function sendMessage() {
+    if(wd.isLock) {
+        return;
+    }
+
     var account = $("#account").val();
     $.ajax({
         cache: false,
@@ -20,9 +24,30 @@ function sendMessage() {
             if(!data.success) {
                 alert(data.message);
             }else {
-                alert("ok");
+                alert("验证码已发送，请注意查收");
+                wd.isLock = true;
+                setTimeout(timeLeft, 1000);
+
             }
         }
     });
+}
+
+var wd = {
+    time: 60,
+    isLock: false
+}
+
+function timeLeft() {
+    wd.time = wd.time - 1;
+
+    if(wd.time >= 0) {
+        $("#sendMessage").html(wd.time + "后重发……");
+        setTimeout(timeLeft, 1000);
+    }else {
+        wd.time = 60;
+        wd.isLock = false;
+        $("#sendMessage").html("发送验证码");
+    }
 }
 

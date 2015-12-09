@@ -1,6 +1,9 @@
 package com.service;
 
+import com.dao.UserMobileMessageMapper;
 import com.dao.UserWithdrawDetailMapper;
+import com.dao.util.Searchable;
+import com.model.UserMobileMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

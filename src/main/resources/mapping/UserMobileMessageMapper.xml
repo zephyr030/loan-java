@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserMobileMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.model.UserMobileMessage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="sendType" property="sendtype" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, code, times, createTime, sendType, date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_mobile_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_mobile_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.model.UserMobileMessage" >
+    insert into user_mobile_message (id, mobile, code, 
+      times, createTime, sendType, 
+      date)
+    values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{times,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{sendtype,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.UserMobileMessage" >
+    insert into user_mobile_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="sendtype != null" >
+        sendType,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtype != null" >
+        #{sendtype,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.UserMobileMessage" >
+    update user_mobile_message
+    <set >
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtype != null" >
+        sendType = #{sendtype,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.UserMobileMessage" >
+    update user_mobile_message
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      sendType = #{sendtype,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectBySearchable" parameterType="Searchable" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List" />
+      from user_mobile_message
+    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+  </select>
+</mapper>

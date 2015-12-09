@@ -1,5 +1,6 @@
 package com.utils;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,6 +55,32 @@ public class StringUtils extends org.springframework.util.StringUtils{
             before.append(mask);
         }
         return before.append(last).toString();
+    }
+
+    /**
+     * 生成随机盐
+     * @param length  长度
+     * @param type    类型  1 纯数字 ， 2字母加数字组合
+     * @return
+     */
+    public static String getSalt(int length ,int type) {
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+
+        if(type == 1) {
+            for(int i=0;i<length;i++) {
+                int r = random.nextInt(10);
+                sb.append(r);
+            }
+        }else {
+            String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+            for(int i=0;i<length;i++) {
+                int number = random.nextInt(base.length());
+                sb.append(base.charAt(number));
+            }
+        }
+
+        return sb.toString();
     }
 
     public static void main(String args[]) {

@@ -54,7 +54,7 @@
 				<li>
 					<label>银行卡号：</label>
 					<span>**** **** **** ****</span>
-					<input class="cd_i_code" type="text" id="cardNumber" value="${cardInfo.cardnumber}" maxlength="4"/>
+					<input class="cd_i_code" type="text" id="cardNumber" value="${cardInfo.cardnumber}" maxlength="4" style="width: 55px"/>
 					<em>充值银行后4位</em>
 				</li>
 				<li>
