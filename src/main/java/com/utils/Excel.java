@@ -45,7 +45,7 @@ public class Excel {
 		WritableSheet ws = null;
 		try{
 			os = response.getOutputStream();
-			String fileName = DateUtils.currentDate2StringByDay()+".xls";
+			String fileName = DateUtils.currentDate2String()+".xls";
 			//生成文件
 	        response.reset();
 	        response.setHeader("Content-Disposition", "attachment; filename="+ new String(fileName.getBytes(), "ISO-8859-1"));

@@ -169,7 +169,7 @@ public class AdminRechargeController {
                                HttpServletRequest request){
         Searchable searchable = new Searchable();
         if(!account.equals("")){
-            searchable.addCondition(new Condition("b.cardnumber", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
         }
         if(!name.equals("")){
             searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
@@ -214,7 +214,7 @@ public class AdminRechargeController {
                                HttpServletRequest request, HttpServletResponse response)throws Exception{
         Searchable searchable = new Searchable();
         if(!account.equals("")){
-            searchable.addCondition(new Condition("b.cardnumber", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
         }
         if(!name.equals("")){
             searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
@@ -241,14 +241,17 @@ public class AdminRechargeController {
         map.put("开户行", "开户行");
         map.put("银行账号", "银行账号");
         map.put("手机号", "手机号");
+        map.put("提现金额", "提现金额");
         map.put("提现时间", "提现时间");
 
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
         mapKey.put("id", "id");
+        mapKey.put("account","account");
         mapKey.put("customername", "customername");
         mapKey.put("bankname", "bankname");
         mapKey.put("cardnumber", "cardnumber");
         mapKey.put("mobile", "mobile");
+        mapKey.put("amount", "amount");
         mapKey.put("drawTime", "drawTime");
         List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
