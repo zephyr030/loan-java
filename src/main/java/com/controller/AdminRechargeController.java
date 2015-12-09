@@ -303,24 +303,30 @@ public class AdminRechargeController {
                                @RequestParam(required = false,defaultValue = "") String fowNo,
                                @RequestParam(required = false,defaultValue = "") String time){
         Map<String,Object> map = ResultUtil.result();
-        if(id <= 0){
-            map.put("code",1);
-            map.put("msg","缺少唯一主键");
-        }else if(Validators.isBlank(fowNo)){
-            map.put("code",2);
-            map.put("msg","请输入流水号");
-        }else if(!Validators.isDateTime(time)){
-            map.put("code",3);
-            map.put("msg","请输入时间");
-        }else{
-            int i = adminRechargeService.reLoadCharge(id,fowNo,time);
-            if(i > 0){
-                map.put("code",0);
-                map.put("msg","更新成功");
+        try{
+            if(id <= 0){
+                map.put("code",1);
+                map.put("msg","缺少唯一主键");
+            }else if(Validators.isBlank(fowNo)){
+                map.put("code",2);
+                map.put("msg","请输入流水号");
+            }else if(!Validators.isDateTime(time)){
+                map.put("code",3);
+                map.put("msg","请输入时间");
             }else{
-                map.put("code",4);
-                map.put("msg","更新失败");
+                int i = adminRechargeService.reLoadCharge(id,fowNo,time);
+                if(i > 0){
+                    map.put("code",0);
+                    map.put("msg","更新成功");
+                }else{
+                    map.put("code",4);
+                    map.put("msg","更新失败");
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","更新信息出现异常");
         }
         return ResultUtil.toJSON(map);
     }

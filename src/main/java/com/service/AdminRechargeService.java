@@ -56,4 +56,10 @@ public class AdminRechargeService extends BaseService{
         return jdbcTemplate.update(sql,new Object[]{fowNo,time,id});
     }
 
+    //回填提现信息
+    public int reloadDraw(long id,int counts,Double money,String bankNo){
+        String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,id});
+    }
+
 }

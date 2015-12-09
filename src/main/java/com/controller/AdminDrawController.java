@@ -6,10 +6,13 @@ import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
 import com.service.AdminRechargeService;
 import com.utils.Excel;
+import com.utils.ResultUtil;
+import com.xuan.utils.Validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -278,5 +281,45 @@ public class AdminDrawController {
         mapKey.put("exeUser", "exeUser");
         List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
+    }
+
+
+    //回填充值信息
+    @RequestMapping("/reloadDraw")
+    @ResponseBody
+    public String reloadDraw(@RequestParam(required = false,defaultValue = "0") long id,
+                             @RequestParam(required = false,defaultValue = "0") int counts,
+                             @RequestParam(required = false,defaultValue = "0") Double money,
+                             @RequestParam(required = false,defaultValue = "") String bankno){
+        Map<String,Object> map = ResultUtil.result();
+        try{
+            if(id <= 0){
+                map.put("code",1);
+                map.put("msg","缺少唯一主键");
+            }else if(counts == 0){
+                map.put("code",2);
+                map.put("msg","请输入交易手数");
+            }else if(money == 0){
+                map.put("code",3);
+                map.put("msg","请输入提现金额");
+            }else if(Validators.isBlank(bankno)){
+                map.put("code",4);
+                map.put("msg","请输入银行单号");
+            }else{
+                int i = adminRechargeService.reloadDraw(id,counts,money,bankno);
+                if(i > 0){
+                    map.put("code",0);
+                    map.put("msg","更新成功");
+                }else{
+                    map.put("code",5);
+                    map.put("msg","更新失败");
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","更新信息出现异常");
+        }
+        return ResultUtil.toJSON(map);
     }
 }
