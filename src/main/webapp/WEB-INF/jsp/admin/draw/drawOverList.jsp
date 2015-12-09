@@ -24,7 +24,7 @@
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
             <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="银行单号"/>
-            <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="交易手数"/>
+            <input type="text" name="counts" value="${counts}" style="margin-left: 12px;"  placeholder="交易手数"/>
 
             <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"

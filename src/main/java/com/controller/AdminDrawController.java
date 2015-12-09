@@ -150,10 +150,10 @@ public class AdminDrawController {
                            HttpServletRequest request){
         Searchable searchable = new Searchable();
         if(!account.equals("")){
-            searchable.addCondition(new Condition("a.account", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
         }
         if(!name.equals("")){
-            searchable.addCondition(new Condition("a.customername", SearchOperator.eq, name));
+            searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
         }
         if(!mobile.equals("")){
             searchable.addCondition(new Condition("b.mobile", SearchOperator.eq, mobile));
@@ -186,6 +186,8 @@ public class AdminDrawController {
         request.setAttribute("page",pageInfo);
         request.setAttribute("account",account);
         request.setAttribute("name",name);
+        request.setAttribute("flowNo",flowNo);
+        request.setAttribute("counts",counts);
         request.setAttribute("mobile",mobile);
         request.setAttribute("smoney",smoney);
         request.setAttribute("emoney",emoney);

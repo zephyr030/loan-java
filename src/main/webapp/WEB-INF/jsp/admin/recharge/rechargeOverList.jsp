@@ -30,7 +30,7 @@
                 <option value="2" ${status==2?'selected':''}>未到账</option>
                 <option value="1" ${status==1?'selected':''}>已到账</option>
             </select>
-            <input type="text" name="flow" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
+            <input type="text" name="flowNo" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
             <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
