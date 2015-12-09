@@ -131,7 +131,7 @@ public class UserRechargeController extends BaseController {
 	 * @param recType
      * @return
      */
-	@RequestMapping(value = "/user/recharge/amount", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/recharge/amount/input", method = RequestMethod.GET)
 	@ResponseBody
 	public Object insertAmount(@RequestParam(value="account", required=true) String account,
 							    @RequestParam(value="amount", required=true) int amount,

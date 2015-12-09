@@ -42,6 +42,17 @@ function Trim(str) {
     return RTrim(LTrim(str));
 }
 
+
+function isMultiple(value, divisor) {
+    if(divisor == 0 || value == 0) {
+        return false;
+    }
+    if(value % divisor != 0) {
+        return false;
+    }
+    return true;
+}
+
 //是否是整数
 function isNumeric(str) {
     var reg = new RegExp("^-?\\d+$");
