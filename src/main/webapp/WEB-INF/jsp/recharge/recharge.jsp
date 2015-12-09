@@ -60,7 +60,7 @@
 					<em>提现时用于收取短信的手机号，请务必真实填写</em>
 				</li>
 			</ul>
-			<div class="cd_btn"><a href="">开始充值</a></div>
+			<div class="cd_btn"><a href="javascript:void(0)" id="rechargeBn">开始充值</a></div>
 		</div>
 	</div>
 </div>
