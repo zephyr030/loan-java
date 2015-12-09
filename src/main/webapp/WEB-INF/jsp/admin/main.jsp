@@ -80,7 +80,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="javascript:;" class="dropdown-toggle" onclick="url('drawOverList')">
                     <i class="menu-icon fa fa-money"></i>
                     <span class="menu-text">
                         提现放款信息
