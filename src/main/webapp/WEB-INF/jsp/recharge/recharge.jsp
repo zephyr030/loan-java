@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="${path}/static/css/index.css">
 
 	<%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
-	<script type="text/javascript" src="${path}/static/script/recharge/recharge.js" ></script>
+	<script type="text/javascript" src="${path}/static/script/recharge/view_recharge.js" ></script>
 </head>
 
 <body>
