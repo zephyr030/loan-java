@@ -19,11 +19,10 @@
 		<img src="${path}/static/images/icon_04.png">
 		<p>请您在新打开的网上银行<br>页面完成付款。<br>充值遇到问题请咨询客服：<br>400-020-0158</p>
 		<div class="cg_l_btn">
-			<a href="" class="cm_m_up">返回修改</a>
-			<a href="" class="cm_m_down">已完成支付</a>
+			<a href="${path}/user/recharge?account=${cardInfo.account}" class="cm_m_up">返回修改</a>
+			<a href="${path}/user/recharge/success?account=${cardInfo.account}" class="cm_m_down">已完成支付</a>
 		</div>
 	</div>
-
 </div>
 <div class="child">
 	<div class="cd_title">
@@ -49,9 +48,9 @@
 				<li><label>开户银行：</label><span>${cardInfo.bankname}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.cardnumber}</span></li>
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
-				<li><input type="checkbox"><span>我已经阅读并完全同意<a href="#"  class="link">《充值须知》</a></span></li>
+				<li><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>
 			</ul>
-			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" target="_blank" onclick="confirm(); return true;">下一步</a></div>
+			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" <c:if test="${'A01' eq recType}">target="_blank"</c:if> onclick="return confirm();">下一步</a></div>
 		</div>
 	</div>
 </div>
@@ -63,8 +62,16 @@
 	});
 
 	function confirm() {
-		$(".cg_mask").show();
-		$(".cg_layer").show();
+		var check = $("input[type='checkbox']:checkbox:checked").length;
+		if(check == 0) {
+			alert("请勾选充值须知");
+			return false;
+		}
+		if('A01' == '${recType}') {
+			$(".cg_mask").show();
+			$(".cg_layer").show();
+		}
+		return true;
 	}
 
 //	function confirmInfo() {

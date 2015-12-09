@@ -74,6 +74,7 @@ public class BBPayApiService extends BaseService {
         sysPayLog.setStatus("A0");
         sysPayLog.setService(interfaceName);
         sysPayLog.setData(JSON.toJSONString(params));
+        sysPayLog.setRemark(remark);
         sysPayLogMapper.insert(sysPayLog);
         return orderNo;
     }

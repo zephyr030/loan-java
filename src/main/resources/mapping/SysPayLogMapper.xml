@@ -1,120 +1,142 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.SysPayLogMapper" >
-  <resultMap id="BaseResultMap" type="com.model.SysPayLog" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="service" property="service" jdbcType="VARCHAR" />
-    <result column="orderNo" property="orderno" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="CHAR" />
-    <result column="data" property="data" jdbcType="VARCHAR" />
-    <result column="sign" property="sign" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SysPayLogMapper">
+  <resultMap id="BaseResultMap" type="com.model.SysPayLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="service" jdbcType="VARCHAR" property="service" />
+    <result column="orderNo" jdbcType="BIGINT" property="orderno" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="return_info" jdbcType="VARCHAR" property="returnInfo" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, service, orderNo, type, data, sign, status, create_time
+  <sql id="Base_Column_List">
+    id, service, orderNo, type, data, sign, status, create_time, return_info, remark
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_pay_log
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_pay_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.model.SysPayLog" >
+  <insert id="insert" parameterType="com.model.SysPayLog">
     insert into sys_pay_log (id, service, orderNo, 
       type, data, sign, status, 
-      create_time)
+      create_time, return_info, remark
+      )
     values (#{id,jdbcType=BIGINT}, #{service,jdbcType=VARCHAR}, #{orderno,jdbcType=BIGINT}, 
       #{type,jdbcType=CHAR}, #{data,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{returnInfo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.model.SysPayLog" >
+  <insert id="insertSelective" parameterType="com.model.SysPayLog">
     insert into sys_pay_log
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="service != null" >
+      <if test="service != null">
         service,
       </if>
-      <if test="orderno != null" >
+      <if test="orderno != null">
         orderNo,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="data != null" >
+      <if test="data != null">
         data,
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         sign,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
+      <if test="returnInfo != null">
+        return_info,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="service != null" >
+      <if test="service != null">
         #{service,jdbcType=VARCHAR},
       </if>
-      <if test="orderno != null" >
+      <if test="orderno != null">
         #{orderno,jdbcType=BIGINT},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=CHAR},
       </if>
-      <if test="data != null" >
+      <if test="data != null">
         #{data,jdbcType=VARCHAR},
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=CHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnInfo != null">
+        #{returnInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.model.SysPayLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.SysPayLog">
     update sys_pay_log
-    <set >
-      <if test="service != null" >
+    <set>
+      <if test="service != null">
         service = #{service,jdbcType=VARCHAR},
       </if>
-      <if test="orderno != null" >
+      <if test="orderno != null">
         orderNo = #{orderno,jdbcType=BIGINT},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=CHAR},
       </if>
-      <if test="data != null" >
+      <if test="data != null">
         data = #{data,jdbcType=VARCHAR},
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         sign = #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=CHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnInfo != null">
+        return_info = #{returnInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.model.SysPayLog" >
+  <update id="updateByPrimaryKey" parameterType="com.model.SysPayLog">
     update sys_pay_log
     set service = #{service,jdbcType=VARCHAR},
       orderNo = #{orderno,jdbcType=BIGINT},
@@ -122,7 +144,9 @@
       data = #{data,jdbcType=VARCHAR},
       sign = #{sign,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      return_info = #{returnInfo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

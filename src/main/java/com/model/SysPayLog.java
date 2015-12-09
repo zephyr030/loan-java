@@ -19,6 +19,10 @@ public class SysPayLog {
 
     private Date createTime;
 
+    private String returnInfo;
+
+    private String remark;
+
     public Long getId() {
         return id;
     }
@@ -81,5 +85,21 @@ public class SysPayLog {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getReturnInfo() {
+        return returnInfo;
+    }
+
+    public void setReturnInfo(String returnInfo) {
+        this.returnInfo = returnInfo;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

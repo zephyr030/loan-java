@@ -29,38 +29,45 @@
 		</ul>
 		<ul class="cd_bank">
 			<li>
-				<img src="images/bank_01.png">
+				<img src="${path}/static/images/bank_01.png">
 				<p>账号：3100 1518 0000 5003 1146<br>户名：上海信闳投资管理有限公司<br>开户行：中国建设银行上海黄浦支行</p>
 			</li>
 			<li>
-				<img src="images/bank_02.png">
+				<img src="${path}/static/images/bank_02.png">
 				<p>账号：1001 2689 1901 6802 706<br>户名：上海信闳投资管理有限公司<br>开户行：中国工商银行上海市金陵东路支行</p>
 			</li>
 			<li>
-				<img src="images/bank_03.png">
+				<img src="${path}/static/images/bank_03.png">
 				<p>账号：0335 7100 0400 11335<br>户名：上海信闳投资管理有限公司<br>开户行：中国农业银行上海西藏南路支行</p>
 			</li>
 			<li>
-				<img src="images/bank_04.png">
+				<img src="${path}/static/images/bank_04.png">
 				<p>账号：4572 6756 9167<br>户名：上海信闳投资管理有限公司<br>开户行：中国银行上海市大世界支行</p>
 			</li>
 		</ul>
+		<form action="${path}/user/recharge/end" id="amountForm" method="post">
 		<div class="cd_list cdg_m_list  cdg_i_list">
 			<ul class="cd_i_list">
 				<li>
 					<label>充值银行：</label>
-					<select>
-						<option></option>
+					<select id="bankId" name="bankId">
+						<c:forEach items="${bankList}" var="obj" varStatus="this">
+							<option value="${obj.typecode}" <c:if test="${obj.typecode == cardInfo.bankname}">selected="selected"</c:if>>${obj.text}</option>
+						</c:forEach>
 					</select>
 				</li>
 				<li>
 					<label>银行流水号：</label>
-					<input type="text" id="flowNo" />
+					<input type="text" id="flowNo" name="flowNo"/>
 					<em>若无法查询，可留空白，但会增加到账时间</em>
+					<input type="hidden" id="account" name="account" value="${account}" />
+					<input type="hidden" id="amount" name="amount" value="${amount}" />
+					<input type="hidden" id="recType" name="recType" value="${recType}" />
 				</li>
 			</ul>
-			<div class="cd_m_btn"><a href="javascript:void(0)" class="cm_m_up">上一步</a><a href="javascript:void(0)" class="cm_m_down" id="sureBn">下一步</a></div>
+			<div class="cd_m_btn"><a href="javascript:history.go(-1);" class="cm_m_up">上一步</a><a href="javascript:void(0)" class="cm_m_down" id="sureBn">下一步</a></div>
 		</div>
+		</form>
 	</div>
 </div>
 <div class="foot">Copyright © 2015 上海信闳投资管理有限公司 版权所有 沪ICP备14048395号-1</div>
@@ -72,36 +79,37 @@
 	});
 
 	function recharge() {
-		var account = $.trim($("#account").val());
-		var amount = $.trim($("#amount").val());
-		var recType = $.trim($("#recType").val());
-		var flowNo = $.trim($("#flowNo").val());
-		var bankId = $.trim($("#bankId").val());
-
-		$.ajax({
-			cache: false,
-			async: false,
-			type: "POST",
-			dataType: "json",
-			url:path + "/user/recharge/end",
-			data:{
-				account: account,
-				amount: amount,
-				recType: recType,
-				bankId: bankId,
-				flowNo: flowNo
-			},
-			error: function(request) {
-				alert("Connection error");
-			},
-			success: function(data) {
-				if(!data.success) {
-					alert(data.message);
-				}else {
-					alert("ok");
-				}
-			}
-		});
+		$("#amountForm").submit();
+//		var account = $.trim($("#account").val());
+//		var amount = $.trim($("#amount").val());
+//		var recType = $.trim($("#recType").val());
+//		var flowNo = $.trim($("#flowNo").val());
+//		var bankId = $.trim($("#bankId").val());
+//
+//		$.ajax({
+//			cache: false,
+//			async: false,
+//			type: "POST",
+//			dataType: "json",
+//			url:path + "/user/recharge/end",
+//			data:{
+//				account: account,
+//				amount: amount,
+//				recType: recType,
+//				bankId: bankId,
+//				flowNo: flowNo
+//			},
+//			error: function(request) {
+//				alert("Connection error");
+//			},
+//			success: function(data) {
+//				if(!data.success) {
+//					alert(data.message);
+//				}else {
+//					$("#amountForm").submit();
+//				}
+//			}
+//		});
 	}
 
 </script>

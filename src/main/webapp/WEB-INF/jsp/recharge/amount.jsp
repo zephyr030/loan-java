@@ -44,7 +44,7 @@
 				</li>
 			</ul>
 			<div class="cd_m_btn cdg_m_btn">
-				<a href="javascript:void(0)" class="cm_m_up" id="backBn">上一步</a>
+				<a href="javascript:history.go(-1);" class="cm_m_up" id="backBn">上一步</a>
 				<a href="javascript:void(0)" class="cm_m_down" id="nextBn">下一步</a>
 			</div>
 		</div>

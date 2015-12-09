@@ -2,11 +2,13 @@ package com.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.model.UserCardInfo;
+import com.model.UserRechargeDetail;
 import com.pay.AES;
 import com.pay.EncryUtil;
 import com.pay.RSA;
 import com.service.BBPayApiService;
 import com.service.UserCardInfoService;
+import com.service.UserRechargeService;
 import com.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ public class PayController extends BaseController {
     private UserCardInfoService userCardInfoService;
     @Autowired
     private BBPayApiService bbPayApiService;
+    @Autowired
+    private UserRechargeService rechargeService;
 
     private ResourceBundle resb = ResourceBundle.getBundle("payapi");
     //获取公钥和私钥
@@ -40,6 +44,7 @@ public class PayController extends BaseController {
     @RequestMapping(value = "pay/view", method = RequestMethod.GET)
     public String payView(@RequestParam(value = "account") String account,
                           @RequestParam(value = "amount") String amount,
+                          @RequestParam(value = "detailId") String detailId,
                           HttpServletRequest request) throws Exception {
         UserCardInfo userCardInfo = userCardInfoService.getUserCardInfoByAccount(account, -1);
         Map<String, Object> map = new HashMap<String, Object>();
@@ -61,7 +66,8 @@ public class PayController extends BaseController {
         map.put("pnc", userCardInfo.getBankid());             //支付节点编码
         map.put("userip", getIpAddr(request));           //用户IP
         map.put("userua", request.getHeader("user-agent"));           //终端UA
-        bbPayApiService.putOrderID(map, "");             // 订单号
+        map.put("merrmk", detailId);                //充值记录ID
+        bbPayApiService.putOrderID(map, detailId);             // 订单号
 
         //生成AES密匙
         String merchantAesKey = RandomUtil.getRandom(16);
@@ -102,7 +108,13 @@ public class PayController extends BaseController {
             String payresult_view = AES.decryptFromBase64(data,yb_aeskey);
             Map backMap = JSON.parseObject(payresult_view, Map.class);
             String order = (String)backMap.get("order");
+            String merrmk = (String)backMap.get("order");
             bbPayApiService.updateOrderRetrunState(Long.valueOf(order), payresult_view);
+
+//            UserRechargeDetail userRechargeDetail = new UserRechargeDetail();
+//            userRechargeDetail.setId(Long.valueOf(merrmk));
+//            userRechargeDetail.setStatus(Integer.valueOf((String)backMap.get("status")));
+//            rechargeService.save(userRechargeDetail);
             return "YES";
         }else{
             return "NO";
@@ -130,9 +142,9 @@ public class PayController extends BaseController {
             String yb_aeskey = RSA.decrypt(encryptkey, merchantPrivateKey);
             String payresult_view = AES.decryptFromBase64(data, yb_aeskey);
             Map backMap = JSON.parseObject(payresult_view, Map.class);
-            String orderNo = (String) backMap.get("bborderid");
+            String orderNo = (String) backMap.get("merrmk");
             request.setAttribute("orderNo", orderNo);
         }
-        return "/recharge/success";
+        return "redirect:/user/recharge/success";
     }
 }

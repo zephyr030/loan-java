@@ -200,9 +200,15 @@ public class UserRechargeController extends BaseController {
 		}
 
 		if("A01".equals(recType)) {
-			return "redirect:/pay/view?account=" + account + "&amount=" + amount;
+			//记录本次充值信息
+			UserRechargeDetail detail = new UserRechargeDetail();
+			detail.setUserId(cardInfo.getId());
+			detail.setAmount(new BigDecimal(amount));
+			detail.setRectype(recType);
+			rechargeService.save(detail);
+			return "redirect:/pay/view?account=" + account + "&amount=" + amount + "detailId=" + detail.getId();
 		} else {
-			return "redirect:/user/recharge/bank ";
+			return "redirect:/user/recharge/bank?account=" + account + "&amount=" + amount + "&recType=" + recType;
 		}
 	}
 
@@ -214,7 +220,7 @@ public class UserRechargeController extends BaseController {
 	 * @param model
      * @return
      */
-	@RequestMapping(value = "/user/recharge/bank", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/recharge/bank", method = RequestMethod.GET)
 	public String selectBank(@RequestParam(value="account", required=true) String account,
 							  @RequestParam(value="amount", required=true) int amount,
 							  @RequestParam(value="recType", required=true) String recType,
@@ -223,6 +229,11 @@ public class UserRechargeController extends BaseController {
 		model.addAttribute("amount",amount);
 		model.addAttribute("recType",recType);
 
+		Searchable searchable = new Searchable();
+		searchable.addCondition(new Condition("typeId", SearchOperator.eq, "SYS_BANK"));
+		searchable.addCondition(new Condition("available", SearchOperator.eq, 1));
+		List<SysTableCode> bankList = codeService.selectBankList(searchable);
+		model.addAttribute("bankList", bankList);
 		return "/recharge/bank";
 	}
 
@@ -231,12 +242,13 @@ public class UserRechargeController extends BaseController {
 	 * @return
      */
 	@RequestMapping(value = "/user/recharge/end", method = RequestMethod.POST)
-	@ResponseBody
-	public Object rechargeSure(@RequestParam(value="account", required=true) String account,
-							    @RequestParam(value="amount", required=true) int amount,
-							    @RequestParam(value="recType", required=true) String recType,
-							    @RequestParam(value="bankId", required=true) String bankId,
-							    @RequestParam(value="flowNo", required=false) String flowNo) {
+	public String rechargeSure(@RequestParam(value="account", required=true) String account,
+							   @RequestParam(value="amount", required=true) int amount,
+							   @RequestParam(value="recType", required=true) String recType,
+							   @RequestParam(value="bankId", required=true) String bankId,
+							   @RequestParam(value="flowNo", required=false) String flowNo,
+							   HttpServletRequest request,
+							   HttpServletResponse response) {
 
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
 		if(cardInfo == null) {
@@ -250,7 +262,8 @@ public class UserRechargeController extends BaseController {
 		detail.setFlowno(flowNo);
 		detail.setBankId(bankId);
 		rechargeService.save(detail);
-		return AjaxResponse.success().toJsonString();
+		request.setAttribute("orderNo", detail.getId());
+		return "/recharge/success";
 	}
 
 	/**
@@ -281,6 +294,15 @@ public class UserRechargeController extends BaseController {
 			ajaxResponse = AjaxResponse.fail("您输入的手机号格式有误");
 		}
 		return ajaxResponse;
+	}
+
+	/**
+	 * 返回成功过页面
+	 * @return
+     */
+	@RequestMapping(value = "/user/recharge/success")
+	public String success(@RequestParam(value="account", required=true) String account) {
+		return "/recharge/success";
 	}
 
 }
