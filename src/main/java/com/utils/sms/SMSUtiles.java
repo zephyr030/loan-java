@@ -49,7 +49,7 @@ public class SMSUtiles {
 
             String SubmitResult =method.getResponseBodyAsString();
 
-            //System.out.println(SubmitResult);
+            System.out.println(SubmitResult);
 
             Document doc = DocumentHelper.parseText(SubmitResult);
             Element root = doc.getRootElement();

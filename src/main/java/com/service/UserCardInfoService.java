@@ -72,8 +72,6 @@ public class UserCardInfoService extends BaseService{
                                           UserCardInfo cardInfo,
                                          int length) {
         AjaxResponse ajaxResponse = null;
-        System.out.println(customerName);
-        System.out.println(cardInfo.getCustomername());
         if(!cardInfo.getCustomername().equals(customerName)) {
             ajaxResponse = AjaxResponse.fail("你输入的账户姓名有误");
         }else if(length != 4 && !cardInfo.getCardnumber().equals(cardNumber)) {

@@ -18,7 +18,7 @@ function draw(id){
             var money = top.$("#money").val();
             //银行单号
             var bankNo = top.$("#bankNo").val();
-            if(parseInt(countsNum) == 0){
+            if(countsNum.length == 0 || parseInt(countsNum) == 0){
                 top.$("#countsNumError").show();
                 return false;
             }else if(!isMoney(money) || parseFloat(money) <= 0){
@@ -28,15 +28,15 @@ function draw(id){
                 top.$("#bankNoError").show();
                 return false;
             }else{
-                top.$("#countsNum").hide();
-                top.$("#money").hide();
-                top.$("#bankNo").hide();
+                top.$("#countsNumError").hide();
+                top.$("#moneyError").hide();
+                top.$("#bankNoError").hide();
                 var status = 0;
                 $.ajax({
                     type:"post",
                     url: "reloadDraw",
                     async: false,
-                    data: {id:id,countsNum:countsNum,money:money,bankNo:bankNo},
+                    data: {id:id,counts:countsNum,money:money,bankno:bankNo},
                     dataType: "json",
                     success: function(result){
                         if(parseInt(result.code) != 0){

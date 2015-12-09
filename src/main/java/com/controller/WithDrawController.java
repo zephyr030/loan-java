@@ -10,6 +10,7 @@ import com.service.UserCardInfoService;
 import com.service.UserWithdrawService;
 import com.utils.AjaxResponse;
 import com.utils.StringUtils;
+import com.utils.sms.SMSUtiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -94,7 +95,26 @@ public class WithDrawController {
         return "/withdraw/confirm";
     }
 
+    /**
+     * 提现第三步：发送验证码
+     * @param account
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/message",method = RequestMethod.POST)
+    public String message(@RequestParam(value="account", required=true) String account,
+                           Model model) {
+        model.addAttribute("account", account);
+        return "/withdraw/message";
+    }
 
+
+    @RequestMapping(value = "/message/send",method = RequestMethod.GET)
+    @ResponseBody
+    public Object sendMessage(@RequestParam(value="account", required=true) String account) {
+        SMSUtiles.sendSMS("13752870005","您的验证码是：344234。请不要把验证码泄露给其他人。");
+        return AjaxResponse.success().toJsonString();
+    }
 
     /**
      * 检查提现信息有效性

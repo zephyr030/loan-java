@@ -1,5 +1,6 @@
 package com.model;
 
+import com.utils.StringUtils;
 import com.utils.security.Security;
 
 import java.math.BigDecimal;
@@ -28,6 +29,10 @@ public class UserCardInfo {
 
     /*加密后的超盘账号*/
     private String encodeAccount;
+
+    private String banknameStr;
+
+    private String maskCardnumber;
 
     public Long getId() {
         return id;
@@ -115,5 +120,24 @@ public class UserCardInfo {
 
     public void setEncodeAccount(String encodeAccount) {
         this.encodeAccount = encodeAccount;
+    }
+
+    public String getBanknameStr() {
+        return banknameStr;
+    }
+
+    public void setBanknameStr(String banknameStr) {
+        this.banknameStr = banknameStr;
+    }
+
+    public String getMaskCardnumber() {
+        if(!StringUtils.isEmpty(this.cardnumber)) {
+            maskCardnumber = StringUtils.maskString(this.cardnumber,4,10,"*");
+        }
+        return maskCardnumber;
+    }
+
+    public void setMaskCardnumber(String maskCardnumber) {
+        this.maskCardnumber = maskCardnumber;
     }
 }
