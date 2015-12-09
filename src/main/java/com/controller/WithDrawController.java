@@ -73,13 +73,26 @@ public class WithDrawController {
             return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
         }
 
-        AjaxResponse ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo);
+        AjaxResponse ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo, 4);
         if(ajaxResponse != null) {
             return ajaxResponse.toJsonString();
         }
         return AjaxResponse.success().toJsonString();
     }
 
+    /**
+     * 提现第二步：确认账户信息
+     * @param account
+     * @return
+     */
+    @RequestMapping(value = "/confirm",method = RequestMethod.POST)
+    public String confirmInfo(@RequestParam(value="account", required=true) String account,
+                               Model model) {
+        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+
+        model.addAttribute("cardInfo", cardInfo);
+        return "/withdraw/confirm";
+    }
 
 
 

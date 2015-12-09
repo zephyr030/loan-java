@@ -62,23 +62,33 @@ public class UserCardInfoService extends BaseService{
     }
 
     /**
-     * 验证用户输入的账户信息是否一致
+     * 验证用户输入的账户信息是否一致, 当length=4的时候 表示只验证银行卡后4位
      * @return
      */
     public AjaxResponse validateCardInfo(String customerName,
                                           String cardNumber,
                                           String bankName,
                                           String mobile,
-                                          UserCardInfo cardInfo) {
+                                          UserCardInfo cardInfo,
+                                         int length) {
         AjaxResponse ajaxResponse = null;
         if(!cardInfo.getCustomername().equals(customerName)) {
             ajaxResponse = AjaxResponse.fail("你输入的账户姓名有误");
-        }else if(!cardInfo.getCardnumber().equals(cardNumber)) {
+        }else if(length != 4 && !cardInfo.getCardnumber().equals(cardNumber)) {
             ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");
         }else if(!cardInfo.getBankname().equals(bankName)) {
             ajaxResponse = AjaxResponse.fail("你输入的开户行信息有误");
         }else if(!cardInfo.getMobile().equals(mobile)) {
             ajaxResponse = AjaxResponse.fail("你输入的手机号信息有误");
+        }else if(length == 4) {
+            if(cardNumber.length() != 4) {
+                ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");
+            }else {
+                String card = cardInfo.getCardnumber().substring(cardInfo.getCardnumber().length()-4, cardInfo.getCardnumber().length());
+                if(!card.equals(cardNumber)) {
+                    ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");
+                }
+            }
         }
         return ajaxResponse;
     }

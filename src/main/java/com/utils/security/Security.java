@@ -78,7 +78,11 @@ public class Security {
 //		System.out.println(s);
 //		s = decrypt(s);
 //		System.out.println(s);
-        System.out.println(decrypt("123456"));
+		String card = "666";
+		String b = card.substring(card.length() - 4 ,card.length());
+
+        System.out.println(b);
+
 
 	}
 
