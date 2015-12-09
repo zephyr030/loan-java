@@ -21,6 +21,7 @@ $(function(){
                             content: '您输入的账户不存在',
                             lock:true,
                             drag:true,
+                            opacity:0.1,
                             ok: function () {
                                 $("#username").focus();
                             }
@@ -54,6 +55,7 @@ $(function(){
                 content: '请填写用户名',
                 lock:true,
                 drag:true,
+                opacity:0.1,
                 ok: function () {
                     $("#username").focus();
                 }
@@ -63,6 +65,7 @@ $(function(){
                 content: '请输入密码',
                 lock:true,
                 drag:true,
+                opacity:0.1,
                 ok: function () {
                     $("#password").focus();
                 }
@@ -79,6 +82,7 @@ $(function(){
                             content: '用户名或密码错误',
                             lock:true,
                             drag:true,
+                            opacity:0.1,
                             ok: function () {
                                 $("#username").focus();
                             }
