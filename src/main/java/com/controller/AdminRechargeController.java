@@ -169,13 +169,13 @@ public class AdminRechargeController {
                                HttpServletRequest request){
         Searchable searchable = new Searchable();
         if(!account.equals("")){
-            searchable.addCondition(new Condition("c.cardnumber", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("b.cardnumber", SearchOperator.eq, account));
         }
         if(!name.equals("")){
-            searchable.addCondition(new Condition("c.customername", SearchOperator.eq, name));
+            searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
         }
         if(!mobile.equals("")){
-            searchable.addCondition(new Condition("c.mobile", SearchOperator.eq, mobile));
+            searchable.addCondition(new Condition("b.mobile", SearchOperator.eq, mobile));
         }
         if(smoney > 0){
             searchable.addCondition(new Condition("a.amount", SearchOperator.gte, smoney));
@@ -184,12 +184,12 @@ public class AdminRechargeController {
             searchable.addCondition(new Condition("a.amount", SearchOperator.lte, emoney));
         }
         if(!startTime.equals("")){
-            searchable.addCondition(new Condition("a.recTime", SearchOperator.gte, startTime));
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.gte, startTime));
         }
         if(!endTime.equals("")){
-            searchable.addCondition(new Condition("a.recTime", SearchOperator.lte, endTime));
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
         }
-        PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
+        PageInfo pageInfo = adminRechargeService.drawList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);
         request.setAttribute("account",account);
@@ -199,38 +199,28 @@ public class AdminRechargeController {
         request.setAttribute("emoney",emoney);
         request.setAttribute("startTime",startTime);
         request.setAttribute("endTime",endTime);
-        return "/admin/recharge/rechargeOverList";
+        return "/admin/draw/drawList";
     }
 
-    //充值查询列表
+    //导出列表
     @RequestMapping("/exportDrawList")
-    public void exportDrawList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
-                                   @RequestParam(required = false,defaultValue = "0") int type,
-                                   @RequestParam(required = false,defaultValue = "") String flow,
-                                   @RequestParam(required = false,defaultValue = "") String account,
-                                   @RequestParam(required = false,defaultValue = "") String name,
-                                   @RequestParam(required = false,defaultValue = "") String mobile,
-                                   @RequestParam(required = false,defaultValue = "0") Double smoney,
-                                   @RequestParam(required = false,defaultValue = "0") Double emoney,
-                                   @RequestParam(required = false,defaultValue = "") String startTime,
-                                   @RequestParam(required = false,defaultValue = "") String endTime,
-                                   @RequestParam(required = false,defaultValue = "0") int status,
-                                   HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public void exportDrawList(@RequestParam(required = false,defaultValue = "") String account,
+                               @RequestParam(required = false,defaultValue = "") String name,
+                               @RequestParam(required = false,defaultValue = "") String mobile,
+                               @RequestParam(required = false,defaultValue = "0") Double smoney,
+                               @RequestParam(required = false,defaultValue = "0") Double emoney,
+                               @RequestParam(required = false,defaultValue = "") String startTime,
+                               @RequestParam(required = false,defaultValue = "") String endTime,
+                               HttpServletRequest request, HttpServletResponse response)throws Exception{
         Searchable searchable = new Searchable();
-        if(type > 0){
-            searchable.addCondition(new Condition("a.recType", SearchOperator.eq, type==1?"A01":"A02"));
-        }
-        if(!flow.equals("")){
-            searchable.addCondition(new Condition("a.flowNo", SearchOperator.eq, flow));
-        }
         if(!account.equals("")){
-            searchable.addCondition(new Condition("c.cardnumber", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("b.cardnumber", SearchOperator.eq, account));
         }
         if(!name.equals("")){
-            searchable.addCondition(new Condition("c.customername", SearchOperator.eq, name));
+            searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
         }
         if(!mobile.equals("")){
-            searchable.addCondition(new Condition("c.mobile", SearchOperator.eq, mobile));
+            searchable.addCondition(new Condition("b.mobile", SearchOperator.eq, mobile));
         }
         if(smoney > 0){
             searchable.addCondition(new Condition("a.amount", SearchOperator.gte, smoney));
@@ -239,44 +229,28 @@ public class AdminRechargeController {
             searchable.addCondition(new Condition("a.amount", SearchOperator.lte, emoney));
         }
         if(!startTime.equals("")){
-            searchable.addCondition(new Condition("a.recTime", SearchOperator.gte, startTime));
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.gte, startTime));
         }
         if(!endTime.equals("")){
-            searchable.addCondition(new Condition("a.recTime", SearchOperator.lte, endTime));
-        }
-        if(status > 0){
-            searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
         }
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
-        map.put("充值方式", "充值方式");
-        map.put("第三方流水号", "第三方流水号");
         map.put("账号", "账号");
         map.put("姓名", "姓名");
         map.put("开户行", "开户行");
         map.put("银行账号", "银行账号");
         map.put("手机号", "手机号");
-        map.put("充值金额", "充值金额");
-        map.put("充值时间", "充值时间");
-        map.put("到账时间", "到账时间");
-        map.put("状态", "状态");
-        map.put("操作人", "操作人");
+        map.put("提现时间", "提现时间");
 
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
         mapKey.put("id", "id");
-        mapKey.put("recTypes", "recTypes");
-        mapKey.put("flowNo", "flowNo");
-        mapKey.put("account", "account");
         mapKey.put("customername", "customername");
         mapKey.put("bankname", "bankname");
         mapKey.put("cardnumber", "cardnumber");
         mapKey.put("mobile", "mobile");
-        mapKey.put("amount", "amount");
-        mapKey.put("recTime", "recTime");
-        mapKey.put("actTime", "actTime");
-        mapKey.put("statusName", "statusName");
-        mapKey.put("exeUser", "exeUser");
-        List<Map<String,Object>> list  = adminRechargeService.rechargeList(searchable);
+        mapKey.put("drawTime", "drawTime");
+        List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
     }
 }

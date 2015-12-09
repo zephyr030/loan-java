@@ -19,8 +19,7 @@
 <body class="no-skin" style="background-color: white;">
 <div class="row">
     <div class="col-xs-12">
-        <form action="rechargeList" id="form" name="form" method="post">
-            <input type="text" name="flow" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
+        <form action="drawList" id="form" name="form" method="post">
             <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
@@ -64,15 +63,13 @@
                         <thead class="thin-border-bottom">
                         <tr>
                             <th><i></i>编号</th>
-                            <th><i></i>充值方式</th>
-                            <th><i></i>第三方流水号</th>
                             <th><i></i>账号</th>
                             <th><i></i>姓名</th>
                             <th><i></i>开户行</th>
                             <th><i></i>银行账号</th>
                             <th><i></i>手机号</th>
-                            <th><i></i>充值金额</th>
-                            <th><i></i>充值时间</th>
+                            <th><i></i>提现金额</th>
+                            <th><i></i>提现时间</th>
                             <th><i></i>操作</th>
                         </tr>
                         </thead>
@@ -81,15 +78,13 @@
                             <c:forEach items="${page.list}" var="obj">
                                 <tr>
                                     <th>${obj.id}</th>
-                                    <td>${obj.recTypes}</td>
-                                    <td>${obj.flowNo}</td>
                                     <td>${obj.account}</td>
                                     <td>${obj.customername}</td>
                                     <td>${obj.bankname}</td>
                                     <td>${obj.cardnumber}</td>
                                     <td>${obj.mobile}</td>
                                     <td>${obj.amount}</td>
-                                    <td>${obj.recTime}</td>
+                                    <td>${obj.drawTime}</td>
                                     <td>
                                         <div class="hidden-sm hidden-xs action-buttons">
                                             <a class="blue" href="">冻结</a>
@@ -109,7 +104,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNumber-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
+                            <a href="drawList?pageNumber=${page.pageNumber-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
@@ -129,7 +124,7 @@
                             <li class="active"><a href="javascript:void(0)">${obj}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="rechargeList?pageNumber=${obj}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}">${obj}</a></li>
+                            <li><a href="drawList?pageNumber=${obj}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}">${obj}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -137,7 +132,7 @@
                 <c:choose>
                     <c:when test="${page.hasNextPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNum+1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Next">
+                            <a href="drawList?pageNumber=${page.pageNum+1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Next">
                                 <span aria-hidden="true">下一页</span>
                             </a>
                         </li>

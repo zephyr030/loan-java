@@ -72,7 +72,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="javascript:;" class="dropdown-toggle" onclick="url('drawList')">
                     <i class="menu-icon fa fa-credit-card"></i>
                     <span class="menu-text">
                         提现列表
