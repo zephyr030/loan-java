@@ -14,7 +14,7 @@
     <div class="cd_title">
         <img src="${path}/static/images/logo.png">
         <img src="${path}/static/images/icon.png">
-        <em>充值成功</em>
+        <em>充值完成</em>
         <a href="${path}/"><< 返回首页</a>
     </div>
     <div class="cd_main">
