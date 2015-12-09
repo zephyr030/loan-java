@@ -1,6 +1,5 @@
 $(document).ready(function(){
     $("#nextBn").click(insertAmount);
-    $("#backBn").click(goBack);
 });
 
 function insertAmount() {
@@ -35,9 +34,4 @@ function insertAmount() {
             }
         }
     });
-}
-
-function goBack() {
-    var account = $.trim($("#account").val());
-    document.location.href = path + '/user/recharge?account=' + account;
 }
