@@ -51,7 +51,7 @@
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
 				<li><input type="checkbox"><span>我已经阅读并完全同意<a href="#"  class="link">《充值须知》</a></span></li>
 			</ul>
-			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}" class="cm_m_down" id="nextBn" target="_blank">下一步</a></div>
+			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" target="_blank" onclick="confirm(); return true;">下一步</a></div>
 		</div>
 	</div>
 </div>
@@ -59,12 +59,13 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#nextBn").click(function() {
-			$("#cg_mask").show();
-			$("#cg_layer").show();
-		});
 		$("#backBn").click(goBack);
 	});
+
+	function confirm() {
+		$(".cg_mask").show();
+		$(".cg_layer").show();
+	}
 
 //	function confirmInfo() {
 //		var account = $("#account").val();

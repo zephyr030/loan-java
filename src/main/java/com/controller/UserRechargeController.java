@@ -185,7 +185,8 @@ public class UserRechargeController extends BaseController {
      */
 	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.GET)
 	public String confirmInfo(@RequestParam(value="account", required=true) String account,
-							  @RequestParam(value="recType") String recType,
+							  @RequestParam(value="recType", required=true) String recType,
+							  @RequestParam(value="amount", required=true) Long amount,
 							  HttpServletRequest request,
 							  HttpServletResponse response) throws Exception{
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
@@ -199,7 +200,7 @@ public class UserRechargeController extends BaseController {
 		}
 
 		if("A01".equals(recType)) {
-			return "redirect:/pay/view?account=" + account + "&account=" + account;
+			return "redirect:/pay/view?account=" + account + "&amount=" + amount;
 		} else {
 			return "redirect:/user/recharge/bank ";
 		}
