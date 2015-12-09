@@ -33,7 +33,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-       $("#payAction").submit();
+       //$("#payAction").submit();
     });
 </script>
 </html>
