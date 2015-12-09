@@ -132,4 +132,52 @@ public class AdminDrawController {
         List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
     }
+
+
+    //提现放款列表
+    @RequestMapping("/drawOverList")
+    public String drawOverList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
+                           @RequestParam(required = false,defaultValue = "0") int type,
+                           @RequestParam(required = false,defaultValue = "") String account,
+                           @RequestParam(required = false,defaultValue = "") String name,
+                           @RequestParam(required = false,defaultValue = "") String mobile,
+                           @RequestParam(required = false,defaultValue = "0") Double smoney,
+                           @RequestParam(required = false,defaultValue = "0") Double emoney,
+                           @RequestParam(required = false,defaultValue = "") String startTime,
+                           @RequestParam(required = false,defaultValue = "") String endTime,
+                           HttpServletRequest request){
+        Searchable searchable = new Searchable();
+        if(!account.equals("")){
+            searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
+        }
+        if(!name.equals("")){
+            searchable.addCondition(new Condition("b.customername", SearchOperator.eq, name));
+        }
+        if(!mobile.equals("")){
+            searchable.addCondition(new Condition("b.mobile", SearchOperator.eq, mobile));
+        }
+        if(smoney > 0){
+            searchable.addCondition(new Condition("a.amount", SearchOperator.gte, smoney));
+        }
+        if(emoney > 0){
+            searchable.addCondition(new Condition("a.amount", SearchOperator.lte, emoney));
+        }
+        if(!startTime.equals("")){
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.gte, startTime));
+        }
+        if(!endTime.equals("")){
+            searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
+        }
+        PageInfo pageInfo = adminRechargeService.drawList(searchable,pageNumber,20);
+        request.setAttribute("page",pageInfo);
+        request.setAttribute("type",type);
+        request.setAttribute("account",account);
+        request.setAttribute("name",name);
+        request.setAttribute("mobile",mobile);
+        request.setAttribute("smoney",smoney);
+        request.setAttribute("emoney",emoney);
+        request.setAttribute("startTime",startTime);
+        request.setAttribute("endTime",endTime);
+        return "/admin/draw/drawOverList";
+    }
 }
