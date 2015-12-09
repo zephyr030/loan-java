@@ -206,7 +206,7 @@ public class UserRechargeController extends BaseController {
 			detail.setAmount(new BigDecimal(amount));
 			detail.setRectype(recType);
 			rechargeService.save(detail);
-			return "redirect:/pay/view?account=" + account + "&amount=" + amount + "detailId=" + detail.getId();
+			return "redirect:/pay/view?account=" + account + "&amount=" + amount + "&detailId=" + detail.getId();
 		} else {
 			return "redirect:/user/recharge/bank?account=" + account + "&amount=" + amount + "&recType=" + recType;
 		}
