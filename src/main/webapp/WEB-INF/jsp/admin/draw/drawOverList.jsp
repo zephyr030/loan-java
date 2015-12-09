@@ -49,7 +49,7 @@
                 <i class="ace-icon fa fa-search bigger-120 green"></i>
                 查询
             </button>
-            <a href="ExcelDrawOverList">
+            <a href="ExcelDrawOverList?account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}">
                 <button type="button" id="export" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                     导出
@@ -113,7 +113,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="drawList?pageNumber=${page.pageNumber-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
+                            <a href="drawList?pageNumber=${page.pageNumber-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
@@ -133,7 +133,7 @@
                             <li class="active"><a href="javascript:void(0)">${obj}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="drawList?pageNumber=${obj}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}">${obj}</a></li>
+                            <li><a href="drawList?pageNumber=${obj}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}">${obj}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -141,7 +141,7 @@
                 <c:choose>
                     <c:when test="${page.hasNextPage}">
                         <li>
-                            <a href="drawList?pageNumber=${page.pageNum+1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Next">
+                            <a href="drawList?pageNumber=${page.pageNum+1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Next">
                                 <span aria-hidden="true">下一页</span>
                             </a>
                         </li>
