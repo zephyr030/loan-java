@@ -184,8 +184,10 @@ public class UserRechargeController extends BaseController {
 	 * @return
      */
 	@RequestMapping(value = "/user/recharge/confirm/info", method = RequestMethod.GET)
-	@ResponseBody
-	public Object confirmInfo(@RequestParam(value="account", required=true) String account) {
+	public String confirmInfo(@RequestParam(value="account", required=true) String account,
+							  @RequestParam(value="recType") String recType,
+							  HttpServletRequest request,
+							  HttpServletResponse response) throws Exception{
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		if(cardInfo == null) {
 			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
@@ -195,7 +197,12 @@ public class UserRechargeController extends BaseController {
 			cardInfo.setStatus(1);
 			cardInfoService.updateUserCardInfo(cardInfo);
 		}
-		return AjaxResponse.success("操作成功").toJsonString();
+
+		if("A01".equals(recType)) {
+			return "redirect:/pay/view?account=" + account + "&account=" + account;
+		} else {
+			return "redirect:/user/recharge/bank ";
+		}
 	}
 
 	/**

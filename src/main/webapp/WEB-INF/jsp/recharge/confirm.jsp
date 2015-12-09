@@ -12,11 +12,11 @@
 </head>
 
 <body>
-<div class="cg_mask"></div>
-<div class="cg_layer">
-	<div class="cg_l_title"><p>充值提示</p><a href=""><img src="images/icon_03.png"></a></div>
+<div class="cg_mask" style="display:none;"></div>
+<div class="cg_layer" style="display:none;">
+	<div class="cg_l_title"><p>充值提示</p><a href=""><img src="${path}/static/images/icon_03.png"></a></div>
 	<div class="cg_l_ctn">
-		<img src="images/icon_04.png">
+		<img src="${path}/static/images/icon_04.png">
 		<p>请您在新打开的网上银行<br>页面完成付款。<br>充值遇到问题请咨询客服：<br>400-020-0158</p>
 		<div class="cg_l_btn">
 			<a href="" class="cm_m_up">返回修改</a>
@@ -29,7 +29,7 @@
 	<div class="cd_title">
 		<img src="${path}/static/images/logo.png">
 		<img src="${path}/static/images/icon.png">
-		<em>自助提现</em>
+		<em>自助充值</em>
 		<a href="${path}/static/"><< 返回首页</a>
 	</div>
 	<div class="cd_main">
@@ -51,7 +51,7 @@
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
 				<li><input type="checkbox"><span>我已经阅读并完全同意<a href="#"  class="link">《充值须知》</a></span></li>
 			</ul>
-			<div class="cd_m_btn"><a href="javascript:void;" class="cm_m_up" id="backBn">上一步</a><a href="javascript:void;" class="cm_m_down" id="nextBn">下一步</a></div>
+			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}" class="cm_m_down" id="nextBn" target="_blank">下一步</a></div>
 		</div>
 	</div>
 </div>
@@ -59,34 +59,37 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#nextBn").click(confirmInfo);
+		$("#nextBn").click(function() {
+			$("#cg_mask").show();
+			$("#cg_layer").show();
+		});
 		$("#backBn").click(goBack);
 	});
 
-	function confirmInfo() {
-		var account = $("#account").val();
-
-		$.ajax({
-			cache: false,
-			async: false,
-			type: "GET",
-			dataType: "json",
-			url:path + "/user/recharge/confirm/info",
-			data:{
-				account: account
-			},
-			error: function(request) {
-				alert("Connection error");
-			},
-			success: function(data) {
-				if(!data.success) {
-					alert(data.message);
-				}else {
-					$("#confirmForm").submit();
-				}
-			}
-		});
-	}
+//	function confirmInfo() {
+//		var account = $("#account").val();
+//
+//		$.ajax({
+//			cache: false,
+//			async: false,
+//			type: "GET",
+//			dataType: "json",
+//			url:path + "/user/recharge/confirm/info",
+//			data:{
+//				account: account
+//			},
+//			error: function(request) {
+//				alert("Connection error");
+//			},
+//			success: function(data) {
+//				if(!data.success) {
+//					alert(data.message);
+//				}else {
+//					$("#confirmForm").submit();
+//				}
+//			}
+//		});
+//	}
 
 	function goBack() {
 		var account = $.trim($("#account").val());

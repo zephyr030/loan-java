@@ -27,10 +27,12 @@
 			<li><a href="">4</a><i></i><p>前往充值</p></li>
 			<li><a href="">5</a><i></i><p>充值成功</p></li>
 		</ul>
+		<form action="${path}/user/recharge/confirm" id="amountForm" method="post">
 		<div class="cd_list cdg_m_list">
 			<ul class="cd_i_list">
 				<li>
 					<label>填写充值金额：</label>
+					<input type="hidden" id="account" name="account" value="${account}"/>
 					<input type="text" id="amount" name="amount"/>
 					<em>请输入100的整数倍</em>
 				</li>
@@ -45,6 +47,7 @@
 				<a href="javascript:void(0)" class="cm_m_down" id="nextBn">下一步</a>
 			</div>
 		</div>
+		</form>
 	</div>
 </div>
 </body>
@@ -58,7 +61,7 @@
 	function insertAmount() {
 		var account = $.trim($("#account").val());
 		var amount = $.trim($("#amount").val());
-		var recType = 'A02';
+		var recType = $("input[name=recType]").val();
 
 		$.ajax({
 			cache: false,
