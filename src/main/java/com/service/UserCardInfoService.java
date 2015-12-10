@@ -76,7 +76,7 @@ public class UserCardInfoService extends BaseService{
             ajaxResponse = AjaxResponse.fail("你输入的账户姓名有误");
         }else if(length != 4 && !cardInfo.getCardnumber().equals(cardNumber)) {
             ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");
-        }else if(!cardInfo.getBankname().equals(bankName)) {
+        }else if(cardInfo.getBank() != Integer.valueOf(bankName)) {
             ajaxResponse = AjaxResponse.fail("你输入的开户行信息有误");
         }else if(!cardInfo.getMobile().equals(mobile)) {
             ajaxResponse = AjaxResponse.fail("你输入的手机号信息有误");

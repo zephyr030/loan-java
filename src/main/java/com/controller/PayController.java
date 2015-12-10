@@ -79,7 +79,7 @@ public class PayController extends BaseController {
         map.put("identitytype", "2");     //用户标示类型
         map.put("areturl", resb.getString("asynreturnURL"));         //商户后台回调地址
         map.put("sreturl", resb.getString("syncreturnURL"));         //商户前台回调地址
-        map.put("pnc", userCardInfo.getBankid());             //支付节点编码
+        map.put("pnc", sysTableCode.getStrval());             //支付节点编码
         map.put("userip", getIpAddr(request));           //用户IP
         map.put("userua", request.getHeader("user-agent"));           //终端UA
         map.put("merrmk", detailId);                //充值记录ID

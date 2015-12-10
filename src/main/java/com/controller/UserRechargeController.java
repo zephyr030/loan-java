@@ -65,7 +65,7 @@ public class UserRechargeController extends BaseController {
 	 * @param account
 	 * @param customerName
 	 * @param cardNumber
-	 * @param bankName
+	 * @param bank
 	 * @param mobile
      * @return
      */
@@ -74,9 +74,9 @@ public class UserRechargeController extends BaseController {
 	public Object recharge(@RequestParam(value="account", required=true) String account,
 						    @RequestParam(value="customerName", required=true) String customerName,
 						    @RequestParam(value="cardNumber", required=true) String cardNumber,
-						    @RequestParam(value="bankName", required=true) String bankName,
+						    @RequestParam(value="bank", required=true) int bank,
 						    @RequestParam(value="mobile", required=true) String mobile) {
-		AjaxResponse ajaxResponse = checkRechargeInfo(account,customerName,cardNumber,bankName,mobile);
+		AjaxResponse ajaxResponse = checkRechargeInfo(account,customerName,cardNumber,bank + "",mobile);
 		if(ajaxResponse != null) {
 			return ajaxResponse.toJsonString();
 		}
@@ -87,7 +87,7 @@ public class UserRechargeController extends BaseController {
 		 */
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
 		if(cardInfo != null) {
-			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo,0);
+			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bank + "",mobile,cardInfo,0);
 			if(ajaxResponse != null) {
 				return ajaxResponse.toJsonString();
 			}
@@ -99,7 +99,7 @@ public class UserRechargeController extends BaseController {
 			cardInfo.setAccount(account);
 			cardInfo.setCustomername(customerName);
 			cardInfo.setCardnumber(cardNumber);
-			cardInfo.setBankname(bankName);
+			cardInfo.setBank(bank);
 			cardInfo.setMobile(mobile);
 			cardInfo.setBalance(BigDecimal.ZERO);
 			cardInfo.setStatus(0);

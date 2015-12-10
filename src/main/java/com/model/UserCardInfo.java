@@ -60,7 +60,7 @@ public class UserCardInfo {
         return bank;
     }
 
-    public void setBankname(int bank) {
+    public void setBank(int bank) {
         this.bank = bank;
     }
 

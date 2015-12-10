@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="customerName" property="customername" jdbcType="VARCHAR" />
-    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="BIGINT" />
     <result column="cardNumber" property="cardnumber" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
