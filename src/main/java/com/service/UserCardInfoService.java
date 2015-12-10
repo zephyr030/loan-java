@@ -47,6 +47,15 @@ public class UserCardInfoService extends BaseService{
     }
 
     /**
+     * 根据条件查询单个账户信息
+     * @param searchable
+     * @return
+     */
+    public UserCardInfo selectUserCardInfoBySearchable(Searchable searchable) {
+        return cardInfoMapper.selectBySearchable(searchable);
+    }
+
+    /**
      * 新增一条用户账户信息
      * @param cardInfo
      * @return
@@ -67,19 +76,21 @@ public class UserCardInfoService extends BaseService{
      */
     public AjaxResponse validateCardInfo(String customerName,
                                           String cardNumber,
-                                          String bankName,
+                                          Integer bank,
                                           String mobile,
                                           UserCardInfo cardInfo,
-                                         int length) {
+                                          int length) {
         AjaxResponse ajaxResponse = null;
         if(!cardInfo.getCustomername().equals(customerName)) {
             ajaxResponse = AjaxResponse.fail("你输入的账户姓名有误");
         }else if(length != 4 && !cardInfo.getCardnumber().equals(cardNumber)) {
             ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");
-        }else if(cardInfo.getBank() != Integer.valueOf(bankName)) {
+        }else if(cardInfo.getBank() != bank) {
             ajaxResponse = AjaxResponse.fail("你输入的开户行信息有误");
         }else if(!cardInfo.getMobile().equals(mobile)) {
             ajaxResponse = AjaxResponse.fail("你输入的手机号信息有误");
+        }else if(cardInfo.getStatus() == 2) {
+            ajaxResponse = AjaxResponse.fail("你的账号已被冻结，请联系管理员解禁");
         }else if(length == 4) {
             if(cardNumber.length() != 4) {
                 ajaxResponse = AjaxResponse.fail("你输入的银行卡号有误");

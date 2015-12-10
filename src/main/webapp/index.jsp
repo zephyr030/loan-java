@@ -13,7 +13,7 @@
 <div class="main">
     <h1>国际期货操盘—充值提现系统</h1>
     <div class="mainctn">
-        <a href="${path}/user/recharge?account=" class="main_btn1">我要充值</a>
+        <a href="${path}/user/recharge" class="main_btn1">我要充值</a>
         <a href="${path}/user/withdraw/index" class="main_btn2">我要提现</a>
     </div>
 </div>

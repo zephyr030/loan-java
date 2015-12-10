@@ -49,19 +49,14 @@ public class UserRechargeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user/recharge", method = RequestMethod.GET)
-	public String recharge(@RequestParam(value="account") String account,
-						    Model model) {
-	//	account = Security.decrypt(account);
-		if(!StringUtils.isEmpty(account)) {
-			UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
-			model.addAttribute("cardInfo", cardInfo);
-		}
+	public String recharge(Model model) {
 		Searchable searchable = new Searchable();
 		searchable.addCondition(new Condition("typeId", SearchOperator.eq, "BANK_ID"));
 		searchable.addCondition(new Condition("available", SearchOperator.eq, 1));
 		List<SysTableCode> bankList = codeService.selectBankList(searchable);
 		model.addAttribute("bankList", bankList);
 		return "/recharge/recharge";
+
 	}
 
 	/**
@@ -78,9 +73,9 @@ public class UserRechargeController extends BaseController {
 	public Object recharge(@RequestParam(value="account", required=true) String account,
 						    @RequestParam(value="customerName", required=true) String customerName,
 						    @RequestParam(value="cardNumber", required=true) String cardNumber,
-						    @RequestParam(value="bank", required=true) int bank,
+						    @RequestParam(value="bank", required=true) Integer bank,
 						    @RequestParam(value="mobile", required=true) String mobile) {
-		AjaxResponse ajaxResponse = checkRechargeInfo(account,customerName,cardNumber,bank + "",mobile);
+		AjaxResponse ajaxResponse = checkRechargeInfo(account,customerName,cardNumber,mobile);
 		if(ajaxResponse != null) {
 			return ajaxResponse.toJsonString();
 		}
@@ -89,9 +84,12 @@ public class UserRechargeController extends BaseController {
 			2.如果有用户则验证其他信息是否一致
 			3.如果没有则新增客户
 		 */
-		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+		Searchable searchable = new Searchable();
+		searchable.addCondition(new Condition("account", SearchOperator.eq, account));
+		searchable.addCondition(new Condition("status", SearchOperator.ne, 0));
+		UserCardInfo cardInfo = cardInfoService.selectUserCardInfoBySearchable(searchable);
 		if(cardInfo != null) {
-			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bank + "",mobile,cardInfo,0);
+			ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bank,mobile,cardInfo,0);
 			if(ajaxResponse != null) {
 				return ajaxResponse.toJsonString();
 			}
@@ -278,14 +276,12 @@ public class UserRechargeController extends BaseController {
 	 * @param account
 	 * @param customerName
 	 * @param cardNumber
-	 * @param bankName
 	 * @param mobile
      * @return
      */
 	private AjaxResponse checkRechargeInfo(String account,
 										    String customerName,
 										    String cardNumber,
-										    String bankName,
 										    String mobile
 										   ) {
 		AjaxResponse ajaxResponse = null;
@@ -295,8 +291,6 @@ public class UserRechargeController extends BaseController {
 			ajaxResponse = AjaxResponse.fail("您输入的银行卡姓名格式有误");
 		}else if(StringUtils.isEmpty(cardNumber) || cardNumber.length() > 30) {
 			ajaxResponse = AjaxResponse.fail("您输入的银行卡号格式有误");
-		}else if(StringUtils.isEmpty(bankName) || bankName.length() > 30) {
-			ajaxResponse = AjaxResponse.fail("您输入的开户行信息格式有误");
 		}else if(StringUtils.isEmpty(mobile) || !StringUtils.isMobile(mobile)) {
 			ajaxResponse = AjaxResponse.fail("您输入的手机号格式有误");
 		}

@@ -71,7 +71,7 @@ public class WithDrawController {
     public Object withdraw(@RequestParam(value="account", required=true) String account,
                             @RequestParam(value="customerName", required=true) String customerName,
                             @RequestParam(value="cardNumber", required=true) String cardNumber,
-                            @RequestParam(value="bankName", required=true) String bankName,
+                            @RequestParam(value="bankName", required=true) Integer bank,
                             @RequestParam(value="mobile", required=true) String mobile) {
         if(StringUtils.isEmpty(account) || account.length() > 30) {
             return AjaxResponse.fail("您输入的超盘账号格式有误").toJsonString();
@@ -82,7 +82,7 @@ public class WithDrawController {
             return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
         }
 
-        AjaxResponse ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bankName,mobile,cardInfo, 4);
+        AjaxResponse ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bank,mobile,cardInfo, 4);
         if(ajaxResponse != null) {
             return ajaxResponse.toJsonString();
         }
@@ -190,7 +190,8 @@ public class WithDrawController {
             }else {
                 //冻结账号
                 cardInfo.setStatus(2);
-
+                cardInfoService.updateUserCardInfo(cardInfo);
+                return AjaxResponse.fail("你连续5次验证码输入有误，账号将被冻结，请联系客服解禁！").toJsonString();
             }
         }
         return null;

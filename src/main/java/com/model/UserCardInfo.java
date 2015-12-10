@@ -13,7 +13,7 @@ public class UserCardInfo {
 
     private String customername;
 
-    private int bank;
+    private Integer bank;
 
     private String cardnumber;
 
@@ -56,11 +56,11 @@ public class UserCardInfo {
         this.customername = customername == null ? null : customername.trim();
     }
 
-    public int getBank() {
+    public Integer getBank() {
         return bank;
     }
 
-    public void setBank(int bank) {
+    public void setBank(Integer bank) {
         this.bank = bank;
     }
 

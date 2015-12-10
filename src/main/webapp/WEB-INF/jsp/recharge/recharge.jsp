@@ -46,7 +46,7 @@
 					<label>开户银行：</label>
 					<select id="bank">
 						<c:forEach var="obj" items="${bankList}" varStatus="this">
-							<option value="${obj.id}" <c:if test="${obj.id == cardInfo.bankname}">selected="selected"</c:if>>${obj.text}</option>
+							<option value="${obj.id}" <c:if test="${obj.id == cardInfo.bank}">selected="selected"</c:if>>${obj.text}</option>
 						</c:forEach>
 					</select>
 					<em>交易软件登录时所用的账号</em>

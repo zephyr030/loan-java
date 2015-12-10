@@ -32,12 +32,12 @@
 			<ul class="cd_i_list cd_m_space">
 				<li>
 					<label>提现验证码：</label>
-					<input type="text" class="cd_i_code"/>
+					<input type="text" class="cd_i_code" maxlength="6" id="v_code"/>
 					<a href="javascript:void(0)" id="sendMessage">获取验证码</a>
 				</li>
 			</ul>
 			<input type="hidden" value="${account}" id="account" />
-			<div class="cd_btn"><a href="">确认提现</a></div>
+			<div class="cd_btn"><a href="javascript:void(0)" id="validateBn">确认提现</a></div>
 		</div>
 	</div>
 </div>

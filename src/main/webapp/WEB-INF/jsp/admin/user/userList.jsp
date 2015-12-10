@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="${path}/static/Ace/css/ace.css" />
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.contentWindow.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/admin/user/userList.js" ></script>
 </head>
 <body class="no-skin" style="background-color: white;">
 <div class="row">
@@ -66,23 +65,21 @@
                                 <td>${obj.createtime}</td>
                                 <td>${obj.balance}</td>
                                 <td>
-                                    <c:if test="${obj.status == 0}">
-                                        未激活
-                                    </c:if>
-                                    <c:if test="${obj.status == 1}">
-                                        已激活
-                                    </c:if>
-                                    <c:if test="${obj.status == 2}">
-                                        已锁定
-                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${obj.status == 0}">未激活</c:when>
+                                        <c:when test="${obj.status == 1}">已激活</c:when>
+                                        <c:otherwise>
+                                            已锁定
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                                 <td>
                                     <div class="hidden-sm hidden-xs action-buttons">
                                         <c:if test="${obj.status == 1}">
-                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},2,'${obj.name}')">锁定</a>
+                                            <a class="red" href="javascript:;" onclick="">锁定</a>
                                         </c:if>
                                         <c:if test="${obj.status == 2}">
-                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},1,'${obj.name}')">解锁</a>
+                                            <a class="red" href="javascript:;" onclick="">解锁</a>
                                         </c:if>
                                     </div>
                                 </td>

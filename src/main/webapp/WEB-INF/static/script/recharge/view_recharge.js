@@ -12,7 +12,7 @@ function recharge() {
     var bank = $.trim($("#bank").val());
     var mobile = $.trim($("#mobile").val());
 
-    if(!validateInfo(account,customerName,cardNumber,bank,mobile)) {
+    if(!validateInfo(account,customerName,cardNumber,mobile)) {
         return;
     }
 
@@ -42,7 +42,7 @@ function recharge() {
     });
 }
 
-function validateInfo(account, customerName, cardNumber, bank, mobile) {
+function validateInfo(account, customerName, cardNumber, mobile) {
     if(!account) {
         alert("请输入操盘账号信息");
         $("#account").focus();
