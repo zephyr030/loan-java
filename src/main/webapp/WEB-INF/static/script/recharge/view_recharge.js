@@ -9,10 +9,10 @@ function recharge() {
     var account = $.trim($("#account").val());
     var customerName = $.trim($("#customerName").val());
     var cardNumber = $.trim($("#cardNumber").val());
-    var bankName = $.trim($("#bankName").val());
+    var bank = $.trim($("#bank").val());
     var mobile = $.trim($("#mobile").val());
 
-    if(!validateInfo(account,customerName,cardNumber,bankName,mobile)) {
+    if(!validateInfo(account,customerName,cardNumber,bank,mobile)) {
         return;
     }
 
@@ -26,7 +26,7 @@ function recharge() {
             account: account,
             customerName: customerName,
             cardNumber: cardNumber,
-            bankName: bankName,
+            bank: bank,
             mobile: mobile
         },
         error: function(request) {
@@ -42,7 +42,7 @@ function recharge() {
     });
 }
 
-function validateInfo(account, customerName, cardNumber, bankName, mobile) {
+function validateInfo(account, customerName, cardNumber, bank, mobile) {
     if(!account) {
         alert("请输入操盘账号信息");
         $("#account").focus();
