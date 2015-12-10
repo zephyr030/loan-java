@@ -157,7 +157,12 @@ public class PayController extends BaseController {
                            HttpServletRequest request,
                            HttpServletResponse response) throws Exception {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
-        TreeMap<String, String> map = EncryUtil.checkDecryptAndSign(data, encryptkey, bbPublicKey, merchantPrivateKey);
+        TreeMap<String, String> map = null;
+        if("1".equals(encryptkey)) {
+            map = EncryUtil.checkMD5Sign(data,md5key);
+        } else {
+            map = EncryUtil.checkDecryptAndSign(data, encryptkey, bbPublicKey, merchantPrivateKey);
+        }
         // 验签通过
         if(map != null) {
             String yb_aeskey = RSA.decrypt(encryptkey, merchantPrivateKey);
