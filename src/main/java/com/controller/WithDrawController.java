@@ -78,12 +78,16 @@ public class WithDrawController {
             return AjaxResponse.fail("您输入的超盘账号格式有误").toJsonString();
         }
 
-        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("account", SearchOperator.eq, account));
+        searchable.addCondition(new Condition("status", SearchOperator.ne, 0));
+        UserCardInfo cardInfo = cardInfoService.selectUserCardInfoBySearchable(searchable);
         if(cardInfo == null) {
             return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
         }
 
         AjaxResponse ajaxResponse = cardInfoService.validateCardInfo(customerName,cardNumber,bank,mobile,cardInfo, 4);
+
         if(ajaxResponse != null) {
             return ajaxResponse.toJsonString();
         }

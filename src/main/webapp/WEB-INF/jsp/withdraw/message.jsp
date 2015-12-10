@@ -32,7 +32,7 @@
 			<ul class="cd_i_list cd_m_space">
 				<li>
 					<label>提现验证码：</label>
-					<input type="text" class="cd_i_code" maxlength="6" id="v_code"/>
+					<input type="text" class="cd_i_code" maxlength="6" id="v_code" style="width: 86px"/>
 					<a href="javascript:void(0)" id="sendMessage">获取验证码</a>
 				</li>
 			</ul>

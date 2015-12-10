@@ -139,9 +139,9 @@
 
   <select id="selectBySearchable" parameterType="Searchable" resultMap="BaseResultMap">
     select a.id, account, customerName, bank, cardNumber, mobile,
-            status, a.createTime, balance, b.text as bankStr
+            status, a.createTime, balance, b.text as banknameStr
     from user_card_info a
-    left join sys_code_table b on a.bank = b.typeCode
+    left join sys_code_table b on a.bank = b.id
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
 
