@@ -206,6 +206,7 @@ public class UserRechargeController extends BaseController {
 			detail.setAmount(new BigDecimal(amount));
 			detail.setRectype(recType);
 			rechargeService.save(detail);
+			request.getSession().setAttribute("detail_id", detail.getId());
 			return "redirect:/pay/view?account=" + account + "&amount=" + amount + "&detailId=" + detail.getId();
 		} else {
 			return "redirect:/user/recharge/bank?account=" + account + "&amount=" + amount + "&recType=" + recType;
@@ -301,7 +302,10 @@ public class UserRechargeController extends BaseController {
 	 * @return
      */
 	@RequestMapping(value = "/user/recharge/success")
-	public String success(@RequestParam(value="account", required=true) String account) {
+	public String success(@RequestParam(value="account", required=true) String account,
+						  HttpServletRequest request) {
+		String orderNo = request.getSession().getAttribute("detail_id") + "";
+		request.setAttribute("orderNo", orderNo);
 		return "/recharge/success";
 	}
 
