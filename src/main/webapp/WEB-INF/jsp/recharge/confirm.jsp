@@ -14,7 +14,7 @@
 <body>
 <div class="cg_mask" style="display:none;"></div>
 <div class="cg_layer" style="display:none;">
-	<div class="cg_l_title"><p>充值提示</p><a href=""><img src="${path}/static/images/icon_03.png"></a></div>
+	<div class="cg_l_title"><p>充值提示</p><a href="javascript:void(0);" onclick="closwMask();"><img src="${path}/static/images/icon_03.png"></a></div>
 	<div class="cg_l_ctn">
 		<img src="${path}/static/images/icon_04.png">
 		<p>请您在新打开的网上银行<br>页面完成付款。<br>充值遇到问题请咨询客服：<br>400-020-0158</p>
@@ -72,6 +72,11 @@
 			$(".cg_layer").show();
 		}
 		return true;
+	}
+
+	function closwMask() {
+		$(".cg_mask").hide();
+		$(".cg_layer").hide();
 	}
 
 //	function confirmInfo() {

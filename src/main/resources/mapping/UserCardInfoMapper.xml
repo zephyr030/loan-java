@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="customerName" property="customername" jdbcType="VARCHAR" />
-    <result column="bankName" property="bankname" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
     <result column="cardNumber" property="cardnumber" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -13,7 +13,7 @@
     <result column="balance" property="balance" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, account, customerName, bankName, cardNumber, mobile, status, createTime, balance
+    id, account, customerName, bank, cardNumber, mobile, status, createTime, balance
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -27,10 +27,10 @@
   </delete>
   <insert id="insert" parameterType="com.model.UserCardInfo" useGeneratedKeys="true" keyProperty="id">
     insert into user_card_info (id, account, customerName, 
-      bankName, cardNumber, mobile, status,
+      bank, cardNumber, mobile, status,
       createTime, balance)
     values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
-      #{bankname,jdbcType=VARCHAR}, #{cardnumber,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{cardnumber,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{balance,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.model.UserCardInfo" >
@@ -45,8 +45,8 @@
       <if test="customername != null" >
         customerName,
       </if>
-      <if test="bankname != null" >
-        bankName,
+      <if test="bank != null" >
+        bank,
       </if>
       <if test="cardnumber != null" >
         cardNumber,
@@ -74,8 +74,8 @@
       <if test="customername != null" >
         #{customername,jdbcType=VARCHAR},
       </if>
-      <if test="bankname != null" >
-        #{bankname,jdbcType=VARCHAR},
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
       </if>
       <if test="cardnumber != null" >
         #{cardnumber,jdbcType=VARCHAR},
@@ -103,8 +103,8 @@
       <if test="customername != null" >
         customerName = #{customername,jdbcType=VARCHAR},
       </if>
-      <if test="bankname != null" >
-        bankName = #{bankname,jdbcType=VARCHAR},
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
       </if>
       <if test="cardnumber != null" >
         cardNumber = #{cardnumber,jdbcType=VARCHAR},
@@ -128,7 +128,7 @@
     update user_card_info
     set account = #{account,jdbcType=VARCHAR},
       customerName = #{customername,jdbcType=VARCHAR},
-      bankName = #{bankname,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
       cardNumber = #{cardnumber,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
@@ -138,10 +138,10 @@
   </update>
 
   <select id="selectBySearchable" parameterType="Searchable" resultMap="BaseResultMap">
-    select a.id, account, customerName, bankName, cardNumber, mobile,
-            status, a.createTime, balance, b.text as banknameStr
+    select a.id, account, customerName, bank, cardNumber, mobile,
+            status, a.createTime, balance, b.text as bankStr
     from user_card_info a
-    left join sys_code_table b on a.bankName = b.typeCode
+    left join sys_code_table b on a.bank = b.typeCode
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
 

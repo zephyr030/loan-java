@@ -3,8 +3,6 @@ package com.service;
 import com.alibaba.fastjson.JSON;
 import com.dao.SysPayLogMapper;
 import com.model.SysPayLog;
-import com.pay.EncryUtil;
-import com.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,30 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 /**
  * Created by Administrator on 2015/12/7.
  */
 @Service
 public class BBPayApiService extends BaseService {
-    //获取配置文件payapi/properties
-    private ResourceBundle resb = ResourceBundle.getBundle("payapi");
-    //币币支付请求地址
-    private String payUrl = resb.getString("payapi.payUrl");
-    //币币退款请求地址
-    private String payOutUrl = resb.getString("payapi.payOutUrl");
-    //币币对账单下载请求地址
-    private String fundsSettle = resb.getString("payapi.fundsSettle");
 
-    // 商户账户编号
-    private String merchantaccount = resb.getString("payapi.merchantaccount");
-    // 从配置文件读取币币的公钥
-    private String bbPublicKey = resb.getString("payapi.bb_publickey");
-
-    // 从配置文件读取商户自己的私钥
-    private String merchantPrivateKey = resb.getString("payapi.merchant_privatekey");
 
     /* 生成订单orderId */
     //protected static final String getOrderSql = "EXEC [Wit_BaseInfo].[dbo].[dc_getOrderID] ?,?,?";
@@ -54,8 +35,6 @@ public class BBPayApiService extends BaseService {
         paramMap.remove("service");
         long orderID = getOrderID(interfaceName, paramMap, remark);
         paramMap.put("orderNo", String.valueOf(orderID));
-        String sign = EncryUtil.handleRSA(new TreeMap<String, Object>(paramMap), merchantPrivateKey);
-        paramMap.put("sign", sign);
     }
 
     /**
