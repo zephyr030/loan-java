@@ -83,7 +83,7 @@ public class PayController extends BaseController {
         map.put("userip", getIpAddr(request));           //用户IP
         map.put("userua", request.getHeader("user-agent"));           //终端UA
         map.put("merrmk", detailId);                //充值记录ID
-        map.put("encry", "1");                      //加密方式字符 0 表示 RSA+AES,1 表示 MD5加密
+        map.put("encry", "0");                      //加密方式字符 0 表示 RSA+AES,1 表示 MD5加密
         bbPayApiService.putOrderID(map, detailId);             // 订单号
 
         PayUtil bbUtil = new PayUtil();
