@@ -45,7 +45,7 @@
 				<li class="cd_c_space"><label>充值金额：</label><a href="#">￥${amount}</a></li>
 				<li><label>充值渠道：</label><span>${recType}</span></li>
 				<li><label>开户姓名：</label><span>${cardInfo.customername}</span></li>
-				<li><label>开户银行：</label><span>${cardInfo.bankname}</span></li>
+				<li><label>开户银行：</label><span>${cardInfo.bank}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.cardnumber}</span></li>
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
 				<li><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>
@@ -118,19 +118,19 @@
     <title>咿呀网管理系统</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
 	<meta name="keywords" content="咿呀网,后台管理系统,开源系统,后台源码下载">
 	<meta name="description" content="咿呀网后台管理系统，是使用Java平台,采用主流SpringMVC+Mybatis技术，数据库使用免费MYSQL,前端使用Jquery和Easyui框架.系统完全开源，欢迎下载">
 	<%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
   </head>
-  
+
   <body>
 
 		<div style="left: 200px;top: 200px;border: 1px">
 			超盘账号<input type="text" value="${cardInfo.account}" disabled="disabled"/><br/>
 			姓名<input type="text" value="${cardInfo.customername}" disabled="disabled"/><br/>
 			银行卡号<input type="text" value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
-			开户行<input type="text" value="${cardInfo.bankname}" disabled="disabled"/><br/>
+			开户行<input type="text" value="${cardInfo.bank}" disabled="disabled"/><br/>
 			手机号<input type="text" value="${cardInfo.mobile}" disabled="disabled"/><br/>
 			充值金额<input type="text" value="${amount}" disabled="disabled"/><br/>
 			充值方式<input type="text" name="recType" value="${recType}" disabled="disabled"/><br/>
