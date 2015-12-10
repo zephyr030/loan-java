@@ -33,8 +33,8 @@ public class BBPayApiService extends BaseService {
     public void putOrderID(Map<String, Object> paramMap, String remark) {
         String interfaceName = paramMap.get("service") == null ? " " : paramMap.get("service").toString();
         paramMap.remove("service");
-        long orderID = getOrderID(interfaceName, paramMap, remark);
-        paramMap.put("orderNo", String.valueOf(orderID));
+        String orderID = getOrderID(interfaceName, paramMap, remark);
+        paramMap.put("order", orderID);
     }
 
     /**
@@ -45,7 +45,7 @@ public class BBPayApiService extends BaseService {
      * @return 订单号
      */
     @Transactional(propagation=Propagation.REQUIRES_NEW)
-    public long getOrderID(String interfaceName, Map params,String remark) {
+    public String getOrderID(String interfaceName, Map params,String remark) {
         long orderNo = System.currentTimeMillis();
         SysPayLog sysPayLog = new SysPayLog();
         sysPayLog.setOrderno(orderNo);
@@ -55,7 +55,7 @@ public class BBPayApiService extends BaseService {
         sysPayLog.setData(JSON.toJSONString(params));
         sysPayLog.setRemark(remark);
         sysPayLogMapper.insert(sysPayLog);
-        return orderNo;
+        return "BB" + orderNo;
     }
 
     /**
