@@ -68,7 +68,7 @@ public class PayController extends BaseController {
 //        map.put("pt", "02");  //02是网上银行
         map.put("transtime", System.currentTimeMillis() + ""); //交易时间
 //        map.put("currency", "1");  //交易币种
-        map.put("amount", amount);    //交易金额
+        map.put("amount", Long.valueOf(amount) * 100);    //交易金额
         map.put("productcategory", "1");  //商品种类
         map.put("productname", "居间币充值");      //商品名称
         map.put("productdesc", "居间币充值");      //商品描述
@@ -84,8 +84,6 @@ public class PayController extends BaseController {
         map.put("merrmk", detailId);                //充值记录ID
         map.put("encry", "0");                      //加密方式字符 0 表示 RSA+AES,1 表示 MD5加密
         bbPayApiService.putOrderID(map, detailId);             // 订单号
-
-        System.out.println(map.get("order"));
 
         PayUtil bbUtil = new PayUtil();
         //调用币币提供的工具包里面的方法，进行组装，加签，加密操作。
