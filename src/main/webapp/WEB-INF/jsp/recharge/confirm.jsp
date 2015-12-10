@@ -45,7 +45,7 @@
 				<li class="cd_c_space"><label>充值金额：</label><a href="#">￥${amount}</a></li>
 				<li><label>充值渠道：</label><span>${recType}</span></li>
 				<li><label>开户姓名：</label><span>${cardInfo.customername}</span></li>
-				<li><label>开户银行：</label><span>${cardInfo.bank}</span></li>
+				<li><label>开户银行：</label><span>${cardInfo.banknameStr}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.cardnumber}</span></li>
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
 				<li><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>

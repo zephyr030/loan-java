@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dao.SysTableCodeMapper;
 import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
@@ -39,6 +40,9 @@ public class UserRechargeController extends BaseController {
 
 	@Autowired
 	private SysTableCodeService codeService;
+
+	@Autowired
+	private SysTableCodeMapper codeMapper;
 
 	/**
 	 * 进入充值页面
@@ -172,6 +176,8 @@ public class UserRechargeController extends BaseController {
 									   @RequestParam(value="recType", required=true) String recType,
 									   Model model) {
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
+		SysTableCode sysTableCode = codeMapper.selectByPrimaryKey(cardInfo.getBank());
+		cardInfo.setBanknameStr(sysTableCode.getTextval());
 		model.addAttribute("cardInfo", cardInfo);
 		model.addAttribute("amount", amount);
 		model.addAttribute("recType", recType);
