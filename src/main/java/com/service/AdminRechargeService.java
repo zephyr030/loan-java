@@ -61,4 +61,12 @@ public class AdminRechargeService extends BaseService{
         String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ?,status = 1 where id = ?";
         return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,id});
     }
+
+    //会员列表
+    public PageInfo userList(Searchable searchable,int pageNumber,int pageSize){
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Map<String,Object>> list = userRechargeDetailMapper.userList(searchable);
+        PageInfo page = new PageInfo(list);
+        return page;
+    }
 }

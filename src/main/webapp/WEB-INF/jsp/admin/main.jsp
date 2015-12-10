@@ -58,6 +58,14 @@
     <div class="sidebar responsive" id="sidebar">
         <ul class="nav nav-list" style="top: 0px;">
             <li>
+                <a href="javascript:;" class="dropdown-toggle" onclick="url('userList')">
+                    <i class="menu-icon fa fa-user"></i>
+                    <span class="menu-text">
+                        会员管理
+                    </span>
+                </a>
+            </li>
+            <li>
                 <a href="javascript:;" class="dropdown-toggle" onclick="url('rechargeList')">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">

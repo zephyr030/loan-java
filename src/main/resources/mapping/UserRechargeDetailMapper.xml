@@ -178,4 +178,11 @@
       LEFT JOIN sys_user d ON a.update_uid = d.id
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
+
+  <!-- 用户列表 -->
+  <select id="userList" parameterType="Searchable" resultType="java.util.Map">
+      SELECT a.*,b.text FROM user_card_info a LEFT JOIN sys_code_table b ON a.bankname=b.typeCode
+      <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+  </select>
+
 </mapper>

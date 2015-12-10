@@ -16,4 +16,7 @@ public interface UserRechargeDetailMapper extends BaseMapper<UserRechargeDetail,
 
     //提现列表
     List<Map<String,Object>> drawList(Searchable searchable);
+
+    //用户列表
+    List<Map<String,Object>> userList(Searchable searchable);
 }
