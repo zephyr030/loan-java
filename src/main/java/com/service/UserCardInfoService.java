@@ -60,14 +60,29 @@ public class UserCardInfoService extends BaseService{
      * @param cardInfo
      * @return
      */
-    public int save(UserCardInfo cardInfo) {
+    public AjaxResponse save(UserCardInfo cardInfo) {
         //先删除未激活的记录
         Searchable searchable = new Searchable();
         searchable.addCondition(new Condition("account", SearchOperator.eq, cardInfo.getAccount()));
         searchable.addCondition(new Condition("status", SearchOperator.eq, 0));
         cardInfoMapper.deleteBySearchable(searchable);
+
+        //再判断用户输入的手机号和银行卡号是否已被注册
+//        searchable = new Searchable();
+//        searchable.addCondition(new Condition("mobile", SearchOperator.eq, cardInfo.getMobile()));
+//        UserCardInfo exsitInfo = cardInfoMapper.selectBySearchable(searchable);
+//        if(exsitInfo != null) {
+//            return AjaxResponse.fail("手机号已被其他账户注册使用");
+//        }
+//        searchable = new Searchable();
+//        searchable.addCondition(new Condition("cardnumber", SearchOperator.eq, cardInfo.getCardnumber()));
+//        exsitInfo = cardInfoMapper.selectBySearchable(searchable);
+//        if(exsitInfo != null) {
+//            return AjaxResponse.fail("银行卡号已被其他账户注册使用");
+//        }
         //再添加新的记录
-        return cardInfoMapper.insertSelective(cardInfo);
+        cardInfoMapper.insertSelective(cardInfo);
+        return null;
     }
 
     /**

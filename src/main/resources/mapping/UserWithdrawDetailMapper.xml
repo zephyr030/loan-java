@@ -25,7 +25,7 @@
     delete from user_withdraw_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.model.UserWithdrawDetail" >
+  <insert id="insert" parameterType="com.model.UserWithdrawDetail" useGeneratedKeys="true" keyProperty="id">
     insert into user_withdraw_detail (id, user_id, amount, 
       drawTime, lastUpdateTime, counts, 
       flowNo, update_uid, status
@@ -35,7 +35,7 @@
       #{flowno,jdbcType=VARCHAR}, #{updateUid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.model.UserWithdrawDetail" >
+  <insert id="insertSelective" parameterType="com.model.UserWithdrawDetail" useGeneratedKeys="true" keyProperty="id">
     insert into user_withdraw_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

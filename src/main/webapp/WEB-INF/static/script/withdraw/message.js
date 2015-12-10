@@ -27,6 +27,7 @@ function sendMessage() {
             }else {
                 alert("验证码已发送，请注意查收");
                 wd.isLock = true;
+                $("#sendMessage").addClass("not");
                 setTimeout(timeLeft, 1);
 
             }
@@ -48,6 +49,7 @@ function timeLeft() {
     }else {
         wd.time = 60;
         wd.isLock = false;
+        $("#sendMessage").removeClass("not");
         $("#sendMessage").html("发送验证码");
     }
 }
@@ -80,10 +82,7 @@ function validateCode() {
             if(!data.success) {
                 alert(data.message);
             }else {
-                alert("验证码已发送，请注意查收");
-                wd.isLock = true;
-                setTimeout(timeLeft, 1);
-
+                document.location.href = path + "/user/withdraw/success?flowNo=" + data.data;
             }
         }
     });

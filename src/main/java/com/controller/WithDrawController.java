@@ -6,6 +6,7 @@ import com.dao.util.Searchable;
 import com.model.SysTableCode;
 import com.model.UserCardInfo;
 import com.model.UserMobileMessage;
+import com.model.UserWithdrawDetail;
 import com.service.SysTableCodeService;
 import com.service.UserCardInfoService;
 import com.service.UserMobileMessageService;
@@ -71,7 +72,7 @@ public class WithDrawController {
     public Object withdraw(@RequestParam(value="account", required=true) String account,
                             @RequestParam(value="customerName", required=true) String customerName,
                             @RequestParam(value="cardNumber", required=true) String cardNumber,
-                            @RequestParam(value="bankName", required=true) Integer bank,
+                            @RequestParam(value="bank", required=true) Integer bank,
                             @RequestParam(value="mobile", required=true) String mobile) {
         if(StringUtils.isEmpty(account) || account.length() > 30) {
             return AjaxResponse.fail("您输入的超盘账号格式有误").toJsonString();
@@ -138,8 +139,8 @@ public class WithDrawController {
         searchable.addCondition(new Condition("date",SearchOperator.eq, simpleDateFormat.format(date)));
         searchable.addCondition(new Condition("sendType",SearchOperator.eq, 1));
         UserMobileMessage message = messageService.selectMessage(searchable);
-        if(message != null && message.getTimes() == 5) {
-            AjaxResponse.fail("当天发送次数超过5次，系统拒绝再次发送").toJsonString();
+        if(message != null && message.getTimes() >= 5) {
+            return AjaxResponse.fail("当天发送次数超过5次，系统拒绝再次发送").toJsonString();
         }
 
         //发送6位数验证码
@@ -194,7 +195,25 @@ public class WithDrawController {
                 return AjaxResponse.fail("你连续5次验证码输入有误，账号将被冻结，请联系客服解禁！").toJsonString();
             }
         }
-        return null;
+
+        UserWithdrawDetail detail = new UserWithdrawDetail();
+        detail.setUserId(cardInfo.getId());
+        detail.setAmount(cardInfo.getBalance());
+        detail.setDrawtime(new Date());
+        detail.setStatus(0);
+
+        long flowNo = withdrawService.save(detail);
+        AjaxResponse response =AjaxResponse.success();
+        response.setData(flowNo);
+        return response.toJsonString();
+    }
+
+
+    @RequestMapping("/success")
+    public String success(@RequestParam(value="flowNo", required=true) String flowNo,
+                           Model model) {
+        model.addAttribute("flowNo", flowNo);
+        return "/withdraw/success";
     }
 
     /**

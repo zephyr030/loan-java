@@ -16,6 +16,7 @@
         <a href="${path}/user/recharge" class="main_btn1">我要充值</a>
         <a href="${path}/user/withdraw/index" class="main_btn2">我要提现</a>
     </div>
+    <div class="main_agree"><input type="checkbox"><span>我已经阅读并完全同意</span><a href="#"  class="link">《充值须知》</a></div>
 </div>
 </body>
 </html>

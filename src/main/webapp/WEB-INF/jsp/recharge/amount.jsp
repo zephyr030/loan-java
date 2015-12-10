@@ -18,15 +18,15 @@
 		<img src="${path}/static/images/logo.png">
 		<img src="${path}/static/images/icon.png">
 		<em>自助充值</em>
-		<a href=""><< 返回首页</a>
+		<a href="${path}/"><< 返回首页</a>
 	</div>
 	<div class="cd_main">
 		<ul class="cd_step cd_g_step">
-			<li class="on"><a href="javascript:void(0)">1</a><i></i><p>填写账户信息</p></li>
-			<li class="on"><a href="javascript:void(0)">2</a><i></i><p>填写充值金额</p></li>
-			<li><a href="javascript:void(0)">3</a><i></i><p>确认充值信息</p></li>
-			<li><a href="javascript:void(0)">4</a><i></i><p>前往充值</p></li>
-			<li><a href="javascript:void(0)">5</a><i></i><p>充值成功</p></li>
+			<li class="on"><a>1</a><i></i><p>填写账户信息</p></li>
+			<li class="on"><a>2</a><i></i><p>填写充值金额</p></li>
+			<li><a>3</a><i></i><p>确认充值信息</p></li>
+			<li><a>4</a><i></i><p>前往充值</p></li>
+			<li><a>5</a><i></i><p>充值成功</p></li>
 		</ul>
 		<form id="amountForm" action="${path}/user/recharge/confirm" method="POST">
 		<div class="cd_list cdg_m_list">

@@ -19,7 +19,7 @@
 		<img src="${path}/static/images/logo.png">
 		<img src="${path}/static/images/icon.png">
 		<em>自助提现</em>
-		<a href=""><< 返回首页</a>
+		<a href="${path}/"><< 返回首页</a>
 	</div>
 	<div class="cd_main">
 		<ul class="cd_step">

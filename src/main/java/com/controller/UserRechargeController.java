@@ -94,6 +94,7 @@ public class UserRechargeController extends BaseController {
 				return ajaxResponse.toJsonString();
 			}
 		}else {
+
 			/* 新增记录时，考虑到用户有第一次录入未激活的情况（未激活的原因通常为输入信息有误），
 			 * 所以添加前先将未激活的记录删除掉，再重新添加
 			 */
@@ -105,7 +106,10 @@ public class UserRechargeController extends BaseController {
 			cardInfo.setMobile(mobile);
 			cardInfo.setBalance(BigDecimal.ZERO);
 			cardInfo.setStatus(0);
-			cardInfoService.save(cardInfo);
+			ajaxResponse = cardInfoService.save(cardInfo);
+			if(ajaxResponse != null) {
+				return ajaxResponse.toJsonString();
+			}
 		}
 		//添加成功后，将account值传回到页面，用于填写金额使用
 		ajaxResponse = AjaxResponse.success();
@@ -150,13 +154,6 @@ public class UserRechargeController extends BaseController {
 			return AjaxResponse.fail("你选择的充值方式有误").toJsonString();
 		}
 
-//		//创建新的充值申请记录
-//		UserRechargeDetail rechargeDetail = new UserRechargeDetail();
-//		rechargeDetail.setUserId(cardInfo.getId());
-//		rechargeDetail.setAmount(new BigDecimal(amount));
-//		rechargeDetail.setRectype(recType);
-
-//		rechargeService.save(rechargeDetail);
 		return AjaxResponse.success("操作成功").toJsonString();
 	}
 

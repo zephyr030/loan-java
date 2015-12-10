@@ -23,11 +23,11 @@
 	</div>
 	<div class="cd_main">
 		<ul class="cd_step cd_g_step">
-			<li class="on"><a href="javascript:void(0)">1</a><i></i><p>填写账户信息</p></li>
-			<li><a href="javascript:void(0)">2</a><i></i><p>填写充值金额</p></li>
-			<li><a href="javascript:void(0)">3</a><i></i><p>确认充值信息</p></li>
-			<li><a href="javascript:void(0)">4</a><i></i><p>前往充值</p></li>
-			<li><a href="javascript:void(0)">5</a><i></i><p>充值成功</p></li>
+			<li class="on"><a>1</a><i></i><p>填写账户信息</p></li>
+			<li><a>2</a><i></i><p>填写充值金额</p></li>
+			<li><a>3</a><i></i><p>确认充值信息</p></li>
+			<li><a>4</a><i></i><p>前往充值</p></li>
+			<li><a>5</a><i></i><p>充值成功</p></li>
 		</ul>
 		<div class="cd_list">
 			<h2>请按要求填写以下信息：<i>（如果是第二次充值，请务必与首次资料一致）</i></h2>
