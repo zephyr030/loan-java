@@ -75,8 +75,6 @@
                                     <c:if test="${obj.status == 2}">
                                         已锁定
                                     </c:if>
-
-
                                 </td>
                                 <td>
                                     <div class="hidden-sm hidden-xs action-buttons">
