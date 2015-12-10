@@ -31,7 +31,7 @@
                             <span class="red">Ace</span>
                             <span class="white" id="id-text2">中间商管理平台</span>
                         </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+                        <h4 class="blue" id="id-company-text">&copy; 上海信闳投资</h4>
                     </div>
 
                     <div class="space-6"></div>
