@@ -43,19 +43,14 @@
 			<ul class="cd_m_list">
 				<li><label>操盘账户：</label><span>${cardInfo.account}</span></li>
 				<li class="cd_c_space"><label>充值金额：</label><a href="#">￥${amount}</a></li>
-				<li><label>充值渠道：</label><span>
-					<c:if test="${recType == 'A01'}">网银充值</c:if>
-					<c:if test="${recType == 'A02'}">银行转账</c:if>
-				</span></li>
+				<li><label>充值渠道：</label><span><c:if test="${'A01' eq recType}">网银充值</c:if><c:if test="${'A02' eq recType}">银行转账</c:if></span></li>
 				<li><label>开户姓名：</label><span>${cardInfo.customername}</span></li>
 				<li><label>开户银行：</label><span>${cardInfo.banknameStr}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.cardnumber}</span></li>
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
 				<li><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>
 			</ul>
-			<div class="cd_m_btn">
-				<a href="javascript:history.go(-1);" class="cm_m_up" id="backBn">上一步</a>
-				<a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" <c:if test="${'A01' eq recType}">target="_blank"</c:if> onclick="return confirm();">下一步</a></div>
+			<div class="cd_m_btn"><a href="javascript:void(0);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" <c:if test="${'A01' eq recType}">target="_blank"</c:if> onclick="return confirm();">下一步</a></div>
 		</div>
 	</div>
 </div>
@@ -84,7 +79,106 @@
 		$(".cg_layer").hide();
 	}
 
+//	function confirmInfo() {
+//		var account = $("#account").val();
+//
+//		$.ajax({
+//			cache: false,
+//			async: false,
+//			type: "GET",
+//			dataType: "json",
+//			url:path + "/user/recharge/confirm/info",
+//			data:{
+//				account: account
+//			},
+//			error: function(request) {
+//				alert("Connection error");
+//			},
+//			success: function(data) {
+//				if(!data.success) {
+//					alert(data.message);
+//				}else {
+//					$("#confirmForm").submit();
+//				}
+//			}
+//		});
+//	}
 
+	function goBack() {
+		var account = $.trim($("#account").val());
+		document.location.href = path + '/user/recharge?account=' + account;
+	}
 </script>
 </html>
 
+<!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>咿呀网管理系统</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta name="keywords" content="咿呀网,后台管理系统,开源系统,后台源码下载">
+	<meta name="description" content="咿呀网后台管理系统，是使用Java平台,采用主流SpringMVC+Mybatis技术，数据库使用免费MYSQL,前端使用Jquery和Easyui框架.系统完全开源，欢迎下载">
+	<%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
+  </head>
+
+  <body>
+
+		<div style="left: 200px;top: 200px;border: 1px">
+			超盘账号<input type="text" value="${cardInfo.account}" disabled="disabled"/><br/>
+			姓名<input type="text" value="${cardInfo.customername}" disabled="disabled"/><br/>
+			银行卡号<input type="text" value="${cardInfo.cardnumber}" disabled="disabled"/><br/>
+			开户行<input type="text" value="${cardInfo.bank}" disabled="disabled"/><br/>
+			手机号<input type="text" value="${cardInfo.mobile}" disabled="disabled"/><br/>
+			充值金额<input type="text" value="${amount}" disabled="disabled"/><br/>
+			充值方式<input type="text" name="recType" value="${recType}" disabled="disabled"/><br/>
+			<input type="button" id="nextBn" value="下一步"/> &nbsp;&nbsp;
+			<input type="button" id="backBn" value="重填"/><br/>
+		</div>
+
+		<form action="${path}/user/recharge/bank" id="confirmForm" method="post">
+			<input type="hidden" id="account" name="account" value="${cardInfo.account}"/>
+			<input type="hidden" id="amount" name="amount" value="${amount}"/>
+			<input type="hidden" id="recType" name="recType" value="${recType}"/>
+		</form>
+  </body>
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$("#nextBn").click(confirmInfo);
+		$("#backBn").click(goBack);
+	});
+
+	function confirmInfo() {
+		var account = $("#account").val();
+
+		$.ajax({
+			cache: false,
+			async: false,
+			type: "GET",
+			dataType: "json",
+			url:path + "/user/recharge/confirm/info",
+			data:{
+				account: account
+			},
+			error: function(request) {
+				alert("Connection error");
+			},
+			success: function(data) {
+				if(!data.success) {
+					alert(data.message);
+				}else {
+					$("#confirmForm").submit();
+				}
+			}
+		});
+	}
+
+	function goBack() {
+		var account = $.trim($("#account").val());
+		document.location.href = path + '/user/recharge?account=' + account;
+	}
+  </script>
+</html>
+-->
