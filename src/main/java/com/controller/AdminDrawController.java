@@ -47,6 +47,10 @@ public class AdminDrawController {
                            @RequestParam(required = false,defaultValue = "") String startTime,
                            @RequestParam(required = false,defaultValue = "") String endTime,
                            HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
         Searchable searchable = new Searchable();
         if(!account.equals("")){
             searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));
@@ -152,6 +156,10 @@ public class AdminDrawController {
                            @RequestParam(required = false,defaultValue = "") String stTime,
                            @RequestParam(required = false,defaultValue = "") String enTime,
                            HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
         Searchable searchable = new Searchable();
         if(!account.equals("")){
             searchable.addCondition(new Condition("b.account", SearchOperator.eq, account));

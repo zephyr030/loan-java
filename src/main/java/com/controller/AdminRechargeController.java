@@ -49,6 +49,10 @@ public class AdminRechargeController {
                                 @RequestParam(required = false,defaultValue = "") String startTime,
                                 @RequestParam(required = false,defaultValue = "") String endTime,
                                HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
         Searchable searchable = new Searchable();
         if(type > 0){
             searchable.addCondition(new Condition("recType", SearchOperator.eq, type==1?"A01":"A02"));
@@ -173,6 +177,10 @@ public class AdminRechargeController {
                                    @RequestParam(required = false,defaultValue = "") String endTime,
                                    @RequestParam(required = false,defaultValue = "0") int status,
                                    HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
         Searchable searchable = new Searchable();
         if(type > 0){
             searchable.addCondition(new Condition("a.recType", SearchOperator.eq, type==1?"A01":"A02"));

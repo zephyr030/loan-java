@@ -4,6 +4,7 @@ import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
+import com.model.SysUser;
 import com.service.AdminRechargeService;
 import com.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,10 @@ public class AdminUserController {
     public String userList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
                            @RequestParam(required = false,defaultValue = "") String account,
                            HttpServletRequest request){
-
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
         Searchable searchable = new Searchable();
         if(account != null && !account.equals("")){
             Condition con1 = new Condition("account",SearchOperator.eq,account);
