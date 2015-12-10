@@ -181,7 +181,7 @@
 
   <!-- 用户列表 -->
   <select id="userList" parameterType="Searchable" resultType="java.util.Map">
-      SELECT a.*,b.text FROM user_card_info a LEFT JOIN sys_code_table b ON a.bank=b.typeCode
+      SELECT a.*,b.text FROM user_card_info a LEFT JOIN sys_code_table b ON a.bank=b.id
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
   </select>
 

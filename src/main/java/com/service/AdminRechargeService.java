@@ -51,15 +51,15 @@ public class AdminRechargeService extends BaseService{
     }
 
     //回填充值信息
-    public int reLoadCharge(long id,String fowNo,String time){
-        String sql = "update user_recharge_detail set flowNo = ?,actTime = ?,status = 1 where id = ?";
-        return jdbcTemplate.update(sql,new Object[]{fowNo,time,id});
+    public int reLoadCharge(long id,String fowNo,String time,long userId){
+        String sql = "update user_recharge_detail set flowNo = ?,actTime = ?,status = 1,update_uid = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{fowNo,time,id,userId});
     }
 
     //回填提现信息
-    public int reloadDraw(long id,int counts,Double money,String bankNo){
-        String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ?,status = 1 where id = ?";
-        return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,id});
+    public int reloadDraw(long id,int counts,Double money,String bankNo,long userId){
+        String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ?,status = 1,update_uid = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,id,userId});
     }
 
     //会员列表

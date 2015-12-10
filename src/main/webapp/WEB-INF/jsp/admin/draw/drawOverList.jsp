@@ -20,28 +20,30 @@
 <div class="row">
     <div class="col-xs-12">
         <form action="drawOverList" id="form" name="form" method="post">
-            <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
+            <input type="text" name="account" value="${account}" placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
             <input type="text" name="flowNo" value="${flowNo}" style="margin-left: 12px;"  placeholder="银行单号"/>
             <input type="text" name="counts" value="${counts}" style="margin-left: 12px;"  placeholder="交易手数"/>
-
+            <p style="margin-top: 5px;">
+            提现金额:
             <input type="text" name="smoney" value="${smoney}" style="margin-left: 12px;"  placeholder="起始金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
-            />
-            --
+            />—
             <input type="text" name="emoney" value="${emoney}" placeholder="结束金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
             />
+            提现时间:
             <input type="text" id="startTime" name="startTime" size="16" readonly class="form_datetime" value="${startTime}"
                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d H%:m%' || '#F{$dp.$D(\'endTime\')}'})"
-            />
+            />—
             <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
             />
+            操作时间:
             <input type="text" id="stTime" name="stTime" size="16" readonly class="form_datetime" value="${stTime}"
                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d H%:m%' || '#F{$dp.$D(\'enTime\')}'})"
-            />
+            />—
             <input type="text" id="enTime" name="enTime" size="16" readonly class="form_datetime" value="${enTime}"
                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'stTime\')}'})"
             />
@@ -55,6 +57,7 @@
                     导出
                 </button>
             </a>
+            </p>
         </form>
         <div class="widget-box widget-color-blue2 ui-sortable-handle">
             <!-- 设置table颜色 -->

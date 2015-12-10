@@ -4,6 +4,7 @@ import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
+import com.model.SysUser;
 import com.service.AdminRechargeService;
 import com.utils.Excel;
 import com.utils.ResultUtil;
@@ -190,7 +191,7 @@ public class AdminDrawController {
         request.setAttribute("account",account);
         request.setAttribute("name",name);
         request.setAttribute("flowNo",flowNo);
-        request.setAttribute("counts",counts);
+        request.setAttribute("counts",counts == 0?"":counts);
         request.setAttribute("mobile",mobile);
         request.setAttribute("smoney",smoney);
         request.setAttribute("emoney",emoney);
@@ -290,7 +291,9 @@ public class AdminDrawController {
     public String reloadDraw(@RequestParam(required = false,defaultValue = "0") long id,
                              @RequestParam(required = false,defaultValue = "0") int counts,
                              @RequestParam(required = false,defaultValue = "0") Double money,
-                             @RequestParam(required = false,defaultValue = "") String bankno){
+                             @RequestParam(required = false,defaultValue = "") String bankno,
+                             HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
         Map<String,Object> map = ResultUtil.result();
         try{
             if(id <= 0){
@@ -306,7 +309,7 @@ public class AdminDrawController {
                 map.put("code",4);
                 map.put("msg","请输入银行单号");
             }else{
-                int i = adminRechargeService.reloadDraw(id,counts,money,bankno);
+                int i = adminRechargeService.reloadDraw(id,counts,money,bankno,user.getId());
                 if(i > 0){
                     map.put("code",0);
                     map.put("msg","更新成功");

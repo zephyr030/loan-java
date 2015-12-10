@@ -4,6 +4,7 @@ import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
+import com.model.SysUser;
 import com.service.AdminRechargeService;
 import com.utils.Excel;
 import com.utils.ResultUtil;
@@ -301,7 +302,9 @@ public class AdminRechargeController {
     @ResponseBody
     public String reLoadCharge(@RequestParam(required = false,defaultValue = "0") long id,
                                @RequestParam(required = false,defaultValue = "") String fowNo,
-                               @RequestParam(required = false,defaultValue = "") String time){
+                               @RequestParam(required = false,defaultValue = "") String time,
+                               HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
         Map<String,Object> map = ResultUtil.result();
         try{
             if(id <= 0){
@@ -314,7 +317,7 @@ public class AdminRechargeController {
                 map.put("code",3);
                 map.put("msg","请输入时间");
             }else{
-                int i = adminRechargeService.reLoadCharge(id,fowNo,time);
+                int i = adminRechargeService.reLoadCharge(id,fowNo,time,user.getId());
                 if(i > 0){
                     map.put("code",0);
                     map.put("msg","更新成功");

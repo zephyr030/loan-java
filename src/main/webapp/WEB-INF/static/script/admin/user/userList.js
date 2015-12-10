@@ -9,7 +9,7 @@ function userLock(id,status,name){
     var text = status == 1?"激活":"锁定";
     $.ajax({
         type:"post",
-        url: "login",
+        url: "lock",
         data: {userId:id,status:status},
         dataType: "json",
         success: function(result){

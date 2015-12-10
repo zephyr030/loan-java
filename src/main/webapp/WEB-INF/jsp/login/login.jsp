@@ -49,14 +49,14 @@
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="text" class="form-control" placeholder="Username" id="username" name="username"/>
+                                                    <input type="text" class="form-control" placeholder="用户名" id="username" name="username"/>
                                                     <i class="ace-icon fa fa-user"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password"/>
+                                                    <input type="password" class="form-control" placeholder="密码" id="password" name="password"/>
                                                     <i class="ace-icon fa fa-lock"></i>
                                                 </span>
                                             </label>
@@ -66,7 +66,7 @@
                                             <div class="clearfix">
                                                 <button type="button" class="width-100 pull-right btn btn-sm btn-primary" id="login">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">Login</span>
+                                                    <span class="bigger-110">登录</span>
                                                 </button>
                                             </div>
                                             <div class="space-4"></div>

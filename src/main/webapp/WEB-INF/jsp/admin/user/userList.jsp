@@ -79,10 +79,10 @@
                                 <td>
                                     <div class="hidden-sm hidden-xs action-buttons">
                                         <c:if test="${obj.status == 1}">
-                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},2,'${obj.name}')">锁定</a>
+                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},2,'${obj.customername}')">锁定</a>
                                         </c:if>
                                         <c:if test="${obj.status == 2}">
-                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},1,'${obj.name}')">解锁</a>
+                                            <a class="red" href="javascript:;" onclick="userLock(${obj.id},1,'${obj.customername}')">解锁</a>
                                         </c:if>
                                     </div>
                                 </td>
