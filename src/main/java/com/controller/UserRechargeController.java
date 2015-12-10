@@ -177,7 +177,7 @@ public class UserRechargeController extends BaseController {
 									   Model model) {
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		SysTableCode sysTableCode = codeMapper.selectByPrimaryKey(cardInfo.getBank());
-		cardInfo.setBanknameStr(sysTableCode.getTextval());
+		cardInfo.setBanknameStr(sysTableCode.getText());
 		model.addAttribute("cardInfo", cardInfo);
 		model.addAttribute("amount", amount);
 		model.addAttribute("recType", recType);
