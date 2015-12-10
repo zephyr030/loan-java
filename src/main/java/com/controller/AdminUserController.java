@@ -5,12 +5,15 @@ import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
 import com.service.AdminRechargeService;
+import com.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * 方法描述:用户列表
@@ -49,8 +52,23 @@ public class AdminUserController {
 
     //冻结/解冻
     @RequestMapping("/lock")
-    public String lock(){
-
-        return "";
+    @ResponseBody
+    public String lock(@RequestParam(required = false,defaultValue = "0") long userId,
+                       @RequestParam(required = false,defaultValue = "0") int status){
+        Map<String,Object> map = ResultUtil.result();
+        try{
+            int i = adminRechargeService.lock(userId,status);
+            if(i == 0){
+                map.put("code",1);
+                map.put("msg","操作失败");
+            }else{
+                map.put("msg","操作成功");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","处理异常");
+        }
+        return ResultUtil.toJSON(map);
     }
 }

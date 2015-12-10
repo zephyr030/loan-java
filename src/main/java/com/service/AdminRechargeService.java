@@ -69,4 +69,10 @@ public class AdminRechargeService extends BaseService{
         PageInfo page = new PageInfo(list);
         return page;
     }
+
+    //锁定/解锁会员
+    public int lock(long userId,int status){
+        String sql = "update user_card_info set status = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{status,userId});
+    }
 }
