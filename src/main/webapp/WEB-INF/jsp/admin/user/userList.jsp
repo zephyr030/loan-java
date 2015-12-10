@@ -65,13 +65,9 @@
                                 <td>${obj.createtime}</td>
                                 <td>${obj.balance}</td>
                                 <td>
-                                    <c:choose>
-                                        <c:when test="${obj.status == 0}">未激活</c:when>
-                                        <c:when test="${obj.status == 1}">已激活</c:when>
-                                        <c:otherwise>
-                                            已锁定
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:if test="${obj.status == 0}">未激活</c:if>
+                                    <c:if test="${obj.status == 1}">已激活</c:if>
+                                    <c:if test="${obj.status == 2}">已锁定</c:if>
                                 </td>
                                 <td>
                                     <div class="hidden-sm hidden-xs action-buttons">
