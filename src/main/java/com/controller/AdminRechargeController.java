@@ -287,6 +287,7 @@ public class AdminRechargeController {
         map.put("到账时间", "到账时间");
         map.put("状态", "状态");
         map.put("操作人", "操作人");
+        map.put("备注", "备注");
 
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
         mapKey.put("id", "id");
@@ -302,6 +303,7 @@ public class AdminRechargeController {
         mapKey.put("actTime", "actTime");
         mapKey.put("statusName", "statusName");
         mapKey.put("exeUser", "exeUser");
+        mapKey.put("remark", "remark");
         List<Map<String,Object>> list  = adminRechargeService.rechargeList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
     }

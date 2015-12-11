@@ -199,7 +199,7 @@
   <select id="drawList" parameterType="Searchable" resultType="java.util.Map">
       SELECT a.id,a.drawTime,a.amount,a.counts,a.flowNo,a.lastUpdateTime,a.status,
       b.account,b.customername,c.text as bankname,b.cardnumber,b.mobile,d.username AS exeUser,
-      CASE a.status WHEN 0 THEN '申请' ELSE '已处理' END AS description,
+      CASE a.status WHEN 0 THEN '申请' WHEN 1 THEN '已处理' ELSE '已拒绝' END AS description,
       a.remark as remark
       FROM user_withdraw_detail a
       LEFT JOIN user_card_info b ON a.user_id = b.id

@@ -180,7 +180,7 @@
             </div>
         </div>
     </div>
-    <div id="remarkBox">
+    <div id="remarkBox" class="hidden">
         <div class="control-group" style="text-align:center;">
             <span id="remarkErrorr" class="red"></span>
         </div>

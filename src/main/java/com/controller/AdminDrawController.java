@@ -73,6 +73,7 @@ public class AdminDrawController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.eq, 0));
         PageInfo pageInfo = adminRechargeService.drawList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);
@@ -273,6 +274,8 @@ public class AdminDrawController {
         map.put("交易手数", "交易手数");
         map.put("银行单号", "银行单号");
         map.put("操作人", "操作人");
+        map.put("状态", "状态");
+        map.put("备注", "备注");
 
 
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
@@ -288,6 +291,8 @@ public class AdminDrawController {
         mapKey.put("counts", "counts");
         mapKey.put("flowNo", "flowNo");
         mapKey.put("exeUser", "exeUser");
+        mapKey.put("description", "description");
+        mapKey.put("remark", "remark");
         List<Map<String,Object>> list  = adminRechargeService.drawList(searchable);
         Excel.ExportExcel(request, response, map, mapKey,list);
     }
@@ -324,6 +329,36 @@ public class AdminDrawController {
                     map.put("msg","更新成功");
                 }else{
                     map.put("code",5);
+                    map.put("msg","更新失败");
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","更新信息出现异常");
+        }
+        return ResultUtil.toJSON(map);
+    }
+
+    //拒绝提现
+    @RequestMapping("/refusedDraw")
+    @ResponseBody
+    public String refusedDraw(@RequestParam(required = false,defaultValue = "0") long id,
+                              @RequestParam(required = false,defaultValue = "") String remark,
+                              HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        Map<String,Object> map = ResultUtil.result();
+        try{
+            if(id <= 0){
+                map.put("code",1);
+                map.put("msg","缺少唯一主键");
+            }else{
+                int i = adminRechargeService.refusedDraw(id,user.getId(),remark);
+                if(i > 0){
+                    map.put("code",0);
+                    map.put("msg","更新成功");
+                }else{
+                    map.put("code",2);
                     map.put("msg","更新失败");
                 }
             }

@@ -15,7 +15,7 @@
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.contentWindow.js" ></script>
     <script type="text/javascript" src="${path}/static/script/My97DatePicker/WdatePicker.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/draw/draw.js?v=2222" ></script>
+    <script type="text/javascript" src="${path}/static/script/draw/draw.js?v=3333" ></script>
 </head>
 <body class="no-skin" style="background-color: white;">
     <div class="row">
@@ -89,10 +89,7 @@
                                                 <c:if test="${obj.status == 0}">
                                                     <a class="blue" href="javascript:;" onclick="draw(${obj.id})">提现</a>
                                                 </c:if>
-
-                                                <c:if test="${obj.status == 1}">
-                                                    <a class="red" href="javascript:;" onclick="draw(${obj.id})">修改</a>
-                                                </c:if>
+                                                <a class="red" href="javascript:;" onclick="refusedDraw(${obj.id})">拒绝</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -175,6 +172,18 @@
             <div class="controls">
                 <input type="text" placeholder="请输入银行单号" class="input-xlarge" id="bankNo"/>
                 <p class="help-block red" id="bankNoError" style="display: none;">请输入银行单号</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="remarkBox" class="hidden">
+        <div class="control-group" style="text-align:center;">
+            <span id="remarkErrorr" class="red"></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label">备注</label>
+            <div class="controls">
+                <input type="text" placeholder="备注" class="input-xlarge" id="remark"/>
             </div>
         </div>
     </div>

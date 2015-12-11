@@ -67,6 +67,11 @@ public class AdminRechargeService extends BaseService{
         String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ?,status = 1,update_uid = ? where id = ?";
         return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,userId,id});
     }
+    //拒绝提现
+    public int refusedDraw(long id,long userId,String remark){
+        String sql = "update user_withdraw_detail set status = 2,update_uid = ?,remark = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{userId,remark,id});
+    }
 
     //会员列表
     public PageInfo userList(Searchable searchable,int pageNumber,int pageSize){
