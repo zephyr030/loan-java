@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
 <!DOCTYPE html>
@@ -86,6 +87,7 @@
                             <th><i></i>充值时间</th>
                             <th><i></i>到账时间</th>
                             <th><i></i>状态</th>
+                            <th><i></i>备注</th>
                             <th><i></i>操作人</th>
                         </tr>
                         </thead>
@@ -104,6 +106,14 @@
                                     <td>${obj.recTime}</td>
                                     <td>${obj.actTime}</td>
                                     <td>${obj.statusName}</td>
+                                    <td title="${obj.remark}">
+                                        <c:if test="${fn:length(obj.remark) > 10}">
+                                            ${fn:substring(obj.remark,0,10)}...
+                                        </c:if>
+                                        <c:if test="${fn:length(obj.remark) <= 10}">
+                                            ${obj.remark}
+                                        </c:if>
+                                    </td>
                                     <td>${obj.exeUser}</td>
                                 </tr>
                             </c:forEach>

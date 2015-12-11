@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.contentWindow.js" ></script>
     <script type="text/javascript" src="${path}/static/script/My97DatePicker/WdatePicker.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js" ></script>
+    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js?v=2222" ></script>
 </head>
 <body class="no-skin" style="background-color: white;">
     <div class="row">
@@ -98,6 +99,7 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
                                                 <a class="blue" href="javascript:;" onclick="isSend(${obj.id})">到账</a>
+                                                <a class="red" href="javascript:;" onclick="refused(${obj.id})">拒绝</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -175,6 +177,17 @@
                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d'})"
                 />
                 <p class="help-block red" id="timeError" style="display: none;">请选择时间</p>
+            </div>
+        </div>
+    </div>
+    <div id="remarkBox">
+        <div class="control-group" style="text-align:center;">
+            <span id="remarkErrorr" class="red"></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label">备注</label>
+            <div class="controls">
+                <input type="text" placeholder="备注" class="input-xlarge" id="remark"/>
             </div>
         </div>
     </div>

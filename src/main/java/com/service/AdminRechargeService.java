@@ -56,6 +56,11 @@ public class AdminRechargeService extends BaseService{
         String sql = "update user_recharge_detail set flowNo = ?,actTime = ?,status = 1,update_uid = ? where id = ?";
         return jdbcTemplate.update(sql,new Object[]{fowNo,time,userId,id});
     }
+    //拒绝上账
+    public int refusedRecharge(long id,long userId,String remark){
+        String sql = "update user_recharge_detail set status = 2,update_uid = ?,remark = ? where id = ?";
+        return jdbcTemplate.update(sql,new Object[]{userId,remark,id});
+    }
 
     //回填提现信息
     public int reloadDraw(long id,int counts,Double money,String bankNo,long userId){

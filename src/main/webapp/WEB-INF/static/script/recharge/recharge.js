@@ -16,6 +16,8 @@ function isSend(id){
             var fowNo = top.$("#rechargeNo").val();
             //操作时间
             var time = top.$("#rechargeTime").val();
+            //备注
+            var remark = top.$("#remark").val();
             if(fowNo.length == 0){
                 top.$("#fowError").show();
                 return false;
@@ -46,6 +48,42 @@ function isSend(id){
                 }else {
                     return false;
                 }
+            }
+        },
+        cancelVal: '关闭',
+        cancel: true
+    });
+}
+
+function refused(id){
+    top.art.dialog({
+        content: $("#remarkBox").html(),
+        lock:true,
+        drag:true,
+        opacity:0.1,
+        ok: function () {
+            //备注
+            var remark = top.$("#remark").val();
+            var status = 0;
+            $.ajax({
+                type:"post",
+                url: "refusedRecharge",
+                async: false,
+                data: {id:id,remark:remark},
+                dataType: "json",
+                success: function(result){
+                    if(parseInt(result.code) != 0){
+                        status = 1;
+                        top.$("#remarkErrorr").html("错误提示:"+result.msg);
+                    }else{
+                        status = 0;
+                    }
+                }
+            });
+            if(status == 0){
+                window.location.href = window.location.href;
+            }else {
+                return false;
             }
         },
         cancelVal: '关闭',

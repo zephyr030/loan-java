@@ -342,4 +342,34 @@ public class AdminRechargeController {
         }
         return ResultUtil.toJSON(map);
     }
+
+    //拒绝充值上账
+    @RequestMapping("/refusedRecharge")
+    @ResponseBody
+    public String refusedRecharge(@RequestParam(required = false,defaultValue = "0") long id,
+                               @RequestParam(required = false,defaultValue = "") String remark,
+                               HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        Map<String,Object> map = ResultUtil.result();
+        try{
+            if(id <= 0){
+                map.put("code",1);
+                map.put("msg","缺少唯一主键");
+            }else{
+                int i = adminRechargeService.refusedRecharge(id,user.getId(),remark);
+                if(i > 0){
+                    map.put("code",0);
+                    map.put("msg","更新成功");
+                }else{
+                    map.put("code",2);
+                    map.put("msg","更新失败");
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","更新信息出现异常");
+        }
+        return ResultUtil.toJSON(map);
+    }
 }
