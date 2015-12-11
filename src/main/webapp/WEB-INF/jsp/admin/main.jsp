@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>中间商管理平台</title>
+    <title>居间商管理平台</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
     <meta name="description" content="User login page" />
@@ -25,7 +25,7 @@
         <a href="main" class="navbar-brand">
             <small>
                 <i class="fa fa-leaf"></i>
-                中间商管理平台
+                居间商管理平台
             </small>
         </a>
     </div>

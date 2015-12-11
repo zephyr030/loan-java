@@ -83,7 +83,7 @@ public class AdminRechargeService extends BaseService{
 
     //锁定/解锁会员
     public int lock(long userId,int status){
-        if(status == 0) {
+        if(status == 1) {
             jdbcTemplate.update("DELETE FROM user_mobile_message WHERE mobile = (SELECT mobile FROM user_card_info WHERE id = ?)",new Object[]{userId});
         }
         String sql = "update user_card_info set status = ? where id = ?";
