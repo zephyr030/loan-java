@@ -49,7 +49,7 @@
 							<option value="${obj.id}" <c:if test="${obj.id == cardInfo.bank}">selected="selected"</c:if>>${obj.text}</option>
 						</c:forEach>
 					</select>
-					<em>交易软件登录时所用的账号</em>
+					<em>充值提现都将用该账户</em>
 				</li>
 				<li>
 					<label>银行卡号：</label>

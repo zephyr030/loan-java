@@ -22,7 +22,7 @@
             <li class="on"><a>1</a><i></i><p>填写账户信息</p></li>
             <li class="on"><a>2</a><i></i><p>填写充值金额</p></li>
             <li class="on"><a>3</a><i></i><p>确认充值信息</p></li>
-            <li class="on"><a></a>4</a><i></i><p>前往充值</p></li>
+            <li class="on"><a>4</a><i></i><p>前往充值</p></li>
             <li class="on"><a>5</a><i></i><p>充值成功</p></li>
         </ul>
         <div class="cd_s_list">

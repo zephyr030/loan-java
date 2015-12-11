@@ -39,8 +39,8 @@
 				</li>
 				<li>
 					<label>选择充值通道：</label>
-					<input type="radio" class="radio" name="recType" value="A01" /><i>网银充值</i>
-					<input type="radio" class="radio" name="recType" value="A02" checked="checked"/><i>银行转账</i>
+					<input type="radio" class="radio" name="recType" value="A01" checked="checked" /><i>网银充值</i>
+					<input type="radio" class="radio" name="recType" value="A02" /><i>银行转账</i>
 				</li>
 			</ul>
 			<div class="cd_m_btn cdg_m_btn">

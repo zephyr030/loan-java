@@ -49,7 +49,7 @@
 		<div class="cd_list cdg_m_list  cdg_i_list">
 			<ul class="cd_i_list">
 				<li>
-					<label>充值银行：</label>
+					<label>充值入账银行：</label>
 					<select id="bankId" name="bankId">
 						<c:forEach items="${bankList}" var="obj" varStatus="this">
 							<option value="${obj.typecode}" <c:if test="${obj.typecode == cardInfo.bankname}">selected="selected"</c:if>>${obj.text}</option>

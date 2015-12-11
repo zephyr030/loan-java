@@ -36,7 +36,7 @@
 		<div class="cd_list">
 			<ul class="cd_m_list">
 				<li><label>操盘账户：</label><span>${cardInfo.account}</span></li>
-				<li class="cd_c_space"><label>提现金额：</label><a href="#">所有金额</a></li>
+				<li class="cd_c_space"><label>提现金额：</label><a>所有金额</a></li>
 				<li><label>开户姓名：</label><span>${cardInfo.customername}</span></li>
 				<li><label>开户银行：</label><span>${cardInfo.banknameStr}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.maskCardnumber}</span></li>

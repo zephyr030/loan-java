@@ -42,13 +42,13 @@
 		<div class="cd_list">
 			<ul class="cd_m_list">
 				<li><label>操盘账户：</label><span>${cardInfo.account}</span></li>
-				<li class="cd_c_space"><label>充值金额：</label><a href="#">￥${amount}</a></li>
+				<li class="cd_c_space"><label>充值金额：</label><a>￥${amount}</a></li>
 				<li><label>充值渠道：</label><span><c:if test="${'A01' eq recType}">网银充值</c:if><c:if test="${'A02' eq recType}">银行转账</c:if></span></li>
 				<li><label>开户姓名：</label><span>${cardInfo.customername}</span></li>
 				<li><label>开户银行：</label><span>${cardInfo.banknameStr}</span></li>
 				<li><label>银行卡号：</label><span>${cardInfo.cardnumber}</span></li>
 				<li class="cd_c_space"><label>手机号码：</label><span>${cardInfo.mobile}</span></li>
-				<li><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>
+				<li style="display:none;"><input type="checkbox" checked><span>我已经阅读并完全同意<a href="#" class="link">《充值须知》</a></span></li>
 			</ul>
 			<div class="cd_m_btn"><a href="javascript:history.go(-1);" class="cm_m_up" id="backBn">上一步</a><a href="${path}/user/recharge/confirm/info?account=${cardInfo.account}&recType=${recType}&amount=${amount}" class="cm_m_down" id="nextBn" <c:if test="${'A01' eq recType}">target="_blank"</c:if> onclick="return confirm();">下一步</a></div>
 		</div>

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dao.SysTableCodeMapper;
 import com.dao.util.Condition;
 import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
@@ -47,6 +48,9 @@ public class WithDrawController {
 
     @Autowired
     private UserMobileMessageService messageService;
+
+    @Autowired
+    private SysTableCodeMapper codeMapper;
 
     /**
      * 提现页面
@@ -103,7 +107,8 @@ public class WithDrawController {
     public String confirmInfo(@RequestParam(value="account", required=true) String account,
                                Model model) {
         UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
-
+        SysTableCode sysTableCode = codeMapper.selectByPrimaryKey(cardInfo.getBank());
+        cardInfo.setBanknameStr(sysTableCode.getText());
         model.addAttribute("cardInfo", cardInfo);
         return "/withdraw/confirm";
     }
