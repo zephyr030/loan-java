@@ -29,7 +29,7 @@
                         <h1>
                             <i class="ace-icon fa fa-leaf green"></i>
                             <span class="red">Ace</span>
-                            <span class="white" id="id-text2">中间商管理平台</span>
+                            <span class="white" id="id-text2">居间商管理平台</span>
                         </h1>
                         <h4 class="blue" id="id-company-text">&copy; 上海信闳投资</h4>
                     </div>
