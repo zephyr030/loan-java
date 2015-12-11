@@ -88,7 +88,6 @@
                             <th><i></i>操作人</th>
                         </tr>
                         </thead>
-
                         <tbody>
                         <c:forEach items="${page.list}" var="obj">
                             <tr>

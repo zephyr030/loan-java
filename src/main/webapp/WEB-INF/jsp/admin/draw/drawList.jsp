@@ -89,6 +89,7 @@
                                                 <c:if test="${obj.status == 0}">
                                                     <a class="blue" href="javascript:;" onclick="draw(${obj.id})">提现</a>
                                                 </c:if>
+
                                                 <c:if test="${obj.status == 1}">
                                                     <a class="red" href="javascript:;" onclick="draw(${obj.id})">修改</a>
                                                 </c:if>

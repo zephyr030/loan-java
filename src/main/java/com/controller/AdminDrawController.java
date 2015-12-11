@@ -301,6 +301,7 @@ public class AdminDrawController {
                              @RequestParam(required = false,defaultValue = "0") Double money,
                              @RequestParam(required = false,defaultValue = "") String bankno,
                              HttpServletRequest request){
+
         SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
         Map<String,Object> map = ResultUtil.result();
         try{

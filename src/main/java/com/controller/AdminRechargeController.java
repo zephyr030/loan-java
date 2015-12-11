@@ -212,6 +212,7 @@ public class AdminRechargeController {
         if(status != 3){
             searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
         }
+
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);

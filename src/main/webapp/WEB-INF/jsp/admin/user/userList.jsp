@@ -53,7 +53,6 @@
                             <th><i></i>操作</th>
                         </tr>
                         </thead>
-
                         <tbody>
                         <c:forEach items="${page.list}" var="obj">
                             <tr>
