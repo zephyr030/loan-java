@@ -274,6 +274,8 @@ public class AdminRechargeController {
         if(status > 0){
             searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.ne, "0"));
+
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
         map.put("充值方式", "充值方式");

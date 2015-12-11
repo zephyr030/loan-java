@@ -119,6 +119,7 @@ public class AdminDrawController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("a.drawTime", SearchOperator.lte, endTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.eq, 0));
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
         map.put("账号", "账号");
@@ -262,6 +263,7 @@ public class AdminDrawController {
         if(!enTime.equals("")){
             searchable.addCondition(new Condition("a.lastUpdateTime", SearchOperator.lte, enTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.ne, "0"));
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
         map.put("账号", "账号");
