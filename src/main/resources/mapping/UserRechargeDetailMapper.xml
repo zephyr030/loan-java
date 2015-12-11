@@ -29,7 +29,7 @@
     delete from user_recharge_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.model.UserRechargeDetail" >
+  <insert id="insert" parameterType="com.model.UserRechargeDetail" useGeneratedKeys="true" keyProperty="id">
     insert into user_recharge_detail (id, recType, user_id, 
       flowNo, amount, recTime,
       status, actTime, update_uid,
@@ -42,7 +42,7 @@
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.model.UserRechargeDetail" >
+  <insert id="insertSelective" parameterType="com.model.UserRechargeDetail" useGeneratedKeys="true" keyProperty="id">
     insert into user_recharge_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
