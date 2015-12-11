@@ -22,6 +22,8 @@ public class UserRechargeDetail {
 
     private Integer updateUid;
 
+    private String bborderid;
+
     private String bankId;
 
     private String remark;
@@ -96,6 +98,14 @@ public class UserRechargeDetail {
 
     public void setUpdateUid(Integer updateUid) {
         this.updateUid = updateUid;
+    }
+
+    public String getBborderid() {
+        return bborderid;
+    }
+
+    public void setBborderid(String bborderid) {
+        this.bborderid = bborderid;
     }
 
     public String getBankId() {
