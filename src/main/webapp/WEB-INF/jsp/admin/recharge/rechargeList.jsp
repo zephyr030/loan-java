@@ -16,7 +16,7 @@
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.contentWindow.js" ></script>
     <script type="text/javascript" src="${path}/static/script/My97DatePicker/WdatePicker.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js?v=2222" ></script>
+    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js?v=33333" ></script>
 </head>
 <body class="no-skin" style="background-color: white;">
     <div class="row">
@@ -98,7 +98,7 @@
                                         <td>${obj.recTime}</td>
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="javascript:;" onclick="isSend(${obj.id})">到账</a>
+                                                <a class="blue" href="javascript:;" onclick="isSend(${obj.id},'${obj.flowNo}')">到账</a>
                                                 <a class="red" href="javascript:;" onclick="refused(${obj.id})">拒绝</a>
                                             </div>
                                         </td>

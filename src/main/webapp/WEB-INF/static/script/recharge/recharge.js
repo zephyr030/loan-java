@@ -5,7 +5,7 @@
  * version v1.0
  * date 2015/12/9
  */
-function isSend(id){
+function isSend(id,flowNo){
     top.art.dialog({
         content: $("#subForm").html(),
         lock:true,
@@ -53,6 +53,7 @@ function isSend(id){
         cancelVal: '关闭',
         cancel: true
     });
+    top.$("#rechargeNo").val(flowNo);
 }
 
 function refused(id){
