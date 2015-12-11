@@ -195,6 +195,7 @@ public class AdminDrawController {
         if(!enTime.equals("")){
             searchable.addCondition(new Condition("a.lastUpdateTime", SearchOperator.lte, enTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.ne, "0"));
         PageInfo pageInfo = adminRechargeService.drawList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("account",account);
