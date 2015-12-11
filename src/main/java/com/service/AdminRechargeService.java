@@ -4,6 +4,7 @@ import com.dao.UserRechargeDetailMapper;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.model.UserCardInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class AdminRechargeService extends BaseService{
     //回填充值信息
     public int reLoadCharge(long id,String fowNo,String time,long userId){
         String sql = "update user_recharge_detail set flowNo = ?,actTime = ?,status = 1,update_uid = ? where id = ?";
-        return jdbcTemplate.update(sql,new Object[]{fowNo,time,id,userId});
+        return jdbcTemplate.update(sql,new Object[]{fowNo,time,userId,id});
     }
 
     //回填提现信息
@@ -74,5 +75,28 @@ public class AdminRechargeService extends BaseService{
     public int lock(long userId,int status){
         String sql = "update user_card_info set status = ? where id = ?";
         return jdbcTemplate.update(sql,new Object[]{status,userId});
+    }
+
+    //会员信息
+    public Map<String,Object> user(long userId){
+        String sql = "select * from user_card_info where id = ?";
+        Map<String,Object> user = jdbcTemplate.queryForMap(sql,new Object[]{userId});
+        return user;
+    }
+
+    //银行列表
+    public List<Map<String,Object>> bankList(){
+        String sql = "select * from sys_code_table where available = 1";
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    //修改会员信息
+    public int updateUser(UserCardInfo userCardInfo){
+        String sql = "update user_card_info set account=?,customername=?,bank=?,cardnumber=?,mobile=?,status=? where id = ?";
+        int i = jdbcTemplate.update(sql,new Object[]{
+                userCardInfo.getAccount(),userCardInfo.getCustomername(),userCardInfo.getBank(),userCardInfo.getCardnumber(),
+                userCardInfo.getMobile(),userCardInfo.getStatus(),userCardInfo.getId()
+        });
+        return i;
     }
 }

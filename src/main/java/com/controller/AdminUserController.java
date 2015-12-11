@@ -5,6 +5,7 @@ import com.dao.util.SearchOperator;
 import com.dao.util.Searchable;
 import com.github.pagehelper.PageInfo;
 import com.model.SysUser;
+import com.model.UserCardInfo;
 import com.service.AdminRechargeService;
 import com.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,6 +74,44 @@ public class AdminUserController {
             e.printStackTrace();
             map.put("code",-1);
             map.put("msg","处理异常");
+        }
+        return ResultUtil.toJSON(map);
+    }
+
+    //会员信息
+    @RequestMapping("/user")
+    public String user(@RequestParam(required = false,defaultValue = "0") long userId,
+                       HttpServletRequest request){
+        SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
+        if(user == null){
+            return "redirect:/admin/login";
+        }
+        //会员信息
+        Map<String,Object> userObj = adminRechargeService.user(userId);
+        request.setAttribute("user",userObj);
+        //银行列表
+        List<Map<String,Object>> bankList = adminRechargeService.bankList();
+        request.setAttribute("bankList",bankList);
+        return "/admin/user/user";
+    }
+
+    //修改会员信息
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public String updateUser(UserCardInfo userCardInfo){
+        Map<String,Object> map = ResultUtil.result();
+        try{
+            int i = adminRechargeService.updateUser(userCardInfo);
+            if(i > 0){
+                map.put("msg","更新成功");
+            }else{
+                map.put("code",1);
+                map.put("msg","更新失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code",-1);
+            map.put("msg","操作异常");
         }
         return ResultUtil.toJSON(map);
     }

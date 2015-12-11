@@ -26,7 +26,8 @@
                 <option value="2" ${type==2?'selected':''}>转账</option>
             </select>
             <select name="status" style="height: 34px;">
-                <option value="0" ${status==0?'selected':''}>全部</option>
+                <option value="0" ${status==3?'selected':''}>全部</option>
+                <option value="0" ${status==0?'selected':''}>已提交</option>
                 <option value="2" ${status==2?'selected':''}>未到账</option>
                 <option value="1" ${status==1?'selected':''}>已到账</option>
             </select>
@@ -117,7 +118,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNumber-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Previous">
+                            <a href="rechargeList?pageNumber=${page.pageNum-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>

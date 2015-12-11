@@ -81,6 +81,7 @@ public class AdminRechargeController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("recTime", SearchOperator.lte, endTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.eq, 0));
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);
@@ -97,8 +98,7 @@ public class AdminRechargeController {
 
     //充值导出EXCEL
     @RequestMapping("/exportRechargeList")
-    public void exportRechargeList(@RequestParam(required = false,defaultValue = "1") int pageNumber,
-                                   @RequestParam(required = false,defaultValue = "0") int type,
+    public void exportRechargeList(@RequestParam(required = false,defaultValue = "0") int type,
                                    @RequestParam(required = false,defaultValue = "") String flow,
                                    @RequestParam(required = false,defaultValue = "") String account,
                                    @RequestParam(required = false,defaultValue = "") String name,
@@ -175,7 +175,7 @@ public class AdminRechargeController {
                                    @RequestParam(required = false,defaultValue = "0") Double emoney,
                                    @RequestParam(required = false,defaultValue = "") String startTime,
                                    @RequestParam(required = false,defaultValue = "") String endTime,
-                                   @RequestParam(required = false,defaultValue = "0") int status,
+                                   @RequestParam(required = false,defaultValue = "3") int status,
                                    HttpServletRequest request){
         SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
         if(user == null){
@@ -209,7 +209,7 @@ public class AdminRechargeController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("a.recTime", SearchOperator.lte, endTime));
         }
-        if(status > 0){
+        if(status != 3){
             searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
         }
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);

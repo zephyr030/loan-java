@@ -47,6 +47,14 @@
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.1" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.3.1" />
           <element id="library" level="project" name="Maven: net.sourceforge.jexcelapi:jxl:2.6.12" />
+          <element id="library" level="project" name="core-renderer-minimal" />
+          <element id="library" level="project" name="iText-2.0.8" />
+          <element id="library" level="project" name="jsqlparser-0.9.1" />
+          <element id="library" level="project" name="Tidy" />
+          <element id="library" level="project" name="core-renderer" />
+          <element id="library" level="project" name="xutils" />
+          <element id="library" level="project" name="bbpay" />
+          <element id="library" level="project" name="commons-lang-2.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">

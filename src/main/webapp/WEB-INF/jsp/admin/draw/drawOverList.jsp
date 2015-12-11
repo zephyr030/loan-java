@@ -116,7 +116,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="drawList?pageNumber=${page.pageNumber-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Previous">
+                            <a href="drawList?pageNumber=${page.pageNum-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>

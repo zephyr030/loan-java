@@ -113,7 +113,7 @@
                     <c:choose>
                         <c:when test="${page.hasPreviousPage}">
                             <li>
-                                <a href="rechargeList?pageNumber=${page.pageNumber-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
+                                <a href="rechargeList?pageNumber=${page.pageNum-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}" aria-label="Previous">
                                     <span aria-hidden="true">上一页</span>
                                 </a>
                             </li>

@@ -84,6 +84,7 @@
                                         <c:if test="${obj.status == 2}">
                                             <a class="red" href="javascript:;" onclick="userLock(${obj.id},1,'${obj.customername}')">解锁</a>
                                         </c:if>
+                                        <a href="user?userId=${obj.id}" class="blue">修改</a>
                                     </div>
                                 </td>
                             </tr>
