@@ -159,7 +159,6 @@
             </nav>
         </div>
     </div>
-
     <div id="subForm" class="hidden">
         <div class="control-group" style="text-align:center;">
             <span id="rechargeErrorr" class="red"></span>
