@@ -24,6 +24,8 @@ public class UserRechargeDetail {
 
     private String bankId;
 
+    private String remark;
+
     public Long getId() {
         return id;
     }
@@ -102,5 +104,13 @@ public class UserRechargeDetail {
 
     public void setBankId(String bankId) {
         this.bankId = bankId;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
