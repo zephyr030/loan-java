@@ -56,6 +56,7 @@ function isSend(id,flowNo){
     top.$("#rechargeNo").val(flowNo);
 }
 
+//拒绝
 function refused(id){
     top.art.dialog({
         content: $("#remarkBox").html(),
