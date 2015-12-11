@@ -165,6 +165,7 @@
       LEFT JOIN sys_code_table d ON c.bank = d.id
       LEFT JOIN sys_user e ON a.update_uid = e.id
     <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+      order by a.recTime desc
   </select>
 
   <!-- 提现 -->
@@ -177,6 +178,7 @@
       LEFT JOIN sys_code_table c ON b.bank = c.id
       LEFT JOIN sys_user d ON a.update_uid = d.id
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+      order by a.drawTime desc
   </select>
 
   <!-- 用户列表 -->
