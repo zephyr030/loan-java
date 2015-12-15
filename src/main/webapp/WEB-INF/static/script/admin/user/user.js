@@ -6,6 +6,15 @@
  * date 2015/12/11
  */
 $(function(){
+
+    $("#check").click(function(){
+       if($("input[type='checkbox']").is(':checked')){
+            $("#status").val(1);
+       }else{
+           $("#status").val(2);
+       }
+    });
+
     $('#form').bootstrapValidator({
             message: "输入的值无效",
             feedbackIcons: {
