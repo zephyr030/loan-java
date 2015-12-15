@@ -31,7 +31,7 @@
             <div class="widget-header">
                 <h5 class="widget-title bigger lighter">
                     <i class="ace-icon fa fa-table"></i>
-                    Tables &amp; Colors
+                    会员管理
                 </h5>
             </div>
 
