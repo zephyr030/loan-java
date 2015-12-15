@@ -29,7 +29,7 @@
         <a href="${path}/user/recharge" class="main_btn1" onclick="return gotoRecharge();">我要充值</a>
         <a href="${path}/user/withdraw/index" class="main_btn2" onclick="return gotoRecharge();">我要提现</a>
     </div>
-    <div class="main_agree"><input type="checkbox" checked="checked"><span>我已经阅读并完全同意</span><a href="#"  class="link">《充值须知》</a></div>
+    <div class="main_agree"><input type="checkbox" checked="checked"><span>我已经阅读并完全同意</span><a href="/help/agree"  class="link" target="_blank">《充值须知》</a></div>
 </div>
 </body>
 </html>
