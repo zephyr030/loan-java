@@ -193,7 +193,7 @@
       LEFT JOIN user_card_info c ON a.user_id = c.id
       LEFT JOIN sys_code_table d ON c.bank = d.id
       LEFT JOIN sys_user e ON a.update_uid = e.id
-    <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+      <include refid="com.dao.common.CommonMapper.Serach_Where"/>
       order by a.recTime desc
   </select>
 
