@@ -87,7 +87,7 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
                                                 <c:if test="${obj.status == 0}">
-                                                    <a class="blue" href="javascript:;" onclick="draw(${obj.id})">提现</a>
+                                                    <a class="blue" href="javascript:;" onclick="draw(${obj.id},${obj.user_id})">提现</a>
                                                 </c:if>
                                                 <a class="red" href="javascript:;" onclick="refusedDraw(${obj.id})">拒绝</a>
                                             </div>

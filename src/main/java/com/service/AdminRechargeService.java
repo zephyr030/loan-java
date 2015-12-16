@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.model.UserCardInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,14 @@ public class AdminRechargeService extends BaseService{
     }
 
     //回填充值信息
-    public int reLoadCharge(long id,String fowNo,String time,long userId){
+    @Transactional
+    public void reLoadCharge(long id,String fowNo,String time,long userId,Double amount,long user_id){
+        //更新提现表
         String sql = "update user_recharge_detail set flowNo = ?,actTime = ?,status = 1,update_uid = ? where id = ?";
-        return jdbcTemplate.update(sql,new Object[]{fowNo,time,userId,id});
+        jdbcTemplate.update(sql,new Object[]{fowNo,time,userId,id});
+        //更新用户表
+        String user = "update user_card_info set balance = balance+? where id = ?";
+        jdbcTemplate.update(user,new Object[]{amount,user_id});
     }
     //拒绝上账
     public int refusedRecharge(long id,long userId,String remark){
@@ -63,9 +69,14 @@ public class AdminRechargeService extends BaseService{
     }
 
     //回填提现信息
-    public int reloadDraw(long id,int counts,Double money,String bankNo,long userId){
+    @Transactional
+    public void reloadDraw(long id,int counts,Double money,String bankNo,long userId,long user_id){
+        //更新提现信息
         String sql = "update user_withdraw_detail set counts = ?,amount = ?,flowNo = ?,status = 1,update_uid = ? where id = ?";
-        return jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,userId,id});
+        jdbcTemplate.update(sql,new Object[]{counts,money,bankNo,userId,id});
+        //提现清除余额
+        String user = "update user_card_info set balance = 0 where id = ?";
+        jdbcTemplate.update(user,new Object[]{user_id});
     }
     //拒绝提现
     public int refusedDraw(long id,long userId,String remark){

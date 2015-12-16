@@ -5,7 +5,7 @@
  * version v1.0
  * date 2015/12/9
  */
-function isSend(id,flowNo){
+function isSend(id,flowNo,amount,user_id){
     top.art.dialog({
         content: $("#subForm").html(),
         lock:true,
@@ -32,7 +32,7 @@ function isSend(id,flowNo){
                     type:"post",
                     url: "reLoadCharge",
                     async: false,
-                    data: {id:id,fowNo:fowNo,time:time},
+                    data: {id:id,fowNo:fowNo,time:time,amount:amount,user_id:user_id},
                     dataType: "json",
                     success: function(result){
                         if(parseInt(result.code) != 0){

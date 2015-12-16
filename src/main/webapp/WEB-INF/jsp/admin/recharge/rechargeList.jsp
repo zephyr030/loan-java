@@ -98,7 +98,7 @@
                                         <td>${obj.recTime}</td>
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="javascript:;" onclick="isSend(${obj.id},'${obj.flowNo}')">到账</a>
+                                                <a class="blue" href="javascript:;" onclick="isSend(${obj.id},'${obj.flowNo}',${obj.amount},${obj.user_id})">到账</a>
                                                 <a class="red" href="javascript:;" onclick="refused(${obj.id})">拒绝</a>
                                             </div>
                                         </td>

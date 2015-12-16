@@ -180,9 +180,11 @@
 
   <!-- 充值查询 -->
   <select id="rechargeList" parameterType="Searchable" resultType="java.util.Map">
-      SELECT a.id,a.recType,a.flowNo,a.amount,a.status,a.recTime,a.actTime,a.update_uid,a.bborderid,
+      SELECT a.id,a.recType,a.flowNo,a.amount,a.status,
+      date_format(a.recTime,'%Y-%c-%d %h:%i:%s') as recTime,
+      date_format(a.actTime,'%Y-%c-%d %h:%i:%s') as actTime,a.update_uid,a.bborderid,
       b.text,c.account,c.customername,d.text AS bankname,c.cardnumber,c.mobile,c.status AS cardStatus,
-      e.username AS exeUser,
+      e.username AS exeUser,a.user_id,
       CASE a.recType WHEN 'A01' THEN '充值' ELSE '转账' END AS recTypes,
       CASE a.status WHEN 1 THEN '已到账' WHEN 2 then '未到账' ELSE '未到账' END as statusName,
       a.remark as remark
@@ -197,8 +199,8 @@
 
   <!-- 提现 -->
   <select id="drawList" parameterType="Searchable" resultType="java.util.Map">
-      SELECT a.id,a.drawTime,a.amount,a.counts,a.flowNo,a.lastUpdateTime,a.status,
-      b.account,b.customername,c.text as bankname,b.cardnumber,b.mobile,d.username AS exeUser,
+      SELECT a.id,date_format(a.drawTime,'%Y-%c-%d %h:%i:%s') as drawTime,a.amount,a.counts,a.flowNo,date_format(a.lastUpdateTime,'%Y-%c-%d %h:%i:%s') as lastUpdateTime,a.status,
+      b.account,b.customername,c.text as bankname,b.cardnumber,b.mobile,d.username AS exeUser,a.user_id,
       CASE a.status WHEN 0 THEN '申请' WHEN 1 THEN '已处理' ELSE '已拒绝' END AS description,
       a.remark as remark
       FROM user_withdraw_detail a

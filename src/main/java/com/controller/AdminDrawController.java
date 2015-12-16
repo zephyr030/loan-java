@@ -308,6 +308,7 @@ public class AdminDrawController {
                              @RequestParam(required = false,defaultValue = "0") int counts,
                              @RequestParam(required = false,defaultValue = "0") Double money,
                              @RequestParam(required = false,defaultValue = "") String bankno,
+                             @RequestParam(required = false,defaultValue = "0") long user_id,
                              HttpServletRequest request){
 
         SysUser user = (SysUser) request.getSession().getAttribute("sysUser");
@@ -326,14 +327,9 @@ public class AdminDrawController {
                 map.put("code",4);
                 map.put("msg","请输入银行单号");
             }else{
-                int i = adminRechargeService.reloadDraw(id,counts,money,bankno,user.getId());
-                if(i > 0){
-                    map.put("code",0);
-                    map.put("msg","更新成功");
-                }else{
-                    map.put("code",5);
-                    map.put("msg","更新失败");
-                }
+                adminRechargeService.reloadDraw(id,counts,money,bankno,user.getId(),user_id);
+                map.put("code",0);
+                map.put("msg","更新成功");
             }
         }catch (Exception e){
             e.printStackTrace();

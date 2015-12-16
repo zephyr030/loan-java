@@ -5,7 +5,7 @@
  * version v1.0
  * date 2015/12/9
  */
-function draw(id){
+function draw(id,user_id){
     top.art.dialog({
         content: $("#subForm").html(),
         lock:true,
@@ -36,7 +36,7 @@ function draw(id){
                     type:"post",
                     url: "reloadDraw",
                     async: false,
-                    data: {id:id,counts:countsNum,money:money,bankno:bankNo},
+                    data: {id:id,counts:countsNum,money:money,bankno:bankNo,user_id:user_id},
                     dataType: "json",
                     success: function(result){
                         if(parseInt(result.code) != 0){
