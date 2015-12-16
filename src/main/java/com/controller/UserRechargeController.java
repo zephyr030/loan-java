@@ -247,7 +247,7 @@ public class UserRechargeController extends BaseController {
 	public String rechargeSure(@RequestParam(value="account", required=true) String account,
 							   @RequestParam(value="amount", required=true) int amount,
 							   @RequestParam(value="recType", required=true) String recType,
-							   @RequestParam(value="bankId", required=true) String bankId,
+							   @RequestParam(value="bankId", required=true) int bankId,
 							   @RequestParam(value="flowNo", required=false) String flowNo,
 							   HttpServletRequest request,
 							   HttpServletResponse response) {

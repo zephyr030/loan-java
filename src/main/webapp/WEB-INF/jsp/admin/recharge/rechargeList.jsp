@@ -16,7 +16,7 @@
     <%@ include file="/WEB-INF/jsp/common/import-js.jsp" %>
     <script type="text/javascript" src="${path}/static/script/resize/iframeResizer.contentWindow.js" ></script>
     <script type="text/javascript" src="${path}/static/script/My97DatePicker/WdatePicker.js" ></script>
-    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js?v=33333" ></script>
+    <script type="text/javascript" src="${path}/static/script/recharge/recharge.js" ></script>
 </head>
 <body class="no-skin" style="background-color: white;">
     <div class="row">

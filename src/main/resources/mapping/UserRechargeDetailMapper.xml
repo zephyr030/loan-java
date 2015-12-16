@@ -12,7 +12,7 @@
     <result column="actTime" property="acttime" jdbcType="TIMESTAMP" />
     <result column="update_uid" property="updateUid" jdbcType="INTEGER" />
     <result column="bborderid" property="bborderid" jdbcType="VARCHAR" />
-    <result column="bank_id" property="bankId" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -38,7 +38,7 @@
     values (#{id,jdbcType=BIGINT}, #{rectype,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
       #{flowno,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{rectime,jdbcType=TIMESTAMP},
       #{status,jdbcType=INTEGER}, #{acttime,jdbcType=TIMESTAMP}, #{updateUid,jdbcType=INTEGER},
-      #{bborderid,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      #{bborderid,jdbcType=VARCHAR}, #{bankId,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
 
@@ -114,7 +114,7 @@
         #{bborderid,jdbcType=VARCHAR},
       </if>
       <if test="bankId != null" >
-        #{bankId,jdbcType=VARCHAR},
+        #{bankId,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -153,7 +153,7 @@
         bborderid = #{bborderid,jdbcType=VARCHAR},
       </if>
       <if test="bankId != null" >
-        bank_id = #{bankId,jdbcType=VARCHAR},
+        bank_id = #{bankId,jdbcType=INTEGER},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
       actTime = #{acttime,jdbcType=TIMESTAMP},
       update_uid = #{updateUid,jdbcType=INTEGER},
       bborderid = #{bborderid,jdbcType=VARCHAR},
-      bank_id = #{bankId,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

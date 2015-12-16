@@ -52,7 +52,7 @@
 					<label>充值入账银行：</label>
 					<select id="bankId" name="bankId">
 						<c:forEach items="${bankList}" var="obj" varStatus="this">
-							<option value="${obj.typecode}" <c:if test="${obj.typecode == cardInfo.bankname}">selected="selected"</c:if>>${obj.text}</option>
+							<option value="${obj.id}">${obj.text}</option>
 						</c:forEach>
 					</select>
 				</li>

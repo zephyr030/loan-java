@@ -24,7 +24,7 @@ public class UserRechargeDetail {
 
     private String bborderid;
 
-    private String bankId;
+    private Integer bankId;
 
     private String remark;
 
@@ -108,11 +108,11 @@ public class UserRechargeDetail {
         this.bborderid = bborderid;
     }
 
-    public String getBankId() {
+    public Integer getBankId() {
         return bankId;
     }
 
-    public void setBankId(String bankId) {
+    public void setBankId(Integer bankId) {
         this.bankId = bankId;
     }
 
