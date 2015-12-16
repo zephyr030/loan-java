@@ -136,6 +136,7 @@ public class AdminRechargeController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("recTime", SearchOperator.lte, endTime));
         }
+        searchable.addCondition(new Condition("a.status", SearchOperator.eq, 0));
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
         map.put("充值方式", "充值方式");
@@ -212,8 +213,6 @@ public class AdminRechargeController {
         if(status != 3){
             searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
         }
-        searchable.addCondition(new Condition("a.status", SearchOperator.ne, "0"));
-
         PageInfo pageInfo = adminRechargeService.rechargeList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);
         request.setAttribute("type",type);
@@ -271,11 +270,9 @@ public class AdminRechargeController {
         if(!endTime.equals("")){
             searchable.addCondition(new Condition("a.recTime", SearchOperator.lte, endTime));
         }
-        if(status > 0){
+        if(status != 3){
             searchable.addCondition(new Condition("a.status", SearchOperator.eq, status));
         }
-        searchable.addCondition(new Condition("a.status", SearchOperator.ne, "0"));
-
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("编号", "编号");
         map.put("充值方式", "充值方式");
