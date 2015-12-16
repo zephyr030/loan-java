@@ -59,6 +59,19 @@ function validateInfo(account, customerName, cardNumber, mobile) {
         $("#customerName").focus();
         return false;
     }
+
+    if(!/^[\u4e00-\u9fa5]+$/i.test(customerName)) {
+        alert("开户姓名应为中文");
+        $("#customerName").focus();
+        return false;
+    }
+
+    if(cardNumber.length < 16 || isNaN(cardNumber)) {
+        alert("请填写正确的银行卡号");
+        $("#cardNumber").focus();
+        return false;
+    }
+
     if(!cardNumber) {
         alert("请输入银行卡号");
         $("#cardNumber").focus();

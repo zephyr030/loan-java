@@ -3,7 +3,7 @@
 <%@ page import="java.util.TreeMap" %>
 <%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 <%
