@@ -143,7 +143,8 @@ public class AdminRechargeController {
         map.put("第三方流水号", "第三方流水号");
         map.put("账号", "账号");
         map.put("姓名", "姓名");
-        map.put("开户行", "开户行");
+        map.put("充值银行", "充值银行");
+        map.put("转账银行", "转账银行");
         map.put("银行账号", "银行账号");
         map.put("手机号", "手机号");
         map.put("充值金额", "充值金额");
@@ -155,7 +156,8 @@ public class AdminRechargeController {
         mapKey.put("flowNo", "flowNo");
         mapKey.put("account", "account");
         mapKey.put("customername", "customername");
-        mapKey.put("bankname", "bankname");
+        mapKey.put("rechargeBankName", "rechargeBankName");
+        mapKey.put("userBankName", "userBankName");
         mapKey.put("cardnumber", "cardnumber");
         mapKey.put("mobile", "mobile");
         mapKey.put("amount", "amount");
@@ -279,7 +281,8 @@ public class AdminRechargeController {
         map.put("第三方流水号", "第三方流水号");
         map.put("账号", "账号");
         map.put("姓名", "姓名");
-        map.put("开户行", "开户行");
+        map.put("充值银行", "充值银行");
+        map.put("转账银行", "转账银行");
         map.put("银行账号", "银行账号");
         map.put("手机号", "手机号");
         map.put("充值金额", "充值金额");
@@ -295,7 +298,8 @@ public class AdminRechargeController {
         mapKey.put("flowNo", "flowNo");
         mapKey.put("account", "account");
         mapKey.put("customername", "customername");
-        mapKey.put("bankname", "bankname");
+        mapKey.put("rechargeBankName", "rechargeBankName");
+        mapKey.put("userBankName", "userBankName");
         mapKey.put("cardnumber", "cardnumber");
         mapKey.put("mobile", "mobile");
         mapKey.put("amount", "amount");

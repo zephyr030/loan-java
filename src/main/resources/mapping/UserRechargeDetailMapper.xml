@@ -183,8 +183,8 @@
       SELECT a.id,a.recType,a.flowNo,a.amount,a.status,
       date_format(a.recTime,'%Y-%c-%d %h:%i:%s') as recTime,
       date_format(a.actTime,'%Y-%c-%d %h:%i:%s') as actTime,a.update_uid,a.bborderid,
-      b.text,c.account,c.customername,d.text AS bankname,c.cardnumber,c.mobile,c.status AS cardStatus,
-      e.username AS exeUser,a.user_id,
+      b.text,c.account,c.customername,d.text AS userBankName,c.cardnumber,c.mobile,c.status AS cardStatus,
+      e.username AS exeUser,a.user_id,f.text as rechargeBankName,
       CASE a.recType WHEN 'A01' THEN '充值' ELSE '转账' END AS recTypes,
       CASE a.status WHEN 1 THEN '已到账' WHEN 2 then '未到账' ELSE '未到账' END as statusName,
       a.remark as remark
@@ -193,6 +193,7 @@
       LEFT JOIN user_card_info c ON a.user_id = c.id
       LEFT JOIN sys_code_table d ON c.bank = d.id
       LEFT JOIN sys_user e ON a.update_uid = e.id
+      LEFT JOIN sys_code_table f ON a.bank_id = f.id
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
       order by a.recTime desc
   </select>
