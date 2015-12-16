@@ -149,7 +149,6 @@ public class AdminRechargeController {
         map.put("手机号", "手机号");
         map.put("充值金额", "充值金额");
         map.put("充值时间", "充值时间");
-
         Map<String,String> mapKey = new LinkedHashMap<String, String>();
         mapKey.put("id", "id");
         mapKey.put("recTypes", "recTypes");
