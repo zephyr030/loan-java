@@ -197,6 +197,7 @@
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
       order by a.recTime desc
   </select>
+
   <!-- 提现 -->
   <select id="drawList" parameterType="Searchable" resultType="java.util.Map">
       SELECT a.id,date_format(a.drawTime,'%Y-%c-%d %h:%i:%s') as drawTime,a.amount,a.counts,a.flowNo,date_format(a.lastUpdateTime,'%Y-%c-%d %h:%i:%s') as lastUpdateTime,a.status,
