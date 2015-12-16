@@ -8,8 +8,11 @@ import com.model.SysUser;
 import com.model.UserCardInfo;
 import com.service.AdminRechargeService;
 import com.utils.ResultUtil;
+import com.utils.StringUtils;
+import com.xuan.utils.Validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,13 +45,16 @@ public class AdminUserController {
             return "redirect:/admin/login";
         }
         Searchable searchable = new Searchable();
+
         if(account != null && !account.equals("")){
             Condition con1 = new Condition("account",SearchOperator.eq,account);
+            con1.setPrefix("(");
             Condition con2 = new Condition(Condition.OR, "customername",SearchOperator.eq,account);
             Condition con3 = new Condition(Condition.OR, "mobile",SearchOperator.eq,account);
             searchable.addCondition(con1);
             searchable.addCondition(con2);
             searchable.addCondition(con3);
+            con3.setEndfix(")");
         }
         PageInfo pageInfo = adminRechargeService.userList(searchable,pageNumber,20);
         request.setAttribute("page",pageInfo);

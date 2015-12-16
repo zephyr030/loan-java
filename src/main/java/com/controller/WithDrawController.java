@@ -134,29 +134,31 @@ public class WithDrawController {
     @RequestMapping(value = "/message/send",method = RequestMethod.GET)
     @ResponseBody
     public Object sendMessage(@RequestParam(value="account", required=true) String account) {
-        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("account", SearchOperator.eq, account));
+        searchable.addCondition(new Condition("status", SearchOperator.ne, 0));
+        UserCardInfo cardInfo = cardInfoService.selectUserCardInfoBySearchable(searchable);
         if(cardInfo == null) {
             return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
+        }
+        if(cardInfo.getStatus() == 2) {
+            return AjaxResponse.fail("你的账号已被冻结，请联系管理员解禁");
         }
 
         //查询当天验证码发送次数，如果超过5次不在发送
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
-        Searchable searchable = new Searchable();
+        searchable = new Searchable();
         searchable.addCondition(new Condition("mobile",SearchOperator.eq, cardInfo.getMobile()));
         searchable.addCondition(new Condition("date",SearchOperator.eq, simpleDateFormat.format(date)));
         searchable.addCondition(new Condition("sendType",SearchOperator.eq, 1));
         UserMobileMessage message = messageService.selectMessage(searchable);
-        if(message != null && message.getTimes() >= 5) {
-            return AjaxResponse.fail("当天发送次数超过5次，系统拒绝再次发送").toJsonString();
-        }
 
         //发送6位数验证码
         String code = StringUtils.getSalt(6,2);
         if(message != null) {
             message.setCode(code);
-            message.setTimes(message.getTimes() + 1);
             messageService.update(message);
         }else {
             message = new UserMobileMessage();
@@ -181,21 +183,32 @@ public class WithDrawController {
     @ResponseBody
     public Object validateMessage(@RequestParam(value="account", required=true) String account,
                                    @RequestParam(value="code", required=true) String code) {
-        UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, 1);
+        Searchable searchable = new Searchable();
+        searchable.addCondition(new Condition("account", SearchOperator.eq, account));
+        searchable.addCondition(new Condition("status", SearchOperator.ne, 0));
+        UserCardInfo cardInfo = cardInfoService.selectUserCardInfoBySearchable(searchable);
         if(cardInfo == null) {
             return AjaxResponse.fail("你输入的操盘账号信息有误").toJsonString();
+        }
+        if(cardInfo.getStatus() == 2) {
+            return AjaxResponse.fail("你的账号已被冻结，请联系管理员解禁");
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
-        Searchable searchable = new Searchable();
+        searchable = new Searchable();
         searchable.addCondition(new Condition("mobile",SearchOperator.eq, cardInfo.getMobile()));
         searchable.addCondition(new Condition("date",SearchOperator.eq, simpleDateFormat.format(date)));
         searchable.addCondition(new Condition("sendType",SearchOperator.eq, 1));
         UserMobileMessage message = messageService.selectMessage(searchable);
+        if(message == null) {
+            return AjaxResponse.fail("请点击发送验证码");
+        }
         if(!message.getCode().equals(code)) {
             if(message.getTimes() < 5) {
+                message.setTimes(message.getTimes() +1);
+                messageService.update(message);
                 return AjaxResponse.fail("你输入的验证码有误").toJsonString();
             }else {
                 //冻结账号
