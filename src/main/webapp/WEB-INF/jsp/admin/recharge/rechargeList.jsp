@@ -38,11 +38,11 @@
                 <input type="text" name="emoney" value="${emoney}" placeholder="结束金额"
                        onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
                 />
-                <input type="text" id="startTime" name="startTime" size="16" readonly class="form_datetime" value="${startTime}"
-                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d H%:m%' || '#F{$dp.$D(\'endTime\')}'})"
+                <input type="text" id="startTime" name="startTime" size="16" class="form_datetime" value="${startTime}"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"
                 />
-                <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
-                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
+                <input type="text" id="endTime" name="endTime" size="16" class="form_datetime" value="${endTime}"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"
                 />
                 <button type="submit" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                     <i class="ace-icon fa fa-search bigger-120 green"></i>

@@ -32,7 +32,7 @@
                 <option value="2" ${status==2?'selected':''}>未到账</option>
                 <option value="1" ${status==1?'selected':''}>已到账</option>
             </select>
-            <input type="text" name="flowNo" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
+            <input type="text" name="flow" value="${flow}" style="margin-left: 12px;"  placeholder="银行流水号"/>
             <input type="text" name="account" value="${account}" style="margin-left: 12px;"  placeholder="账号"/>
             <input type="text" name="name" value="${name}" style="margin-left: 12px;"  placeholder="姓名"/>
             <input type="text" name="mobile" value="${mobile}" style="margin-left: 12px;"  placeholder="手机号"/>
@@ -43,11 +43,11 @@
             <input type="text" name="emoney" value="${emoney}" placeholder="结束金额"
                    onkeyup="value=value.replace(/[^\d]/g,'') "  onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
             />
-            <input type="text" id="startTime" name="startTime" size="16" readonly class="form_datetime" value="${startTime}"
-                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d H%:m%' || '#F{$dp.$D(\'endTime\')}'})"
+            <input type="text" id="startTime" name="startTime" size="16" class="form_datetime" value="${startTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"
             />
-            <input type="text" id="endTime" name="endTime" size="16" readonly class="form_datetime" value="${endTime}"
-                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'startTime\')}'})"
+            <input type="text" id="endTime" name="endTime" size="16" class="form_datetime" value="${endTime}"
+                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"
             />
             <button type="submit" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                 <i class="ace-icon fa fa-search bigger-120 green"></i>
