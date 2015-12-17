@@ -20,10 +20,6 @@
 <div class="row">
     <div class="col-xs-12">
         <form action="sysUserList" id="form" name="form" method="post">
-            <button type="submit" id="search" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
-                <i class="ace-icon fa fa-search bigger-120 green"></i>
-                查询
-            </button>
             <a href="<c:url value="init"/>">
                 <button type="button" id="addUser" class="btn btn-white btn-info btn-round" style="margin-left: 12px;margin-bottom: 5px;">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
