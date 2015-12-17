@@ -1,8 +1,20 @@
 //只允许输入数字
 function InputNum(e) {
     var k = window.event ? e.keyCode : e.which;
-    if ((k >= 48 && k <= 57) || k == 9 || k == 8 || k == 0 || ( k >= 96 && k <= 105 ) || k == 9) {
 
+    if ((k >= 48 && k <= 57) || k == 9 || k == 8 || k == 0 || ( k >= 96 && k <= 105 ) || k == 190) {
+        if(k == 190) {
+            e = e ? e : window.event;
+            var obj = e.srcElement ? e.srcElement : e.target;
+            var $obj = $(obj);
+            if(!$obj.val() || $obj.val().indexOf('.') != -1) {
+                if (window.event) {
+                    window.event.returnValue = false;
+                } else {
+                    e.preventDefault();//for firefox
+                }
+            }
+        }
     } else {
         if (window.event) {
             window.event.returnValue = false;
