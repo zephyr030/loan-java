@@ -140,14 +140,14 @@ public class UserRechargeController extends BaseController {
 	@RequestMapping(value = "/user/recharge/amount/input", method = RequestMethod.GET)
 	@ResponseBody
 	public Object insertAmount(@RequestParam(value="account", required=true) String account,
-							    @RequestParam(value="amount", required=true) int amount,
+							    @RequestParam(value="amount", required=true) BigDecimal amount,
 							    @RequestParam(value="recType", required=true) String recType) {
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		if(cardInfo == null) {
 			return AjaxResponse.fail("你输入的账号信息有误").toJsonString();
 		}
 
-		if(!NumberUtils.isMultiple(amount, 100)) {
+		if(!NumberUtils.isMultiple(amount.intValue(), 100)) {
 			return AjaxResponse.fail("你输入的金额不是100的整数倍").toJsonString();
 		}
 		if(!recType.equals("A01") && !recType.equals("A02")) {
@@ -167,14 +167,14 @@ public class UserRechargeController extends BaseController {
      */
 	@RequestMapping(value = "/user/recharge/confirm", method = RequestMethod.POST)
 	public String confirmRechargeInfo(@RequestParam(value="account", required=true) String account,
-									   @RequestParam(value="amount", required=true) int amount,
+									   @RequestParam(value="amount", required=true) BigDecimal amount,
 									   @RequestParam(value="recType", required=true) String recType,
 									   Model model) {
 		UserCardInfo cardInfo = cardInfoService.getUserCardInfoByAccount(account, -1);
 		SysTableCode sysTableCode = codeMapper.selectByPrimaryKey(cardInfo.getBank());
 		cardInfo.setBanknameStr(sysTableCode.getText());
 		model.addAttribute("cardInfo", cardInfo);
-		model.addAttribute("amount", amount);
+		model.addAttribute("amount", amount.intValue());
 		model.addAttribute("recType", recType);
 		return "/recharge/confirm";
 	}

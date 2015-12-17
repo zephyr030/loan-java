@@ -95,6 +95,10 @@ public class WithDrawController {
         if(ajaxResponse != null) {
             return ajaxResponse.toJsonString();
         }
+
+        if(cardInfo.getBalance().doubleValue() == 0) {
+            return AjaxResponse.fail("您的账户余额为零,无需提现");
+        }
         return AjaxResponse.success().toJsonString();
     }
 
