@@ -9,7 +9,9 @@ public class SysUser {
 
     private String password;
 
-    private Date createtime;
+    private Date createTime;
+
+    private int available;
 
     public Integer getId() {
         return id;
@@ -35,11 +37,19 @@ public class SysUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(int available) {
+        this.available = available;
     }
 }

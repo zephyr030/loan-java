@@ -5,10 +5,11 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="available" property="available" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, createTime
+    id, username, password, createTime,available
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -85,5 +86,12 @@
     <include refid="Base_Column_List" />
     from sys_user
     where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <!-- 系统用户列表 -->
+  <select id="sysUserList" resultMap="BaseResultMap" parameterType="java.util.Map">
+      select id,username,available,date_format(createTime,'%Y-%c-%d %h:%i:%s') createTime from sys_user
+      <include refid="com.dao.common.CommonMapper.Serach_Where"/>
+      order by id DESC
   </select>
 </mapper>

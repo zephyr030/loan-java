@@ -56,8 +56,14 @@ public class LoginController extends BaseController  {
         Map<String,Object> map = ResultUtil.result();
         //检测用户是否存在
         SysUser user = userService.getSysUserByName(username);
-        //验证几码
-        if(null != user && user.getPassword().equals(password)) {
+        //验证码
+        if(user.getAvailable() == -1){
+            map.put("code",2);
+            map.put("msg","该账号不存在");
+        }else if(user.getAvailable() == 0){
+            map.put("code",3);
+            map.put("msg","该账号不可用");
+        }else if(null != user && user.getPassword().equals(password)) {
             String token = username + "|" + user.getId();
             request.getSession().setAttribute("token", token);
             request.getSession().setAttribute("sysUser",user);

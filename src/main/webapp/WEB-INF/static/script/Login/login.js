@@ -79,7 +79,7 @@ $(function(){
                 success: function(result){
                     if(parseInt(result.code) != 0){
                         art.dialog({
-                            content: '用户名或密码错误',
+                            content: result.msg,
                             lock:true,
                             drag:true,
                             opacity:0.1,
