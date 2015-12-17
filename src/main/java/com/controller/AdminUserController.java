@@ -121,5 +121,4 @@ public class AdminUserController {
         }
         return ResultUtil.toJSON(map);
     }
-
 }

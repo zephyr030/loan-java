@@ -57,6 +57,16 @@
 <div class="main-container" id="main-container">
     <div class="sidebar responsive" id="sidebar">
         <ul class="nav nav-list" style="top: 0px;">
+            <c:if test="${user.username == 'admin'}">
+                <li>
+                    <a href="javascript:;" class="dropdown-toggle" onclick="url('sysUserList')">
+                        <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text">
+                        账户管理
+                    </span>
+                    </a>
+                </li>
+            </c:if>
             <li>
                 <a href="javascript:;" class="dropdown-toggle" onclick="url('userList')">
                     <i class="menu-icon fa fa-user"></i>
