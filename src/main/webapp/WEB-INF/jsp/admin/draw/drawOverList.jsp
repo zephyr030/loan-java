@@ -127,7 +127,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="drawList?pageNumber=${page.pageNum-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Previous">
+                            <a href="drawOverList?pageNumber=${page.pageNum-1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
@@ -147,7 +147,7 @@
                             <li class="active"><a href="javascript:void(0)">${obj}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="drawList?pageNumber=${obj}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}">${obj}</a></li>
+                            <li><a href="drawOverList?pageNumber=${obj}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}">${obj}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -155,7 +155,7 @@
                 <c:choose>
                     <c:when test="${page.hasNextPage}">
                         <li>
-                            <a href="drawList?pageNumber=${page.pageNum+1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Next">
+                            <a href="drawOverList?pageNumber=${page.pageNum+1}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&flowNo=${flowNo}&counts=${counts}&stTime=${stTime}&enTime=${enTime}" aria-label="Next">
                                 <span aria-hidden="true">下一页</span>
                             </a>
                         </li>

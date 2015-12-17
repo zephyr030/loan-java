@@ -130,7 +130,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNum-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Previous">
+                            <a href="rechargeOverList?pageNumber=${page.pageNum-1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                             <li class="active"><a href="javascript:void(0)">${obj}</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="rechargeList?pageNumber=${obj}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}">${obj}</a></li>
+                            <li><a href="rechargeOverList?pageNumber=${obj}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}">${obj}</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -158,7 +158,7 @@
                 <c:choose>
                     <c:when test="${page.hasNextPage}">
                         <li>
-                            <a href="rechargeList?pageNumber=${page.pageNum+1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Next">
+                            <a href="rechargeOverList?pageNumber=${page.pageNum+1}&type=${type}&flow=${flow}&account=${account}&name=${name}&mobile=${mobile}&smoney=${smoney}&emoney=${emoney}&startTime=${startTime}&endTime=${endTime}&status=${status}" aria-label="Next">
                                 <span aria-hidden="true">下一页</span>
                             </a>
                         </li>
