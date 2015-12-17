@@ -61,7 +61,7 @@ public class AdminRechargeController {
             searchable.addCondition(new Condition("flowNo", SearchOperator.eq, flow));
         }
         if(!account.equals("")){
-            searchable.addCondition(new Condition("cardnumber", SearchOperator.eq, account));
+            searchable.addCondition(new Condition("account", SearchOperator.eq, account));
         }
         if(!name.equals("")){
             searchable.addCondition(new Condition("customername", SearchOperator.eq, name));
