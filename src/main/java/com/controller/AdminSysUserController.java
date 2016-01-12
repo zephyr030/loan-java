@@ -8,6 +8,8 @@ import com.model.SysUser;
 import com.service.AdminSysUserService;
 import com.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -99,10 +99,7 @@
                                     <td>${obj.flowNo}</td>
                                     <td>${obj.account}</td>
                                     <td>${obj.customername}</td>
-                                    <td>
-                                        <c:if test="${obj.recTypes == '充值'}">${obj.rechargeBankName}</c:if>
-                                        <c:if test="${obj.recTypes == '转账'}">${obj.userBankName}</c:if>
-                                    </td>
+                                    <td>${obj.rechargeBankName}</td>
                                     <td>${obj.cardnumber}</td>
                                     <td>${obj.mobile}</td>
                                     <td>${obj.amount}</td>
