@@ -90,7 +90,7 @@
 
   <!-- 系统用户列表 -->
   <select id="sysUserList" resultMap="BaseResultMap" parameterType="java.util.Map">
-      select id,username,available,date_format(createTime,'%Y-%c-%d %h:%i:%s') createTime from sys_user
+      select id,username,available,date_format(createTime,'%Y-%m-%d %h:%i:%s') createTime from sys_user
       <include refid="com.dao.common.CommonMapper.Serach_Where"/>
       order by id DESC
   </select>
