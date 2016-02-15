@@ -98,7 +98,7 @@
                 <c:choose>
                     <c:when test="${page.hasPreviousPage}">
                         <li>
-                            <a href="userList?pageNumber=${page.pageNumber-1}&account=${account}" aria-label="Previous">
+                            <a href="userList?pageNumber=${page.pageNum-1}&account=${account}" aria-label="Previous">
                                 <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
