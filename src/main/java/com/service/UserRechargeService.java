@@ -28,4 +28,13 @@ public class UserRechargeService extends BaseService{
     public int save(UserRechargeDetail rechargeDetail) {
         return rechargeMapper.insertSelective(rechargeDetail);
     }
+
+    /**
+     * 查询充值记录
+     * @param id
+     * @return
+     */
+    public UserRechargeDetail getDetailById(Long id) {
+        return rechargeMapper.selectByPrimaryKey(id);
+    }
 }

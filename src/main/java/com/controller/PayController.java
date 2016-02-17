@@ -8,6 +8,7 @@ import com.bebepay.component.util.PayUtil;
 import com.dao.SysTableCodeMapper;
 import com.model.SysTableCode;
 import com.model.UserCardInfo;
+import com.model.UserRechargeDetail;
 import com.service.BBPayApiService;
 import com.service.UserCardInfoService;
 import com.service.UserRechargeService;
@@ -129,13 +130,14 @@ public class PayController extends BaseController {
             String payresult_view = AES.decryptFromBase64(data,yb_aeskey);
             Map backMap = JSON.parseObject(payresult_view, Map.class);
             String order = (String)backMap.get("order");
-            String merrmk = (String)backMap.get("order");
+            String merrmk = (String)backMap.get("merrmk");
             bbPayApiService.updateOrderRetrunState(Long.valueOf(order), payresult_view);
 
-//            UserRechargeDetail userRechargeDetail = new UserRechargeDetail();
-//            userRechargeDetail.setId(Long.valueOf(merrmk));
-//            userRechargeDetail.setStatus(Integer.valueOf((String)backMap.get("status")));
-//            rechargeService.save(userRechargeDetail);
+
+            UserRechargeDetail userRechargeDetail = new UserRechargeDetail();
+            userRechargeDetail.setId(Long.valueOf(merrmk));
+            userRechargeDetail.setFlowno((String)backMap.get("bborderid"));
+            rechargeService.save(userRechargeDetail);
             return "YES";
         }else{
             return "NO";
@@ -170,6 +172,10 @@ public class PayController extends BaseController {
             Map backMap = JSON.parseObject(payresult_view, Map.class);
             String orderNo = (String) backMap.get("merrmk");
             request.setAttribute("orderNo", orderNo);
+
+            UserRechargeDetail userRechargeDetail = rechargeService.getDetailById(Long.valueOf(orderNo));
+            String account = userRechargeDetail.getUserId().toString();
+            return "redirect:/user/recharge/success?account=" + account;
         }
         return "redirect:/user/recharge/success";
     }
