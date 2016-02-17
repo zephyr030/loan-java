@@ -300,7 +300,7 @@ public class UserRechargeController extends BaseController {
 	 * @return
      */
 	@RequestMapping(value = "/user/recharge/success")
-	public String success(@RequestParam(value="account", required=true) String account,
+	public String success(@RequestParam(value="account") String account,
 						  HttpServletRequest request) {
 		String orderNo = request.getSession().getAttribute("detail_id") + "";
 		request.setAttribute("orderNo", orderNo);

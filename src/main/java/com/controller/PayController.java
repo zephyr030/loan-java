@@ -6,6 +6,9 @@ import com.bebepay.component.encrypt.EncryUtil;
 import com.bebepay.component.encrypt.RSA;
 import com.bebepay.component.util.PayUtil;
 import com.dao.SysTableCodeMapper;
+import com.dao.util.Condition;
+import com.dao.util.SearchOperator;
+import com.dao.util.Searchable;
 import com.model.SysTableCode;
 import com.model.UserCardInfo;
 import com.model.UserRechargeDetail;
@@ -174,8 +177,11 @@ public class PayController extends BaseController {
             request.setAttribute("orderNo", orderNo);
 
             UserRechargeDetail userRechargeDetail = rechargeService.getDetailById(Long.valueOf(orderNo));
-            String account = userRechargeDetail.getUserId().toString();
-            return "redirect:/user/recharge/success?account=" + account;
+            String user_id = userRechargeDetail.getUserId().toString();
+            Searchable searchable = new Searchable();
+            searchable.addCondition(new Condition("id", SearchOperator.eq, user_id));
+            UserCardInfo userCardInfo = userCardInfoService.selectUserCardInfoBySearchable(searchable);
+            return "redirect:/user/recharge/success?account=" + userCardInfo.getAccount();
         }
         return "redirect:/user/recharge/success";
     }
