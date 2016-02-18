@@ -17,6 +17,7 @@ import com.service.UserCardInfoService;
 import com.service.UserRechargeService;
 import com.utils.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -135,6 +136,7 @@ public class PayController extends BaseController {
             String payresult_view = AES.decryptFromBase64(data,yb_aeskey);
             Map backMap = JSON.parseObject(payresult_view, Map.class);
             String order = (String)backMap.get("order");
+            order = order.replace("BB", "");
             String merrmk = (String)backMap.get("merrmk");
             bbPayApiService.updateOrderRetrunState(Long.valueOf(order), payresult_view);
 
@@ -177,6 +179,7 @@ public class PayController extends BaseController {
             String payresult_view = AES.decryptFromBase64(data, yb_aeskey);
             Map backMap = JSON.parseObject(payresult_view, Map.class);
             String orderNo = (String) backMap.get("merrmk");
+            orderNo = orderNo.replace("BB", "");
             request.setAttribute("orderNo", orderNo);
 
             UserRechargeDetail userRechargeDetail = rechargeService.getDetailById(Long.valueOf(orderNo));
@@ -188,4 +191,21 @@ public class PayController extends BaseController {
         }
         return "redirect:/user/recharge/success";
     }
+
+    public static void main(String [] args) {
+        String bbPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCg7Wwh0LaFMABgf44w0hqciJPw8HnnEbFDJmkeBtRjQHI0bkKh2bBe42qbhFLQZMpfc8CiZnxtUEc4T0J1n6Fd9WTgbF8boKF0dfMaCyr8zbgCVElN3CHIAVYOVHFT/3zHxlwYsrHo3VjWoU8Q5+qlrZ6UsX/EXXRcrZ3eKRCilQIDAQAB";
+        String data = "6sOjMilRy9gITcIcAjgJDROhR1iVfktM2QBDck9UulKrFyPvwik9AlQU8PJLJLa/Sr4Ivb4B+hHTe5B8yd3il0bRD02StpDTeJLV3PtU9MhnSLXbUg0fRw5xz4pvQe8/xRurzm/8IKaQI2Hw+LUL/0hscqweC74LVdm4X04SuSEdd61lC2VpGl6heGbPQQ7DB6/9EXAVVbtNaiVef0i/iDJpQ0N8XH2pwy+/fC0645J35BGunMftzOlkSYgqbCXEowV3K+yJzYI5h8cJdydPAoegqRt561xrUXjPOpCCxptVmPst+z5glS+M23IW2gQg/e8KOhFPhai2tQBBv1BSYqD9sAsTlah1wxZPxl5I3oYUMMLMORotY3qgCYxa3iFT8al3TZHnpbJMOFn2fAquO92+leBvDk7712PhbqvHuBagNOQv5s2ZmrNy7NKdXjxOE+lK+u6FjILN5+GkN144Ew==";
+        String encryptkey = "CI8zT99dfBBks7rSC1wH+2wXChYH9XAaAs8HEbJthIgsKLEBIdvadMhz8XR2HP7EqruCyFFE4YOEdUvFVGwJoQvSCKSy/90W+g1wEu+MiMPYw1Xp+9Uk7wZfhRHQX0p/jncMRmVb1fHCuJ85PMU8RbCiYYXhOqRimwqIJH4lfB8=";
+        String merchantPrivateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAI7HBIvDBDYI60bpZ7wVVIF7L4Jwz2oEXEbkNu7XzhCovL829yoKUPBTC46mIM51Tvwbgbn3gKABVI8C/D29Tfee42m4Qnb+/dmZx34AZQUBiDmHkv71Beu3vVow/EZVcjsGssrhcM3jDUuYbGeuIWCwviqI1XD2MeLXA/M5R94LAgMBAAECgYEAindMW1bIELdZpa3aord0+xXCn5hULxcHfuD4vW2hNNrQIglmbukOUePYA4Htswxli24Jw5basVJY9VEJ275pi1RNptbqP3FK2MfC9/DCKzPzw+rBlNqBlZprrlyKd00iEZ5+icS2Tkz7nRca9/loRFgTocgtmRbjW6KgHPkEUdECQQDY5/EjCm54xPTrD/UGAKxVlG5Gno26J3eog+UTry/aoLcbeFIhxFjjOyHXiHAPu0eNFz16zQcUFCIZsFQVixSvAkEAqILG47FG9yMLzmaX38J145SkLoqsY+LwnZxURU9kcZ0FknBGMdBK3wbc3huo2WfGV5IaTdgTH0PF+90RiHnbZQJAFExYV5QhVHHyDZFXt7EWb4fNbhRmZPZOj1mQdXAehVIm8I4o+Xn7a4BcIWRmQEKhZoW3PiezsuBTdJ34sG9shwJBAKeT1mKc66vd6GHMWQCnDEHUkinOsn1rNEopKwz6VTM/Kklk6gmj0LFWy9L9wr7hmrd/jjUXynxvE7bTNBp6xJkCQQCnk6rwttHHR54reYO3ohxDB2ndbHUms4zbph0WddKgpo9bM+o/I65Ty7pB+O/QRTP5W8Pq+skgk2f/Z7N7dPr9";
+        try {
+            TreeMap<String, String> map = EncryUtil.checkDecryptAndSign(data, encryptkey, bbPublicKey, merchantPrivateKey);
+            System.out.println(map.toString());
+            String yb_aeskey = RSA.decrypt(encryptkey, merchantPrivateKey);
+            String payresult_view = AES.decryptFromBase64(data, yb_aeskey);
+            System.out.println(payresult_view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -60,15 +60,15 @@ public class BBPayApiService extends BaseService {
 
     /**
      * 修改订单返回状态
-     * @param orderid 订单ID
+     * @param orderNo 订单ID
      * @param returninfo 返回信息
      */
-    public void updateOrderRetrunState(long orderid, String returninfo){
+    public void updateOrderRetrunState(long orderNo, String returninfo){
         StringBuffer sql = new StringBuffer();
         sql.append("update sys_pay_log ");
-        sql.append("set status = 'A1' , returninfo = ? ");
-        sql.append("where orderID = ? ");
-        jdbcTemplate.update(sql.toString(), returninfo , orderid);
+        sql.append("set status = 'A1' , return_info = ? ");
+        sql.append("where orderNo = ? ");
+        jdbcTemplate.update(sql.toString(), returninfo , orderNo);
     }
 
 
