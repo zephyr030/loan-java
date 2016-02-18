@@ -185,7 +185,7 @@ public class PayController extends BaseController {
             UserRechargeDetail userRechargeDetail = rechargeService.getDetailById(Long.valueOf(orderNo));
             String user_id = userRechargeDetail.getUserId().toString();
             Searchable searchable = new Searchable();
-            searchable.addCondition(new Condition("id", SearchOperator.eq, user_id));
+            searchable.addCondition(new Condition("a.id", SearchOperator.eq, user_id));
             UserCardInfo userCardInfo = userCardInfoService.selectUserCardInfoBySearchable(searchable);
             return "redirect:/user/recharge/success?account=" + userCardInfo.getAccount();
         }
