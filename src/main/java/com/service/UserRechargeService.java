@@ -26,7 +26,7 @@ public class UserRechargeService extends BaseService{
      * @return
      */
     public int save(UserRechargeDetail rechargeDetail) {
-        if(rechargeDetail.getId() > 0) {
+        if(rechargeDetail != null && rechargeDetail.getId() != null && rechargeDetail.getId() > 0) {
             return rechargeMapper.updateByPrimaryKeySelective(rechargeDetail);
         } else {
             return rechargeMapper.insertSelective(rechargeDetail);

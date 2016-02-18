@@ -15,6 +15,7 @@ import com.model.UserRechargeDetail;
 import com.service.BBPayApiService;
 import com.service.UserCardInfoService;
 import com.service.UserRechargeService;
+import com.utils.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -120,6 +121,7 @@ public class PayController extends BaseController {
     @RequestMapping(value = "pay/callback", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String payCallBack(String data, String encryptkey, HttpServletResponse response) throws Exception {
+        Logger.info("后台返回back|" + encryptkey + "|" + data);
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         TreeMap<String, String> map = null;
         if("1".equals(encryptkey)) {
@@ -136,7 +138,7 @@ public class PayController extends BaseController {
             String merrmk = (String)backMap.get("merrmk");
             bbPayApiService.updateOrderRetrunState(Long.valueOf(order), payresult_view);
 
-
+            //更新用户充值记录中的流水号
             UserRechargeDetail userRechargeDetail = new UserRechargeDetail();
             userRechargeDetail.setId(Long.valueOf(merrmk));
             userRechargeDetail.setFlowno((String)backMap.get("bborderid"));
@@ -161,6 +163,7 @@ public class PayController extends BaseController {
                            String encryptkey,
                            HttpServletRequest request,
                            HttpServletResponse response) throws Exception {
+        Logger.info("前台返回view|" + encryptkey + "|" + data);
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         TreeMap<String, String> map = null;
         if("1".equals(encryptkey)) {

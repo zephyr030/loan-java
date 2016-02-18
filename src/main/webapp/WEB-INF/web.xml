@@ -17,6 +17,20 @@
 		<description>监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<context-param>
+		<description>log4j配置文件</description>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webApp.root</param-value>
+	</context-param>
+	<context-param>
+		<description>log4j监听器</description>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
 	
 	<filter>
         <filter-name>encodingFilter</filter-name>
